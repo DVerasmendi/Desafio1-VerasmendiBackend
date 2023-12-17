@@ -51,11 +51,11 @@ getProductById(id) {
 const manager = new ProductManager();
 
 // Agregar productos
-manager.addProduct('Producto 1', 'Descripción del Producto 1', 19.99, '/path/to/image1.jpg', 'P001', 50);
-manager.addProduct('Producto 2', 'Descripción del Producto 2', 29.99, '/path/to/image2.jpg', 'P002', 30);
-manager.addProduct('Producto 3', 'Descripción del Producto 3', 39.99, '/path/to/image3.jpg', 'P003', 40);
-manager.addProduct('Producto 4', 'Descripción del Producto 4', 49.99, '/path/to/image4.jpg', 'P004', 60);
-manager.addProduct('Producto 5', 'Descripción del Producto 5', 59.99, '/path/to/image5.jpg', 'P005', 70);
+manager.addProduct('Producto 1', 'Descripción del Producto 1', 19.99, '/image1.jpg', 'P001', 50);
+manager.addProduct('Producto 2', 'Descripción del Producto 2', 29.99, '/image2.jpg', 'P002', 30);
+manager.addProduct('Producto 3', 'Descripción del Producto 3', 39.99, '/image3.jpg', 'P003', 40);
+manager.addProduct('Producto 4', 'Descripción del Producto 4', 49.99, '/image4.jpg', 'P004', 60);
+manager.addProduct('Producto 5', 'Descripción del Producto 5', 59.99, '/image5.jpg', 'P005', 70);
 
 // Obtener todos los productos
 const allProducts = manager.getProducts();
