@@ -1,0 +1,153 @@
+<!-- views/realTimeProducts.handlebars -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Productos en Tiempo Real</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+            text-align: center; 
+        }
+        h1 {
+            color: #333;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: left; 
+        }
+        img {
+            max-width: 100px;
+            height: auto;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #add-product-container {
+            border: 1px solid #ddd;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            text-align: center; 
+        }
+        #add-product-container h1 {
+            margin-bottom: 10px;
+        }
+        #product-form {
+            display: flex;
+            flex-direction: column;
+        }
+        #product-form input {
+            margin-bottom: 10px;
+            padding: 10px;
+        }
+        #product-form button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        #product-form button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Formulario para agregar un nuevo producto -->
+<div id="add-product-container">
+    <h1>Agregar un Nuevo Producto</h1>
+    <form id="product-form">
+        <input type="text" id="title" placeholder="Título del producto">
+        <input type="text" id="description" placeholder="Descripción del producto">
+        <button type="button" onclick="addProduct()">Agregar Producto</button>
+    </form>
+</div>
+
+<h1>Lista de Productos en Tiempo Real</h1>
+
+<!-- Lista de productos -->
+<ul id="product-list">
+    {{#each products}}
+    <li id="product-{{this.id}}">
+        <h2>{{this.title}}</h2>
+        <p><strong>Descripción:</strong> {{this.description}}</p>
+        <button type="button" onclick="removeProduct('{{this.id}}')">Eliminar</button>
+    </li>
+    {{/each}}
+</ul>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    const socket = io();
+
+    function addProduct() {
+        const title = document.getElementById('title').value;
+        const description = document.getElementById('description').value;
+
+        // Genera un ID único que no esté en la lista actual de productos
+        const uniqueId = generateUniqueId();
+
+        socket.emit('productAdded', { id: uniqueId, title, description });
+    }
+
+    function removeProduct(productId) {
+        socket.emit('productRemoved', { id: productId });
+    }
+
+    function generateUniqueId() {
+        const timestamp = new Date().getTime();
+        let uniqueId = `product-${timestamp}`;
+
+        // Verifica que el ID no exista en la lista actual de productos
+        const productList = document.getElementById('product-list');
+        const existingIds = Array.from(productList.children).map(product => product.id);
+
+        while (existingIds.includes(uniqueId)) {
+            // Si el ID ya existe, genera uno nuevo
+            uniqueId = `product-${new Date().getTime()}`;
+        }
+
+        return uniqueId;
+    }
+
+    socket.on('updateRealTimeProducts', ({ action, productId, updatedProduct }) => {
+        updateProductList();
+        location.reload();
+    });
+
+    function updateProductList() {
+        const productList = document.getElementById('product-list');
+    }
+</script>
+
+</body>
+</html>
