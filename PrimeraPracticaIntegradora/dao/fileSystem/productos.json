@@ -1,0 +1,54 @@
+[
+    {
+        "id": 1,
+        "title": "Lentes",
+        "description": "Increibles lentes para ver",
+        "code": "P001",
+        "price": 19.99,
+        "status": true,
+        "stock": 50,
+        "category": "Categoría 1",
+        "thumbnails": [
+            "images/lentes.jpg"
+        ]
+    },
+    {
+        "id": 2,
+        "title": "Parlante",
+        "description": "Increibles parlantes para escuchar musica en grupo",
+        "code": "P002",
+        "price": 29.99,
+        "status": true,
+        "stock": 30,
+        "category": "Categoría 2",
+        "thumbnails": [
+            "images/parlante.jpg"
+        ]
+    },
+    {
+        "id": 3,
+        "title": "Audifonos",
+        "description": "Increibles audifonos para escuchar tu musica",
+        "code": "P003",
+        "price": 24.99,
+        "status": true,
+        "stock": 30,
+        "category": "Categoría 1",
+        "thumbnails": [
+            "images/audifonos.jpg"
+        ]
+    },
+    {
+        "id": 4,
+        "title": "Despertador",
+        "description": "Increible despertador para ti",
+        "code": "P004",
+        "price": 49.99,
+        "status": true,
+        "stock": 60,
+        "category": "Categoría 2",
+        "thumbnails": [
+            "images/reloj.jpg"
+        ]
+    }
+]
