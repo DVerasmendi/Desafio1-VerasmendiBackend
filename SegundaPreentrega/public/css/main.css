@@ -1,0 +1,65 @@
+body, html{
+    font-family: 'Montserrat', sans-serif;
+    /* Puedes ajustar la propiedad background-size según tus necesidades */
+    background-size:contain;
+}
+
+/* No necesitas redefinir estilos que Tailwind maneja, como tamaños de fuente, colores, padding, etc. */
+.text-border {
+text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; /* Negro */
+}
+
+
+.text-background {
+position: relative;
+display: inline-block;
+}
+
+.text-background::before {
+content: '';
+position: absolute;
+top: 50%; /* Ajusta según sea necesario */
+left: 50%; /* Ajusta según sea necesario */
+width: 100%; /* O más, si quieres un borde más grande */
+height: 100%; /* O más, si quieres un borde más grande */
+background-color: rgba(255, 255, 255, 0.992); /* Color de fondo gris semi-transparente */
+z-index: -1;
+transform: translate(-50%, -50%) scale(1.2); /* Ajusta para controlar el tamaño del fondo */
+border-radius: 2.5rem; /* Añade bordes redondeados si lo deseas */
+filter: blur(35px); /* Difumina el fondo para el efecto deseado */
+}
+
+
+.product{
+    background-color: rgba(165, 42, 42, 0.156);
+    border: 5px white solid;
+    border-radius: 20px;
+}
+
+.img_index_product{
+    border: 5px white solid;
+    border-radius: 20px;
+    width: 30%;
+    margin-top: 3%;
+}
+
+.img_detail_prduct{
+    border: 5px white solid;
+    border-radius: 20px;
+    width: 90%;
+    margin-top: 3%;
+}
+
+.div_detail_product{
+    margin-top: 3%;
+}
+
+.info_description_product{
+    font-size: 2rem;
+}
+
+
+.table_carrito{
+    border: 3px white solid;
+    
+}
