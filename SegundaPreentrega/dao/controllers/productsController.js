@@ -1,20 +1,21 @@
+const mongoose = require('mongoose');
 const Product = require('../db/models/Product');
 
 // Obtener todos los productos
 exports.getAllProducts = async (req, res, next) => {
-    const { limit = 10, page = 1, sort, query } = req.query;
-    const options = {
-        page: parseInt(page, 10),
-        limit: parseInt(limit, 10),
-        sort: sort ? { price: sort === 'asc' ? 1 : -1 } : {},
-    };
-
-    let filter = {};
-    if (query) {
-        filter = { name: new RegExp(query, 'i') };
-    }
-
     try {
+        const { limit = 10, page = 1, sort, query } = req.query;
+        const options = {
+            page: parseInt(page, 10),
+            limit: parseInt(limit, 10),
+            sort: sort ? { price: sort === 'asc' ? 1 : -1 } : {},
+        };
+
+        let filter = {};
+        if (query) {
+            filter = { name: new RegExp(query, 'i') };
+        }
+
         // Logica para obtener todos los productos paginados
         const result = await Product.paginate(filter, options);
 
@@ -26,10 +27,11 @@ exports.getAllProducts = async (req, res, next) => {
             };
         });
 
-        console.log('FLAG:', req.isApiRequest)
+        // Obtener categorías únicas
+        const uniqueCategories = [...new Set(products.map(product => product.category))];
+
         if (req.isApiRequest) {
-            // Si es una solicitud API, responde en formato JSON
-            console.log('ES API')
+            // Lógica para manejar solicitudes de API
             const response = {
                 status: 'success',
                 payload: products,
@@ -44,8 +46,7 @@ exports.getAllProducts = async (req, res, next) => {
             };
             res.status(200).json(response);
         } else {
-            console.log('ES WEB')
-            // Si es una solicitud de renderizacion, renderiza la vista
+            // Lógica para manejar solicitudes web
             res.locals.productsData = {
                 payload: products,
                 totalPages: result.totalPages,
@@ -54,6 +55,7 @@ exports.getAllProducts = async (req, res, next) => {
                 page: result.page,
                 hasPrevPage: result.hasPrevPage,
                 hasNextPage: result.hasNextPage,
+                uniqueCategories: uniqueCategories
             };
             next();
         }
@@ -61,6 +63,7 @@ exports.getAllProducts = async (req, res, next) => {
         next(error);
     }
 };
+
 
 // Agregar un producto
 exports.addProduct = async (req, res) => {
@@ -110,5 +113,70 @@ exports.getProductDetails = async (productId) => {
         };
     } catch (error) {
         throw error;
+    }
+};
+
+
+
+// Obtener productos por categoria
+exports.getProductsByCategory = async (req, res, next) => {
+    try {
+        const { category } = req.query;
+        const { limit = 10, page = 1, sort, query } = req.query;
+        const options = {
+            page: parseInt(page, 10),
+            limit: parseInt(limit, 10),
+            sort: sort ? { price: sort === 'asc' ? 1 : -1 } : {},
+        };
+
+        const allCategories = await Product.distinct('category');
+        let filter = { category: category };
+
+        if (query) {
+            filter.name = new RegExp(query, 'i');
+        }
+
+        const result = await Product.paginate(filter, options);
+
+        const products = result.docs.map(product => {
+            return {
+                ...product._doc,
+                _id: product._id.toHexString(),
+            };
+        });
+
+        console.log('FLAG:', req.isApiRequest)
+        if (req.isApiRequest) {
+            console.log('ES API')
+            const response = {
+                status: 'success',
+                payload: products,
+                totalPages: result.totalPages,
+                prevPage: result.prevPage,
+                nextPage: result.nextPage,
+                page: result.page,
+                hasPrevPage: result.hasPrevPage,
+                hasNextPage: result.hasNextPage,
+                prevLink: result.hasPrevPage ? `/api/products/category/${category}?page=${result.prevPage}` : null,
+                nextLink: result.hasNextPage ? `/api/products/category/${category}?page=${result.nextPage}` : null
+            };
+            res.status(200).json(response);
+        } else {
+            console.log('ES WEB')
+            // Obtener categorías únicas
+            res.locals.productsData = {
+                payload: products,
+                totalPages: result.totalPages,
+                prevPage: result.prevPage,
+                nextPage: result.nextPage,
+                page: result.page,
+                hasPrevPage: result.hasPrevPage,
+                hasNextPage: result.hasNextPage,
+                uniqueCategories: allCategories 
+            };
+            next();
+        }
+    } catch (error) {
+        next(error);
     }
 };

@@ -1,17 +1,17 @@
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 {{#contentFor "pageTitle"}}Detalles{{/contentFor}}
 <div class="row">
     <div class="col-md-6">
     <img src="{{product.imageUrl}}" alt="{{product.name}}" class="img-fluid img_detail_prduct">
     </div>
     <div class="col-md-6 text-background div_detail_product">
-    <h2 class="mb-3" style="font-size:3rem"><strong>{{product.name}}</strong></h2>
+    <h2 class="mb-3" style="font-size:1.5rem"><strong>{{product.name}}</strong></h2>
     <div class="info_description_product">
-    <p class="text-muted"><strong>Descripción:</strong> {{product.description}}</p>
-    <p><strong>Precio:</strong> ${{product.price}}</p>
-    <p><strong>Stock:</strong> {{product.stock}} unidades disponibles</p>
+    <p class="text-muted" style="font-size:1.2rem"><strong>Descripción:</strong> {{product.description}}</p>
+    <p style="font-size:1.2rem"><strong>Precio:</strong> ${{product.price}}</p>
+    <p style="font-size:1.2rem"><strong>Stock:</strong> {{product.stock}} unidades disponibles</p>
+    <p style="font-size:1.2rem"><strong>Categoria:</strong>{{product.category}}</p>
     </div>
-    <!-- Botón para agregar al carrito directamente -->
+    <!-- Boton para agregar al carrito directamente -->
         <button class="btn btn-success btn-lg" onclick="addToCart('{{product._id}}', '{{product.name}}', {{product.price}}, '65c9326dffef98faa42dee08')">Agregar al carrito</button>
     </div>
 </div>

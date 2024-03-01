@@ -1,19 +1,44 @@
 <!-- Navbar de Bootstrap -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-        <a class="navbar-brand" href="/" style="font-size: 2rem;">Chicken with Rice</a>
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/" style="font-size: 1.5rem;">Chicken with Rice</a>
+        <!-- Boton de alternancia para dispositivos moviles -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+
+        <!-- Contenido del navbar -->
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
+            <ul class="navbar-nav">
+                {{#if logged}}
+                    <!-- Botones para usuarios autenticados -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/" style="font-size: 1.2rem;">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/products" style="font-size: 1.2rem;">Productos</a>
+                    </li>
+                {{/if}}
+            </ul>
+
+            <!-- Botones de usuario (autenticado o no) -->
+            <ul class="navbar-nav ms-auto">
+                {{#if logged}}
+                    <!-- Botones para usuarios autenticados -->
                 <li class="nav-item">
-                    <a class="nav-link" href="/" style="font-size: 1.5rem;">Inicio</a>
+                    <a class="nav-link" href="/carts/65c9326dffef98faa42dee08" style="font-size: 1.2rem; display: flex; align-items: center;">
+                        <img src="/public/images/cart.png" alt="Carrito" style="margin-right: 25px; height: 35px; width: 35px;">
+                    </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/products" style="font-size: 1.5rem;">Productos</a>
-                </li>
-                <!-- Agrega más elementos de menú según sea necesario -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout" style="font-size: 1.2rem;">Cerrar Sesión</a>
+                    </li>
+                {{else}}
+                    <!-- Botones para usuarios no autenticados -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/" style="font-size: 1.5rem;">Iniciar Sesión</a>
+                    </li>
+                {{/if}}
             </ul>
         </div>
     </div>

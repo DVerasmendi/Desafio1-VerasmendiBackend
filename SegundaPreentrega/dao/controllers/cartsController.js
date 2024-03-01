@@ -86,23 +86,34 @@ getCartById: async (req, res) => {
 
 // Agregar un producto al carrito
 addToCart: async (req, res) => {
-try {
-    const { cartId } = req.params;
-    const { productId, quantity } = req.body;
-    const cart = await Cart.findById(cartId);
+    try {
+        const { cartId } = req.params;
+        const { productId, quantity } = req.body;
+        const cart = await Cart.findById(cartId);
 
-    if (cart) {
-    cart.items.push({ productId, quantity });
-    await cart.save();
-    res.status(200).json(cart);
-    } else {
-    res.status(404).json({ error: 'Carrito no encontrado' });
+        if (cart) {
+            // Verificar si el producto ya está en el carrito
+            const existingProductIndex = cart.items.findIndex(item => item.productId.toString() === productId);
+            
+            if (existingProductIndex !== -1) {
+                // Si el producto ya existe, aumentar la cantidad
+                cart.items[existingProductIndex].quantity += parseInt(quantity, 10);
+            } else {
+                // Si el producto no existe, agregarlo al carrito
+                cart.items.push({ productId, quantity });
+            }
+
+            await cart.save();
+            res.status(200).json(cart);
+        } else {
+            res.status(404).json({ error: 'Carrito no encontrado' });
+        }
+    } catch (error) {
+        console.error('Error al agregar producto al carrito:', error);
+        res.status(500).json({ error: 'Error interno del servidor' });
     }
-} catch (error) {
-    console.error('Error al agregar producto al carrito:', error);
-    res.status(500).json({ error: 'Error interno del servidor' });
-}
 },
+
 
 // Actualizar la cantidad de un producto en el carrito
 updateCartItemQuantity: async (req, res) => {

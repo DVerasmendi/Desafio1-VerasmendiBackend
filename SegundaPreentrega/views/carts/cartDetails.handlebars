@@ -20,7 +20,33 @@
             {{/each}}
         </tbody>
     </table>
-    <div class="d-flex justify-content-center align-items-center mb-5">
-    <p class="fw-bold text-background" style="font-size: 2rem;">Total: ${{totalPrice}}</p>
-    </div>
+                <div class="d-flex flex-column justify-content-center align-items-center mb-5">
+                    <p class="fw-bold text-background" style="font-size: 2rem; margin-bottom: 10px;">Total: ${{totalPrice}}</p>
+                    <a class="text-background btn btn-success btn-lg" role="button" id="boton_pagar">Pagar</a>
+                </div>
+    </div>            
 </div>
+
+<script>
+document.getElementById('boton_pagar').addEventListener('click', function() {
+var cartId = '{{ cartId }}';
+Swal.fire({
+title: 'Procesando pedido',
+html: 'Por favor espere unos minutos mientras procesamos su compra',
+allowOutsideClick: false,
+timerProgressBar: true,
+didOpen: () => {
+Swal.showLoading()
+}
+});
+    setTimeout(() => {
+    Swal.close(); 
+    Swal.fire({
+    title: 'Compra procesada con éxito',
+    text:  `Carrito: ${cartId}`,
+    icon: 'success'
+    });
+    }, 4000);
+
+});
+</script>

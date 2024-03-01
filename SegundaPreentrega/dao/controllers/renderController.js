@@ -7,15 +7,11 @@ const cartsController = require('./cartsController');
 // Obtener y renderizar todos los productos en el navegador web
 router.get('/', productsController.getAllProducts, (req, res) => {
     try {
-        console.log('SIN PRODUCTOS RENDER')
         const productsData = res.locals.productsData;
-        console.log('PRODUCTOS RENDER:',productsData)
          // Realizar la copia profunda del objeto antes de renderizar la vista
         res.locals.productsData.payload = JSON.parse(JSON.stringify(productsData.payload));
-        console.log('PRODUCTOS RENDER 2:',res.locals.productsData)
-
     if (productsData && productsData.payload) {
-        console.log('INGRESA ACA')
+        const user = req.session.user;
     // Renderiza la vista con los datos obtenidos
     try {
     res.render('products/index', {
@@ -29,6 +25,10 @@ router.get('/', productsController.getAllProducts, (req, res) => {
         hasNextPage: productsData.hasNextPage,
         prevLink: productsData.hasPrevPage ? `/products?page=${productsData.prevPage}` : null,
         nextLink: productsData.hasNextPage ? `/products?page=${productsData.nextPage}` : null,
+        logged: req.session.logged || false, 
+        welcomeMessage: user ? `Bienvenido: ${user.role} | ROL: ${user.username}` : '',
+        uniqueCategories:productsData.uniqueCategories
+
     });
     } catch (error) {
         console.error(error);
@@ -47,6 +47,47 @@ router.get('/', productsController.getAllProducts, (req, res) => {
 });
 
 
+// Ruta para obtener y renderizar productos por categoría
+router.get('/products/category/:category?', productsController.getProductsByCategory, (req, res) => {
+    try {
+        const productsData = res.locals.productsData;
+        // Realizar la copia profunda del objeto antes de renderizar la vista
+        res.locals.productsData.payload = JSON.parse(JSON.stringify(productsData.payload));
+
+        if (productsData && productsData.payload) {
+            // Renderiza la vista con los datos obtenidos
+            res.render('products/index', {
+                pageTitle: 'Productos',
+                products: productsData.payload,
+                totalPages: productsData.totalPages,
+                prevPage: productsData.prevPage,
+                nextPage: productsData.nextPage,
+                page: productsData.page,
+                hasPrevPage: productsData.hasPrevPage,
+                hasNextPage: productsData.hasNextPage,
+                prevLink: productsData.hasPrevPage ? `/products/category/${req.params.category}?page=${productsData.prevPage}` : null,
+                nextLink: productsData.hasNextPage ? `/products/category/${req.params.category}?page=${productsData.nextPage}` : null,
+                logged: req.session.logged || false,
+                welcomeMessage: req.session.user ? `Bienvenido ${req.session.user.role} | ROL: ${req.session.user.username}` : '',
+                categorySubtitle: req.params.category ? `Categoría: ${req.params.category}` : '',  // Muestra la categoría solo si se filtra
+                uniqueCategories: productsData.uniqueCategories
+            });
+        } else {
+            console.log('El resultado de getProductsByCategory es undefined o no tiene payload.');
+            res.status(500).json({ status: 'error', error: 'Error interno del servidor' });
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ status: 'error', error: 'Error al renderizar la vista' });
+    }
+});
+
+
+
+
+
+
+
 // Ruta para ver detalles de un producto
 router.get('/products/:id', async (req, res, next) => {
     const productId = req.params.id;
@@ -60,7 +101,7 @@ router.get('/products/:id', async (req, res, next) => {
         console.log('DATILLA:',product)
 
         // Renderizar la vista de detalles del producto
-        res.render('products/details', { product });
+        res.render('products/details', { product ,logged: req.session.logged || false});
     } catch (error) {
         next(error);
     }
@@ -78,7 +119,7 @@ router.get('/carts/:cartId', async (req, res, next) => {
         }
 
         // Renderizar la vista de detalles del carrito
-        res.render('carts/cartDetails', { items: cartData.items, totalPrice: cartData.totalPrice });
+        res.render('carts/cartDetails', { items: cartData.items, totalPrice: cartData.totalPrice, cartId:cartId,logged: req.session.logged || false });
     } catch (error) {
         next(error);
     }

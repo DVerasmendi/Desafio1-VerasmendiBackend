@@ -1,4 +1,5 @@
 const express = require('express');
+const session = require('express-session');
 const http = require('http');
 const socketIO = require('socket.io');
 const { engine } = require('express-handlebars');
@@ -9,6 +10,26 @@ const USE_DB = process.env.USE_DB || true; // Bandera para usar DB o FileSystem 
 const app = express();
 const server = http.createServer(app);
 const io = socketIO(server);
+
+
+// Configuración de express-session
+app.use(session({
+secret: 'tu_secreto_aqui',
+resave: false,
+saveUninitialized: false
+}));
+
+const users = [
+    { username: 'admin', password: 'admin', role: 'admin' },
+    { username: 'user', password: 'user', role: 'user' }
+];
+
+
+// Middleware para analizar el cuerpo de la solicitud
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+
 
 // Configuracion de Express y Socket.IO
 app.use('/public', express.static('public'));
@@ -84,19 +105,52 @@ app.use((req, res, next) => {
 
 // Rutas para la web
 app.get('/', (req, res) => {
+    const logged = req.session.logged || false;
     if (req.isApiRequest) {
       // Lógica para manejar solicitudes de API
     res.json({ message: 'Esta es una respuesta de la API' });
 } else {
     // Lógica para manejar solicitudes web
-    res.render('home', { pageTitle: 'Chicken with Rice' });
+    console.log('VARIABLE DE LOGGEO:',logged)
+    res.render('login', { pageTitle: 'Chicken with Rice',logged});
 }
+});
+
+
+// Ruta para manejar el envío del formulario de inicio de sesión
+app.post('/login', (req, res) => {
+    const { username, password } = req.body;
+    // Buscar el usuario en el array
+    console.log(req.body)
+    console.log('USER:',username, '| PASSWORD:',password)
+    const user = users.find(u => u.username === username && u.password === password);
+    if (user) {
+        // Si las credenciales son correctas, establecer la sesión y redirigir
+        req.session.logged = true;
+        req.session.user = user; // Almacena información del usuario en la sesión si es necesario
+        console.log('USER APP.JS:',user)
+        res.redirect('/products'); // Redirige a la página deseada después del inicio de sesión
+    } else {
+        // Si las credenciales son incorrectas, devuelve un error
+        res.status(401).json({ error: 'Credenciales incorrectas' });
+    }
+    });
+
+// LOGOUT //
+app.get('/logout', (req, res) => {
+    req.session.destroy(err => {
+        if (err) {
+        console.error(err);
+        }
+        res.redirect('/');
+});
 });
 
 
 // Ruta para acceder a la vista del chat
 app.get('/chat', (req, res) => {
-res.render('chat', { pageTitle: 'Chat para clientes' });
+const logged = req.session.logged || false;
+res.render('chat', { pageTitle: 'Chat para clientes' ,logged});
 });
 
 const renderController = require('./dao/controllers/renderController');
