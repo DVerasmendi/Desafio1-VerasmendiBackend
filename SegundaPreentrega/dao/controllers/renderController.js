@@ -71,7 +71,7 @@ router.get('/products/category/:category?', productsController.getProductsByCate
                 nextLink: productsData.hasNextPage ? `/products/category/${req.params.category}?page=${productsData.nextPage}` : null,
                 logged: req.session.logged || false,
                 welcomeMessage: req.session.user ? `Bienvenido ${req.session.user.username} | ROL: ${req.session.user.role}` : '',
-                categorySubtitle: req.params.category ? `Categoría: ${req.params.category}` : '',  // Muestra la categoría solo si se filtra
+                categorySubtitle: req.params.category ? `Categoría: ${req.params.category}` : '',  // Muestra la categoria solo si se filtra
                 uniqueCategories: productsData.uniqueCategories
             });
         } else {
@@ -147,9 +147,6 @@ router.post('/login', async (req, res) => {
 });
 
 
-
-
-
 // Controlador para renderizar el formulario de registro
 router.get('/registerForm', (req, res) => {
     try {
@@ -195,9 +192,6 @@ router.post('/registerUpload', usersController.getAllUsers, async (req, res) => 
         res.status(500).json({ status: 'error', message: 'Error al procesar la solicitud' });
     }
 });
-
-
-
 
 
 

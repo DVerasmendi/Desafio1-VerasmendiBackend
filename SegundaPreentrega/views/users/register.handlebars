@@ -9,7 +9,6 @@
         <p class="text-background" style="font-size:1.2rem">Si desea registrarse por favor llene los datos.</p>
         </div>
         <hr class="my-4">
-        <!-- Logica condicional para mostrar el formulario solo si no esta logueado -->
         {{#unless logged}}
             <p class="text-background" style="font-size:1.2rem"> <strong>Datos de registro.</strong></p>
             <div class="d-flex justify-content-center align-items-center mt-2">
@@ -117,7 +116,6 @@ document.getElementById('botonFormRegister').addEventListener('click', async () 
         }
     } catch (error) {
         console.error('Error al realizar la solicitud:', error);
-        // Puedes manejar errores de red u otros errores aquí
     } 
 });
 
