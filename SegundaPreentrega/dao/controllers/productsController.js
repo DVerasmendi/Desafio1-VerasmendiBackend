@@ -129,52 +129,93 @@ exports.getProductsByCategory = async (req, res, next) => {
             sort: sort ? { price: sort === 'asc' ? 1 : -1 } : {},
         };
 
-        const allCategories = await Product.distinct('category');
-        let filter = { category: category };
+        // Verificar si la categoría es "allCategories"
+        if (category.toLowerCase() === 'allcategories') {
+            // Obtener todos los productos sin filtrar por categoría
+            const allProducts = await Product.paginate({}, options);
 
-        if (query) {
-            filter.name = new RegExp(query, 'i');
-        }
+            const products = allProducts.docs.map(product => {
+                return {
+                    ...product._doc,
+                    _id: product._id.toHexString(),
+                };
+            });
 
-        const result = await Product.paginate(filter, options);
-
-        const products = result.docs.map(product => {
-            return {
-                ...product._doc,
-                _id: product._id.toHexString(),
-            };
-        });
-
-        console.log('FLAG:', req.isApiRequest)
-        if (req.isApiRequest) {
-            console.log('ES API')
-            const response = {
-                status: 'success',
-                payload: products,
-                totalPages: result.totalPages,
-                prevPage: result.prevPage,
-                nextPage: result.nextPage,
-                page: result.page,
-                hasPrevPage: result.hasPrevPage,
-                hasNextPage: result.hasNextPage,
-                prevLink: result.hasPrevPage ? `/api/products/category/${category}?page=${result.prevPage}` : null,
-                nextLink: result.hasNextPage ? `/api/products/category/${category}?page=${result.nextPage}` : null
-            };
-            res.status(200).json(response);
+            if (req.isApiRequest) {
+                // Respuesta para API
+                const response = {
+                    status: 'success',
+                    payload: products,
+                    totalPages: allProducts.totalPages,
+                    prevPage: allProducts.prevPage,
+                    nextPage: allProducts.nextPage,
+                    page: allProducts.page,
+                    hasPrevPage: allProducts.hasPrevPage,
+                    hasNextPage: allProducts.hasNextPage,
+                    prevLink: allProducts.hasPrevPage ? `/api/products?page=${allProducts.prevPage}` : null,
+                    nextLink: allProducts.hasNextPage ? `/api/products?page=${allProducts.nextPage}` : null
+                };
+                res.status(200).json(response);
+            } else {
+                // Respuesta para web
+                res.locals.productsData = {
+                    payload: products,
+                    totalPages: allProducts.totalPages,
+                    prevPage: allProducts.prevPage,
+                    nextPage: allProducts.nextPage,
+                    page: allProducts.page,
+                    hasPrevPage: allProducts.hasPrevPage,
+                    hasNextPage: allProducts.hasNextPage,
+                    uniqueCategories: await Product.distinct('category')
+                };
+                next();
+            }
         } else {
-            console.log('ES WEB')
-            // Obtener categorías únicas
-            res.locals.productsData = {
-                payload: products,
-                totalPages: result.totalPages,
-                prevPage: result.prevPage,
-                nextPage: result.nextPage,
-                page: result.page,
-                hasPrevPage: result.hasPrevPage,
-                hasNextPage: result.hasNextPage,
-                uniqueCategories: allCategories 
-            };
-            next();
+            // La categoría no es "allCategories", aplicar el filtro de categoría
+            let filter = { category };
+
+            if (query) {
+                filter.name = new RegExp(query, 'i');
+            }
+
+            const result = await Product.paginate(filter, options);
+
+            const products = result.docs.map(product => {
+                return {
+                    ...product._doc,
+                    _id: product._id.toHexString(),
+                };
+            });
+
+            if (req.isApiRequest) {
+                // Respuesta para API
+                const response = {
+                    status: 'success',
+                    payload: products,
+                    totalPages: result.totalPages,
+                    prevPage: result.prevPage,
+                    nextPage: result.nextPage,
+                    page: result.page,
+                    hasPrevPage: result.hasPrevPage,
+                    hasNextPage: result.hasNextPage,
+                    prevLink: result.hasPrevPage ? `/api/products/category/${category}?page=${result.prevPage}` : null,
+                    nextLink: result.hasNextPage ? `/api/products/category/${category}?page=${result.nextPage}` : null
+                };
+                res.status(200).json(response);
+            } else {
+                // Respuesta para web
+                res.locals.productsData = {
+                    payload: products,
+                    totalPages: result.totalPages,
+                    prevPage: result.prevPage,
+                    nextPage: result.nextPage,
+                    page: result.page,
+                    hasPrevPage: result.hasPrevPage,
+                    hasNextPage: result.hasNextPage,
+                    uniqueCategories: await Product.distinct('category')
+                };
+                next();
+            }
         }
     } catch (error) {
         next(error);

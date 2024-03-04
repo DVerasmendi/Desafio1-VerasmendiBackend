@@ -104,4 +104,33 @@ PlUS:
 
 - Se edita el archivo app.js ajustando las nuevas configuraciones.
 - Se ajustan los controllers de cart y product para lograr la integración de solicitudes API y SITIO WEB.
+/*************************************************************************************************************/
+Ajustes varios y colocacion de LOGIN 04/03/2024
 
+- Se realizan ajustes solicitados por la profe.
+    - Se coloca categoria a productos, se ajusta precio y stock en cada producto.
+    - Se agrega filtrado por categoria.
+    - Se ajusta alert de éxito al agregar al carrito.
+
+- Se coloca vista de login general.
+    - Se ajusta header segun loggeo o desloggeo de usuarios.
+    - Se crea vista de registro de usuario.
+        - Formulario básico con diferentes datos de registro.
+        - El select de ROL se bloquea netamente para permitir la opcion de user. (La opcion de admin se debe setear en Atlas por seguridad).
+
+    - Se crea validación de usuarios con Atlas.
+    - Se crea registro de usuarios a Atlas.
+    - Se crea perfil de admin para Coder.
+        - USER: adminCoder@coder.com
+        - PASS: adminCod3r123
+    - Se crean diferentes perfiles de usuario.
+        - USER: Jose Sanchez
+        - PASS: 123456
+
+    - Se coloca "cerrar sesión" para destruir la sesión almacenada por cada user.
+
++ PLUS 
+    - Se hicieron mejoras en cuanto al front.
+    - Se mejoro la interfaz de usuario, en cuanto a la administracion de la info.
+    - Se ajustaron detalles en cuanto a redirección y manejo de info.
+    - Se agrega el ico para la pagina web.

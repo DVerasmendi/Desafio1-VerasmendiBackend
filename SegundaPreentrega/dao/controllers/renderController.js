@@ -3,6 +3,8 @@ const express = require('express');
 const router = express.Router();
 const productsController = require('./productsController');
 const cartsController = require('./cartsController');
+const usersController = require('./usersController');
+
 
 // Obtener y renderizar todos los productos en el navegador web
 router.get('/', productsController.getAllProducts, (req, res) => {
@@ -26,7 +28,7 @@ router.get('/', productsController.getAllProducts, (req, res) => {
         prevLink: productsData.hasPrevPage ? `/products?page=${productsData.prevPage}` : null,
         nextLink: productsData.hasNextPage ? `/products?page=${productsData.nextPage}` : null,
         logged: req.session.logged || false, 
-        welcomeMessage: user ? `Bienvenido: ${user.role} | ROL: ${user.username}` : '',
+        welcomeMessage: user ? `Bienvenido: ${user.username} | ROL: ${user.role}` : '',
         uniqueCategories:productsData.uniqueCategories
 
     });
@@ -68,7 +70,7 @@ router.get('/products/category/:category?', productsController.getProductsByCate
                 prevLink: productsData.hasPrevPage ? `/products/category/${req.params.category}?page=${productsData.prevPage}` : null,
                 nextLink: productsData.hasNextPage ? `/products/category/${req.params.category}?page=${productsData.nextPage}` : null,
                 logged: req.session.logged || false,
-                welcomeMessage: req.session.user ? `Bienvenido ${req.session.user.role} | ROL: ${req.session.user.username}` : '',
+                welcomeMessage: req.session.user ? `Bienvenido ${req.session.user.username} | ROL: ${req.session.user.role}` : '',
                 categorySubtitle: req.params.category ? `Categoría: ${req.params.category}` : '',  // Muestra la categoría solo si se filtra
                 uniqueCategories: productsData.uniqueCategories
             });
@@ -81,12 +83,6 @@ router.get('/products/category/:category?', productsController.getProductsByCate
         res.status(500).json({ status: 'error', error: 'Error al renderizar la vista' });
     }
 });
-
-
-
-
-
-
 
 // Ruta para ver detalles de un producto
 router.get('/products/:id', async (req, res, next) => {
@@ -124,6 +120,86 @@ router.get('/carts/:cartId', async (req, res, next) => {
         next(error);
     }
 });
+
+/// USERS ///
+router.post('/login', async (req, res) => {
+    const { username, password } = req.body;
+
+    try {
+        // Buscar el usuario en la base de datos
+        const user = await usersController.verifyLogin(username, password);
+
+        if (user) {
+            req.session.logged = true;
+            req.session.user = user;
+            console.log('USER:',user)
+            res.redirect('/products');
+        } else {
+            // Si las credenciales son incorrectas, renderizar la página de login con un mensaje de error
+            res.render('failedlogin');
+        }
+    } catch (error) {
+        console.error('Error al buscar el usuario:', error);
+        res.status(500).render('failedlogin', {
+            error: 'Error interno del servidor'
+        });
+    }
+});
+
+
+
+
+
+// Controlador para renderizar el formulario de registro
+router.get('/registerForm', (req, res) => {
+    try {
+        const user = req.session.user;
+        // Renderizar la vista con el formulario de registro
+        res.render('users/register', {
+            pageTitle: 'Registro de Usuario',
+            logged: req.session.logged || false,
+            welcomeMessage: user ? `Bienvenido: ${user.username} | ROL: ${user.role}` : '',
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ status: 'error', error: 'Error al renderizar el formulario de registro' });
+    }
+});
+
+
+// Ruta para cargar la vista de registro y procesar el registro de usuarios
+router.post('/registerUpload', usersController.getAllUsers, async (req, res) => {
+    try {
+        const usersData = res.locals.usersData;
+        if (usersData && usersData.users) {
+            const { username, email } = req.body;
+
+            const userExists = usersData.users.some(user => user.username === username || user.email === email);
+
+            if (userExists) {
+                console.log('El usuario ya existe.');
+                // Devolver un JSON indicando que el usuario ya existe
+                res.status(400).json({ status: 'error', message: 'El usuario ya existe' });
+            } else {
+                // Si el usuario no existe, puedes realizar el registro
+                await usersController.addUser(req, res);
+                // Devolver un JSON indicando que el registro fue exitoso
+                res.status(200).json({ status: 'success', message: 'Registro exitoso' });
+            }
+        } else {
+            console.log('El resultado de getAllUsers es undefined o no tiene users.');
+            res.status(500).json({ status: 'error', message: 'Error interno del servidor' });
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ status: 'error', message: 'Error al procesar la solicitud' });
+    }
+});
+
+
+
+
+
 
 
 module.exports = router;

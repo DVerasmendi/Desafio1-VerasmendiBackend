@@ -1,0 +1,124 @@
+<!-- Contenido de la pagina principal -->
+<div class="jumbotron">
+    <div class="container text-center">
+        <div class="d-flex justify-content-center align-items-center">
+        <h1 class="text-border text-background" style="font-size:1.5rem">{{pageTitle}}</h1>
+        <h3 class="text-background" style="font-size:1.2rem"><em>{{welcomeMessage}}</em></h3>
+        </div>
+        <div class="d-flex justify-content-center align-items-center">
+        <p class="text-background" style="font-size:1.2rem">Si desea registrarse por favor llene los datos.</p>
+        </div>
+        <hr class="my-4">
+        <!-- Logica condicional para mostrar el formulario solo si no esta logueado -->
+        {{#unless logged}}
+            <p class="text-background" style="font-size:1.2rem"> <strong>Datos de registro.</strong></p>
+            <div class="d-flex justify-content-center align-items-center mt-2">
+                <div class="container row justify-content-center">
+                    <form id="FormRegisterID" method="POST" action="/registerUpload">
+                        <div class="mb-3 col-6">
+                            <input type="text" class="form-control text-background form-control col-12" id="username" placeholder="User" 
+                            name="username" required>
+                        </div>
+                        <div class="mb-3 col-6">
+                            <input type="email" class="form-control text-background form-control col-12" id="email" 
+                            placeholder="Email" name="email" required>
+                        </div>
+                        <div class="mb-3 col-6">
+                            <input type="number" class="form-control text-background form-control col-12" id="age" 
+                            placeholder="Edad" name="age" required>
+                        </div>
+                        <div class="mb-3 col-6">
+                            <input type="password" class="form-control text-background form-control col-12" id="password" 
+                            placeholder="Password" name="password" required>
+                        </div>
+                        <div class="mb-3 col-6">
+                        <select id="role" name="role" class="form-control text-background" required>
+                        <option value="" selected disabled>Rol</option>
+                        <option value="user">User</option>
+                        <option value="admin" disabled>Admin</option>
+                        </select>
+                        </div>
+                        <div class="mb-3 col-6">
+                        <button id="botonFormRegister" type="button" class="text-background btn btn-lg btn-primary flex-fill mb-3" style="font-size: 1.2rem;"><strong>Registrarse</strong></button>
+                        <a class="text-background btn btn-danger btn-lg mb-2 flex-fill" style="font-size: 1.2rem;" href="/" role="button">Volver</a>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        {{else}}
+                <div class="container text-center">
+                <p class="text-background" style="font-size:1.4rem">Ya estas loggeado!</p>
+                <div class="d-flex justify-content-center align-items-center">
+                    <img src="/public/images/pollo_.png" alt="Pollo Bailando" class="img-fluid" style="width: 20%; margin-botom:2%">
+                </div>
+                <a class="text-background btn btn-success btn-lg mb-5" href="/products" role="button">Ver menú</a>
+                <a class="text-background btn btn-danger btn-lg mb-5" href="/logout" role="button">Logout</a>
+                </div>
+                </div>
+        {{/unless}}
+    </div>
+</div>
+<script>
+document.getElementById('botonFormRegister').addEventListener('click', async () => {
+    Swal.fire({
+        title: 'Procesando usuario',
+        html: 'Por favor espere unos minutos mientras validamos el usuario',
+        allowOutsideClick: false,
+        timerProgressBar: true,
+        didOpen: () => {
+            Swal.showLoading()
+        }
+    });
+
+    try {
+        const registerForm = document.getElementById('FormRegisterID');
+        const formData = new FormData(registerForm);
+
+        // Realizar la solicitud usando fetch
+        const response = await fetch('/registerUpload', {
+            method: 'POST',
+            body: formData,
+        });
+
+        // Verificar el estado de la respuesta
+        if (response.ok) {
+            // Si la respuesta es exitosa, obtener y mostrar el mensaje
+            const responseData = await response.json();
+            Swal.fire({
+            icon:'success',
+            title: 'Usuario agregado con éxito',
+            text: responseData.message,
+            showCloseButton: true,
+            confirmButtonText:'Ok',
+            confirmButtonColor: '#000000',
+            }).then((result) => {
+            if (result.isConfirmed) {
+                // Redirigir a la página principal
+                window.location.href = "/";
+            }
+            })
+        } else {
+            // Si la respuesta no es exitosa, obtener y mostrar el mensaje de error
+            const errorData = await response.json();
+            Swal.fire({
+            icon:'error',
+            title: 'El usuario ya se encuentra registrado',
+            text: errorData.message,
+            showCloseButton: true,
+            confirmButtonText:'Ok',
+            confirmButtonColor: '#000000',
+            }).then((result) => {
+            if (result.isConfirmed) {
+                // Redirigir a la página principal
+                window.location.href = "/";
+            }
+            })
+        }
+    } catch (error) {
+        console.error('Error al realizar la solicitud:', error);
+        // Puedes manejar errores de red u otros errores aquí
+    } 
+});
+
+</script>

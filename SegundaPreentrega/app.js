@@ -5,13 +5,17 @@ const socketIO = require('socket.io');
 const { engine } = require('express-handlebars');
 const mongoose = require('mongoose');
 const path = require('path');
+
+const multer = require('multer');
+const upload = multer();
+
 const USE_DB = process.env.USE_DB || true; // Bandera para usar DB o FileSystem TRUE : MONGO ATLAS, FALSE: FILESYSTEM
 
 const app = express();
 const server = http.createServer(app);
 const io = socketIO(server);
 
-
+app.use(upload.none());
 // Configuración de express-session
 app.use(session({
 secret: 'tu_secreto_aqui',
@@ -117,24 +121,6 @@ app.get('/', (req, res) => {
 });
 
 
-// Ruta para manejar el envío del formulario de inicio de sesión
-app.post('/login', (req, res) => {
-    const { username, password } = req.body;
-    // Buscar el usuario en el array
-    console.log(req.body)
-    console.log('USER:',username, '| PASSWORD:',password)
-    const user = users.find(u => u.username === username && u.password === password);
-    if (user) {
-        // Si las credenciales son correctas, establecer la sesión y redirigir
-        req.session.logged = true;
-        req.session.user = user; // Almacena información del usuario en la sesión si es necesario
-        console.log('USER APP.JS:',user)
-        res.redirect('/products'); // Redirige a la página deseada después del inicio de sesión
-    } else {
-        // Si las credenciales son incorrectas, devuelve un error
-        res.status(401).json({ error: 'Credenciales incorrectas' });
-    }
-    });
 
 // LOGOUT //
 app.get('/logout', (req, res) => {
@@ -157,6 +143,13 @@ const renderController = require('./dao/controllers/renderController');
 // RUTAS WEB
 app.use('/', renderController);
 app.use('/products', renderController);
+app.get('/register', renderController); 
+app.post('/registerUpload', renderController); 
+app.post('/login', renderController); 
+
+
+
+
 
 
 

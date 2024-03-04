@@ -15,13 +15,17 @@
                 <div class="container row justify-content-center">
                     <h2 class="text-center mb-4 text-background" style="font-size:1.2rem">Ingresar</h2>
                     <form method="POST" action="/login">
-                        <div class="mb-3">
+                        <div class="mb-3 col-6">
                             <input type="text" class="form-control text-background form-control col-12" id="username" placeholder="User" name="username" required>
                         </div>
-                        <div class="mb-3">
+                        <div class="mb-3 col-6">
                             <input type="password" class="form-control text-background form-control col-12" id="password" placeholder="Password" name="password" required>
                         </div>
-                        <button type="submit" class="btn btn-primary"><strong>Iniciar Sesión</strong></button>
+                        <div class="mb-3 col-6">
+                        <button type="submit" class="text-background btn btn-lg btn-primary flex-fill mb-3" style="font-size: 1.2rem;"><strong>Iniciar Sesión</strong></button>
+                        <a class="text-background btn btn-danger btn-lg mb-2 flex-fill" style="font-size: 1.2rem;" href="/registerForm" role="button">Registrarse</a>
+                        </div>
+
                     </form>
                 </div>
             </div>

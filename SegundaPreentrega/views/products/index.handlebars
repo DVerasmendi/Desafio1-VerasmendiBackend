@@ -17,7 +17,8 @@
         <div class="form-group mx-2 pb-5">
             <label for="categoryFilter" class="text-background mb-2" style="font-size:1.2rem"><strong>Filtrar por Categoría:</strong></label>
             <select id="categoryFilter" name="category" class="form-control" onchange="submitCategoryForm()" style="font-size:1.2rem">
-                <option value="">Todas las categorías</option>
+                <option value="">Selecciona una</option>
+                <option value="allCategories">Todas las categorías</option>
                 {{#each uniqueCategories}}
                     <option value="{{this}}">{{this}}</option>
                 {{/each}}
