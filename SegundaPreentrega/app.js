@@ -23,10 +23,6 @@ resave: false,
 saveUninitialized: false
 }));
 
-const users = [
-    { username: 'admin', password: 'admin', role: 'admin' },
-    { username: 'user', password: 'user', role: 'user' }
-];
 
 
 // Middleware para analizar el cuerpo de la solicitud
