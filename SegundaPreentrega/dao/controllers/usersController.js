@@ -1,11 +1,24 @@
 const mongoose = require('mongoose');
 const User = require('../db/models/User');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 // Validacion de usuarios
 exports.verifyLogin = async (username, password) => {
     try {
-        const user = await User.findOne({ username, password });
-        return user;
+        // Buscar el usuario en la base de datos por el nombre de usuario
+        const user = await User.findOne({ username });
+
+        // Si no se encuentra el usuario, retornar null
+        if (!user) {
+            return null;
+        }
+
+        // Comparar la contraseña introducida con el hash almacenado
+        const passwordMatch = await bcrypt.compare(password, user.password);
+
+        // Devolver el usuario si la contraseña coincide, de lo contrario, retornar null
+        return passwordMatch ? user : null;
     } catch (error) {
         throw error;
     }
@@ -42,12 +55,15 @@ exports.addUser = async (req, res) => {
             return res.status(400).json({ status: 'error', message: 'Faltan datos obligatorios' });
         }
 
+         // Hash de la contraseña
+        const hashedPassword = await bcrypt.hash(password, saltRounds);
+        
         // Crear una nueva instancia del modelo User con los datos recibidos
         const newUser = new User({
             username,
             email,
             age,
-            password,
+            password: hashedPassword,
             role,
         });
 

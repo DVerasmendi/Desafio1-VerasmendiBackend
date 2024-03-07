@@ -8,7 +8,6 @@ const path = require('path');
 
 const multer = require('multer');
 const upload = multer();
-
 const USE_DB = process.env.USE_DB || true; // Bandera para usar DB o FileSystem TRUE : MONGO ATLAS, FALSE: FILESYSTEM
 
 const app = express();
@@ -141,6 +140,7 @@ app.use('/', renderController);
 app.use('/products', renderController);
 app.get('/register', renderController); 
 app.post('/registerUpload', renderController); 
+app.get('/api/sessions/github', renderController); 
 app.post('/login', renderController); 
 
 

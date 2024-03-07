@@ -4,8 +4,83 @@ const router = express.Router();
 const productsController = require('./productsController');
 const cartsController = require('./cartsController');
 const usersController = require('./usersController');
+const User = require('../db/models/User');
+//HASH
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+//Configuracion de github Passport
+const passport = require('passport');
+const GitHubStrategy = require('passport-github2').Strategy;
+// Configuración de Passport y GitHub
+passport.use(new GitHubStrategy({
+    clientID: 'Iv1.01a5d88226c7749d', //TU_CLIENT_ID
+    clientSecret: '03a4002b555e73d9a59ec75035d6b72e15427c50', //TU_CLIENT_SECRET
+    callbackURL: 'http://localhost:8080/api/sessions/github/callback'
+},
+async (accessToken, refreshToken, profile, done) => {
+    try {
+    // Verifica si el usuario ya está registrado en tu base de datos
+    const existingUser = await User.findOne({ githubId: profile.id });
+
+    if (existingUser) {
+    // El usuario ya esta registrado, simplemente retorna el usuario existente
+    return done(null, existingUser);
+    } else {
+    // El usuario no está registrado, realiza el registro
+    password=profile.id
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+
+    const newUser = new User({
+        githubId: profile.id,
+        username: profile.username,
+        email: profile.username,
+        age:0,
+        password:hashedPassword,
+        role:'user'
+    });
+
+    // Guarda el nuevo usuario en la base de datos
+    await newUser.save();
+
+    // Retorna el nuevo usuario
+    return done(null, newUser);
+    }
+} catch (error) {
+    // Manejo de errores
+    return done(error);
+}
+}
+));
+
+passport.serializeUser((user, done) => {
+done(null, user);
+});
+
+passport.deserializeUser((obj, done) => {
+done(null, obj);
+});
+
+router.use(passport.initialize());
+router.use(passport.session());
+
+// Ruta para iniciar sesion con GitHub
+router.get('/api/sessions/github', passport.authenticate('github'));
+// Ruta de retorno despues de la autenticacion de GitHub
+router.get('/api/sessions/github/callback',
+passport.authenticate('github', { failureRedirect: '/' }),
+(req, res) => {
+// Redirige al usuario despues de la autenticacion exitosa
+            req.session.logged = true;
+            req.session.user = {
+                id: req.user.id,
+                username: req.user.username,
+                role: 'user', 
+            };
+            res.redirect('/products');
+});
 
 
+//// RUTAS VARIAS ////
 // Obtener y renderizar todos los productos en el navegador web
 router.get('/', productsController.getAllProducts, (req, res) => {
     try {
@@ -192,7 +267,6 @@ router.post('/registerUpload', usersController.getAllUsers, async (req, res) => 
         res.status(500).json({ status: 'error', message: 'Error al procesar la solicitud' });
     }
 });
-
 
 
 

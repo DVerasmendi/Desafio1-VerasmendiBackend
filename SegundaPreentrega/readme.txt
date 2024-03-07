@@ -134,3 +134,20 @@ Ajustes varios y colocacion de LOGIN 04/03/2024
     - Se mejoro la interfaz de usuario, en cuanto a la administracion de la info.
     - Se ajustaron detalles en cuanto a redirección y manejo de info.
     - Se agrega el ico para la pagina web.
+
+/*************************************************************************************************************/
+Se agrega hash y autenticacion por github  12/03/2024
+    - Se instala npm install bcrypt
+    - Se implementa el hash.
+        - Se ajusta el almacenado y la comparación de pass con la nueva implementación de hash.
+    - Se crea la app en página de github para enlazar el loggeo.
+        - Se crean las diferentes rutas para enlazar todo.
+        - Se agrega botones en Register y Login para acceder con github.
+
+    - En la vista Register:
+        - Se coloca "Registrarse con Github".
+        - Se crea la lógica para registrar usuario proveniente de github.
+    - En la vista Login:
+        - Se coloca "Inicia sesión con Github".
+
+    Ambos Botones redireccionan a las mismas rutas, pero a efectos del user no percibe esto. De igual forma se crea un registro de usuario para control interno de la tienda.
