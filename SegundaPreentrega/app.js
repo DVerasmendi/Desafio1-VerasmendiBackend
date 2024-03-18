@@ -141,6 +141,7 @@ app.use('/products', renderController);
 app.get('/register', renderController); 
 app.post('/registerUpload', renderController); 
 app.get('/api/sessions/github', renderController); 
+app.get('/api/sessions/current', renderController); 
 app.post('/login', renderController); 
 
 

@@ -19,6 +19,7 @@ passport.use(new GitHubStrategy({
 },
 async (accessToken, refreshToken, profile, done) => {
     try {
+    console.log('ACCESS TOKEN:',accessToken)
     // Verifica si el usuario ya está registrado en tu base de datos
     const existingUser = await User.findOne({ githubId: profile.id });
 
@@ -78,6 +79,26 @@ passport.authenticate('github', { failureRedirect: '/' }),
             };
             res.redirect('/products');
 });
+
+
+// Ruta para verificar el usuario actual
+router.get('/api/sessions/current', (req, res) => {
+// Verificar si el usuario está autenticado
+if (req.session.logged && req.session.user) {
+    // Devolver el usuario actual
+    res.json({ user: req.session.user });
+} else {
+    // Si no hay usuario autenticado, devolver un error
+    res.status(401).json({ message: 'No hay usuario autenticado' });
+}
+});
+
+module.exports = router;
+
+
+
+
+
 
 
 //// RUTAS VARIAS ////

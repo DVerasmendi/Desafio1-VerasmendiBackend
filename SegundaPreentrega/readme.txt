@@ -151,3 +151,9 @@ Se agrega hash y autenticacion por github  12/03/2024
         - Se coloca "Inicia sesión con Github".
 
     Ambos Botones redireccionan a las mismas rutas, pero a efectos del user no percibe esto. De igual forma se crea un registro de usuario para control interno de la tienda.
+
+/*************************************************************************************************************/
+Desafio complementario  21/03/2024
+    - Se agrega la ruta app.get('/api/sessions/current', renderController); 
+        La cual entrega la info de si existe un usuario autenticado o no, entregando la info por Json.
+        - Se adquiere la info al hacer un GET a : http://localhost:8080/api/sessions/current
