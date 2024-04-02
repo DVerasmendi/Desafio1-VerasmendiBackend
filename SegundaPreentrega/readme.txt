@@ -157,3 +157,14 @@ Desafio complementario  21/03/2024
     - Se agrega la ruta app.get('/api/sessions/current', renderController); 
         La cual entrega la info de si existe un usuario autenticado o no, entregando la info por Json.
         - Se adquiere la info al hacer un GET a : http://localhost:8080/api/sessions/current
+
+/*************************************************************************************************************/
+Reestructura de nuestro servidor  02/04/2024
+    - Se reafirma el uso de capas.
+        - Routing.
+        - Controlador.
+        - Dao.
+        - Vistas.
+    - Se crea el archivo .env 
+        + Se instala el paquete npm install dotenv
+        + Se pasa al archivo .env las credenciales de mongoDB y passport de Github.

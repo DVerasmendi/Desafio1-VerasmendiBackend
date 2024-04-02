@@ -5,6 +5,8 @@ const productsController = require('./productsController');
 const cartsController = require('./cartsController');
 const usersController = require('./usersController');
 const User = require('../db/models/User');
+require('dotenv').config();
+
 //HASH
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
@@ -13,9 +15,9 @@ const passport = require('passport');
 const GitHubStrategy = require('passport-github2').Strategy;
 // Configuración de Passport y GitHub
 passport.use(new GitHubStrategy({
-    clientID: 'Iv1.01a5d88226c7749d', //TU_CLIENT_ID
-    clientSecret: '03a4002b555e73d9a59ec75035d6b72e15427c50', //TU_CLIENT_SECRET
-    callbackURL: 'http://localhost:8080/api/sessions/github/callback'
+    clientID: process.env.CLIENT_ID, //TU_CLIENT_ID
+    clientSecret: process.env.CLIENT_SECRET, //TU_CLIENT_SECRET
+    callbackURL: process.env.CALLBACK_URL
 },
 async (accessToken, refreshToken, profile, done) => {
     try {
