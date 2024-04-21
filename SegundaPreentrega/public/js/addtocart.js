@@ -1,5 +1,4 @@
 // script.js
-
 async function addToCart(productId, productName, productPrice, cartId) {
     try {
         const response = await fetch(`/api/carts/${cartId}/items`, {
@@ -10,18 +9,14 @@ async function addToCart(productId, productName, productPrice, cartId) {
             body: JSON.stringify({
                 productId,
                 quantity: 1,
+                price:productPrice
             }),
         });
 
         if (!response.ok) {
             console.error('Error al agregar producto al carrito:', response.statusText);
-            // Puedes mostrar un mensaje de error al usuario si lo prefieres
             return;
         }
-
-        const cart = await response.json();
-
-        // Mostrar una alerta de SweetAlert con la información del producto y el carrito
         Swal.fire({
             icon: 'success',
             title: 'Producto Agregado al Carrito',
@@ -30,6 +25,5 @@ async function addToCart(productId, productName, productPrice, cartId) {
 
     } catch (error) {
         console.error('Error al agregar producto al carrito:', error);
-        // Puedes mostrar un mensaje de error al usuario si lo prefieres
     }
 }

@@ -11,8 +11,15 @@
     <p style="font-size:1.2rem"><strong>Stock:</strong> {{product.stock}} unidades disponibles</p>
     <p style="font-size:1.2rem"><strong>Categoria:</strong>{{product.category}}</p>
     </div>
-    <!-- Boton para agregar al carrito directamente -->
-        <button class="btn btn-success btn-lg" onclick="addToCart('{{product._id}}', '{{product.name}}', {{product.price}}, '65c9326dffef98faa42dee08')">Agregar al carrito</button>
+        <div class="container">
+            <div class="col-5">
+                <div class="text-center">
+                    <button class="btn btn-success btn-lg" onclick="addToCart('{{product._id}}', '{{product.name}}', {{product.price}}, '{{cartId}}')">Agregar al carrito</button>
+                    <a id="vaciarCarrito" class="text-background btn btn-lg btn-danger flex-fill mb-3" style="font-size: 1.2rem;" href="/products" role="button">Volver</a>
+
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <script src="/public/js/addtocart.js"></script>

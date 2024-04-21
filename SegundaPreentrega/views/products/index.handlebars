@@ -27,7 +27,7 @@
     </form>
 </div>
 <div class="d-flex flex-column justify-content-center align-items-center">
-{{#each products}}
+{{#eachWithCartId products}}
 <div class="product card d-flex justify-content-center align-items-center p-2 col-8 mb-3">
     <img src="{{imageUrl}}" class="card-img-top img_index_product" alt="{{name}}">
     <div class="card-body text-background">
@@ -38,13 +38,14 @@
         <p class="card-text">Categoria: {{category}}</p>
         <a href="/products/{{_id}}" class="btn btn-primary btn-lg">Ver detalles</a>
 
-        <button class="btn btn-success btn-lg" onclick="addToCart('{{_id}}', '{{name}}', {{price}}, '65c9326dffef98faa42dee08')">Agregar al carrito</button>
+        <button class="btn btn-success btn-lg" onclick="addToCart('{{_id}}', '{{name}}', {{price}}, '{{cartId}}')">Agregar al carrito</button>
 
     </div>
 </div>
 {{else}}
 <p>No hay productos disponibles.</p>
-{{/each}}
+{{/eachWithCartId}}
+
 </div>
 <script src="/public/js/addtocart.js"></script>
 

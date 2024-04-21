@@ -1,17 +1,26 @@
 const Message = require('../db/models/Message');
 
-exports.getAllMessages = async (req, res) => {
+exports.getAllMessages = async () => {
     try {
         const messages = await Message.find();
-        res.status(200).json(messages);
+        // Convertir los ObjectId a strings
+        const formattedMessages = messages.map(message => {
+            return {
+                ...message.toObject(),
+                _id: message._id.toString()
+            };
+        });
+        return formattedMessages;
     } catch (error) {
         console.error('Error al obtener los mensajes:', error);
-        res.status(500).json({ error: 'Error interno del servidor' });
+        throw new Error('Error interno del servidor');
     }
 };
 
+
 exports.addMessage = async (req, res) => {
     try {
+        console.log('Se recibió una solicitud para agregar un mensaje');
         const { user, message } = req.body;
         const newMessage = new Message({ user, message });
         await newMessage.save();

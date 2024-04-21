@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const User = require('../db/models/User');
+const Cart = require('../db/models/Cart');
+
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
@@ -55,7 +57,7 @@ exports.addUser = async (req, res) => {
             return res.status(400).json({ status: 'error', message: 'Faltan datos obligatorios' });
         }
 
-         // Hash de la contraseña
+        // Hash de la contraseña
         const hashedPassword = await bcrypt.hash(password, saltRounds);
         
         // Crear una nueva instancia del modelo User con los datos recibidos
@@ -69,8 +71,15 @@ exports.addUser = async (req, res) => {
 
         // Guardar el nuevo usuario en la base de datos
         await newUser.save();
+
+        // Crear un carrito para el nuevo usuario
+        const newCart = await Cart.create({ userId: newUser._id, userEmail: newUser.email });
+        
+        // Asociar el ID del carrito al usuario
+        newUser.cartId = newCart._id;
+        await newUser.save();
     } catch (error) {
         console.error('Error al agregar usuario:', error);
+        res.status(500).json({ status: 'error', message: 'Error interno del servidor' });
     }
 };
-

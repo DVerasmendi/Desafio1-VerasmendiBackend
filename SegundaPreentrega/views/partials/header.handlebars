@@ -20,19 +20,30 @@
                     </li>
                 {{/if}}
             </ul>
-
             <!-- Botones de usuario (autenticado o no) -->
             <ul class="navbar-nav ms-auto">
                 {{#if logged}}
                     <!-- Botones para usuarios autenticados -->
-                <li class="nav-item">
-                    <a class="nav-link" href="/carts/65c9326dffef98faa42dee08" style="font-size: 1.2rem; display: flex; align-items: center;">
-                        <img src="/public/images/cart.png" alt="Carrito" style="margin-right: 25px; height: 35px; width: 35px;">
-                    </a>
-                </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/logout" style="font-size: 1.2rem;">Cerrar Sesión</a>
-                    </li>
+                            <li class="nav-item">
+                            <a class="nav-link" href="/orders" style="font-size: 1.2rem; display: flex; align-items: center;">
+                                <img src="/public/images/pedidos.png" alt="Mis pedidos" style="margin-right: 25px; height: 35px; width: 35px;">
+                            </a>
+                            </li>
+                            <li class="nav-item">
+                            <a class="nav-link" href="/chat" style="font-size: 1.2rem; display: flex; align-items: center;">
+                                <img src="/public/images/mensajes.png" alt="Mis Mensajes" style="margin-right: 25px; height: 35px; width: 35px;">
+                            </a>
+                            </li>
+                        {{#eq user_role "user"}}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/carts/{{cartId}}" style="font-size: 1.2rem; display: flex; align-items: center;">
+                                <img src="/public/images/cart.png" alt="Carrito" style="margin-right: 25px; height: 35px; width: 35px;">
+                            </a>
+                        </li>
+                        {{/eq}}
+                            <li class="nav-item">
+                                <a class="nav-link" href="/logout" style="font-size: 1.2rem;">Cerrar Sesión</a>
+                            </li> 
                 {{else}}
                     <!-- Botones para usuarios no autenticados -->
                     <li class="nav-item">

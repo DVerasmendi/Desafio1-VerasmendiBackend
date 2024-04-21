@@ -2,15 +2,25 @@ document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('form');
     const userInput = document.getElementById('userInput');
     const messageInput = document.getElementById('messageInput');
-    const messagesList = document.getElementById('messages');
+    const enviarButton = document.getElementById('enviarButton');
+    if (enviarButton){
+        enviarButton.addEventListener('click', function(e) {
+            e.preventDefault();
 
-    if (form){
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        const user = userInput.value;
-        const message = messageInput.value;
+            const user = userInput.value.trim();
+            const message = messageInput.value.trim();
 
-        if (user && message) {
+            if (!user || !message) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Por favor, completa todos los campos',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK'
+                });
+                return;
+            }
+
             fetch('/api/messages', {
                 method: 'POST',
                 headers: {
@@ -20,18 +30,21 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .then(response => response.json())
             .then(data => {
-                console.log('Mensaje enviado:', data);
-                // Añadir el mensaje a la lista después de recibir la respuesta del servidor
-                const li = document.createElement('li');
-                li.textContent = `${user}: ${message}`;
-                messagesList.appendChild(li);
-                userInput.value = '';
-                messageInput.value = '';
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Éxito',
+                    text: '¡Su mensaje ha sido enviado a la tienda! Pronto le responderemos.',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = '/products';
+                    }
+                });
             })
             .catch((error) => {
                 console.error('Error al enviar el mensaje:', error);
             });
-        }
-    });
-}
+        });
+    }
 });

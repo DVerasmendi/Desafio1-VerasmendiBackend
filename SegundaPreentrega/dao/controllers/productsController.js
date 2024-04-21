@@ -68,13 +68,22 @@ exports.getAllProducts = async (req, res, next) => {
 // Agregar un producto
 exports.addProduct = async (req, res) => {
     try {
-        const newProduct = new Product(req.body);
-        await newProduct.save();
-        res.send(newProduct);
+        // Verificar si el usuario es administrador
+        const user = req.session.user;
+        if (user && user.role === 'admin') {
+            // Si es administrador, proceder a agregar el producto
+            const newProduct = new Product(req.body);
+            await newProduct.save();
+            res.send(newProduct);
+        } else {
+            // Si no es administrador, devolver un error de autorización
+            res.status(403).json({ message: 'Acceso denegado. Se requiere permiso de administrador.' });
+        }
     } catch (error) {
         res.status(500).send(error);
     }
 };
+
 
 // Editar un producto
 exports.updateProduct = async (req, res) => {

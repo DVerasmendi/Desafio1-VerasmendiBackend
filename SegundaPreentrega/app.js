@@ -60,6 +60,21 @@ const hbs = exphbs.create({
             delete this._blocks[name];
             return content;
         },
+        // 
+        eq: function (a, b, options) {
+            return a === b ? options.fn(this) : options.inverse(this);
+        },
+        eachWithCartId: function(context, options) {
+            let ret = '';
+            for (let i = 0, j = context.length; i < j; i++) {
+                context[i].cartId = options.data.root.cartId;
+                ret = ret + options.fn(context[i]);
+            }
+            return ret;
+        },
+        multiply: function (a, b) {
+            return a * b;
+        },
     },
 });
 
@@ -94,14 +109,6 @@ app.use('/api/carts', cartRoutes);
 app.use('/api/messages', messageRoutes); 
 
 
-
-
-app.use((req, res, next) => {
-    // Verificar si la ruta tiene el prefijo /api/
-    req.isApiRequest = req.path.startsWith('/api');
-    next();
-});
-
 // Rutas para la web
 app.get('/', (req, res) => {
     const logged = req.session.logged || false;
@@ -110,8 +117,10 @@ app.get('/', (req, res) => {
     res.json({ message: 'Esta es una respuesta de la API' });
 } else {
     // Lógica para manejar solicitudes web
+    const cartId = '';
+    const user_role = '';
     console.log('VARIABLE DE LOGGEO:',logged)
-    res.render('login', { pageTitle: 'Chicken with Rice',logged});
+    res.render('login', { pageTitle: 'Chicken with Rice',logged, user_role, cartId});
 }
 });
 
@@ -128,12 +137,6 @@ app.get('/logout', (req, res) => {
 });
 
 
-// Ruta para acceder a la vista del chat
-app.get('/chat', (req, res) => {
-const logged = req.session.logged || false;
-res.render('chat', { pageTitle: 'Chat para clientes' ,logged});
-});
-
 const renderController = require('./dao/controllers/renderController');
 // RUTAS WEB
 app.use('/', renderController);
@@ -143,10 +146,8 @@ app.post('/registerUpload', renderController);
 app.get('/api/sessions/github', renderController); 
 app.get('/api/sessions/current', renderController); 
 app.post('/login', renderController); 
-
-
-
-
+app.get('/chat', renderController); 
+app.get('/orders', renderController); 
 
 
 

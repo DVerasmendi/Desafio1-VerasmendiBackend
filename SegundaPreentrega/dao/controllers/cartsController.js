@@ -1,4 +1,7 @@
 const Cart = require('../db/models/Cart');
+const Product = require('../db/models/Product');
+const ticketController = require('./ticketController');
+
 
 // Controlador para gestionar operaciones en el carrito
 const cartsController = {
@@ -32,7 +35,6 @@ getCartById: async (req, res) => {
         const cart = await Cart.findById(cartId).populate('items.productId');
         if (req.isApiRequest) {
             console.log('ES API')
-
             if (!cart) {
                 return res.status(404).json({ error: 'Carrito no encontrado' });
             }
@@ -88,7 +90,7 @@ getCartById: async (req, res) => {
 addToCart: async (req, res) => {
     try {
         const { cartId } = req.params;
-        const { productId, quantity } = req.body;
+        const { productId, quantity , price} = req.body;
         const cart = await Cart.findById(cartId);
 
         if (cart) {
@@ -100,7 +102,7 @@ addToCart: async (req, res) => {
                 cart.items[existingProductIndex].quantity += parseInt(quantity, 10);
             } else {
                 // Si el producto no existe, agregarlo al carrito
-                cart.items.push({ productId, quantity });
+                cart.items.push({ productId, quantity, price }); 
             }
 
             await cart.save();
@@ -185,21 +187,26 @@ try {
 // Eliminar un producto específico del carrito
 removeProductFromCart: async (req, res) => {
     try {
-        const { cid, pid } = req.params; // cid es el ID del carrito, pid es el ID del producto
-        const cart = await Cart.findById(cid); // Encuentra el carrito por su ID
-
+        const { cartId, productId } = req.params;
+        // Buscar el carrito por su ID
+        const cart = await Cart.findById(cartId);
         if (!cart) {
-            return res.status(404).json({ message: 'Carrito no encontrado' });
+            console.log('Carrito no encontrado');
         }
+        // Filtrar los elementos del carrito excluyendo el producto que se desea eliminar
+        const initialItemCount = cart.items.length;
+        cart.items = cart.items.filter(item => item.productId.toString() !== productId.toString());
 
-        // Filtrar los ítems para eliminar el producto especificado
-        cart.items = cart.items.filter(item => item.productId.toString() !== pid);
-
-        await cart.save(); // Guardar el carrito después de eliminar el producto
-        res.status(200).json({ message: 'Producto eliminado del carrito', cart });
+        // Verificar si el producto fue eliminado del carrito
+        const finalItemCount = cart.items.length;
+        if (initialItemCount === finalItemCount) {
+            console.log('Producto no encontrado en el carrito');
+        }
+        // Guardar el carrito actualizado
+        await cart.save();
     } catch (error) {
         console.error('Error al eliminar producto del carrito:', error);
-        res.status(500).json({ error: 'Error interno del servidor' });
+        return res.status(500).json({ error: 'Error interno del servidor' });
     }
 },
 
@@ -271,9 +278,103 @@ emptyCart  : async (req, res) => {
         res.status(500).json({ error: 'Error interno del servidor' });
     }
 },
+
+// Obtener un carrito por ID de usuario y popular los detalles de los productos
+getCartByUserId: async (req, res) => {
+    const userId = req.session.user._id;
+    const userEmail = req.session.user.email;
+
+    try {
+        console.log('USERID:', userId);
+        console.log('USEREMAIL:', userEmail);
+
+        // Buscar todos los carritos del usuario, tanto activos como completados
+        const carts = await Cart.find({ userId }).populate('items.productId');
+
+        // Filtrar los carritos activos y completados
+        const activeCarts = carts.filter(cart => cart.status === 'active');
+        const completedCarts = carts.filter(cart => cart.status === 'completed');
+
+        // Verificar si hay carritos activos
+        if (activeCarts.length > 0) {
+            // Devolver el primer carrito activo encontrado
+            const activeCart = activeCarts[0];
+            return activeCart._id
+        }
+
+        // Si no hay carritos activos, crear uno nuevo
+        console.log('No se encontraron carritos activos. Creando uno nuevo...');
+        const newCart = await Cart.create({ userId, userEmail });
+        return newCart._id
+    } catch (error) {
+        console.error('Error al obtener el carrito:', error);
+        return res.status(500).json({ error: 'Error interno del servidor' });
+    }
+},
+
+purchaseCart: async (req, res) => {
+    const { cartId } = req.params;
+    try {
+        const cart = await Cart.findById(cartId).populate('items.productId');
+        if (!cart || cart.status !== 'active') {
+            return res.status(404).json({ error: 'Carrito no encontrado o no está activo' });
+        }
+
+        const purchasedProducts = [];
+        const notPurchasedProducts = [];
+
+        let totalPurchasedAmount = 0;
+        let totalNotPurchasedAmount = 0;
+
+        for (const item of cart.items) {
+            const product = item.productId;
+
+            if (!product || product.stock < item.quantity) {
+                notPurchasedProducts.push({
+                    name: product.name,
+                    quantity: item.quantity,
+                    price: item.price,
+                    totalAmount: item.quantity * item.price
+                });
+                totalNotPurchasedAmount += item.quantity * item.price;
+            } else {
+                purchasedProducts.push({
+                    name: product.name,
+                    quantity: item.quantity,
+                    price: item.price,
+                    totalAmount: item.quantity * item.price
+                });
+                totalPurchasedAmount += item.quantity * item.price;
+                product.stock -= item.quantity;
+                await product.save();
+                await cartsController.removeProductFromCart({ params: { cartId: cartId, productId: product._id } });
+            }
+        }
+        // Solo se generara el ticket si existen elementos comprados y procesados, si todos los elementos no tienen stock, no se procesa ticket de compra.
+        if (purchasedProducts.length !== 0) {
+            await ticketController.createTicket(cart, purchasedProducts, totalPurchasedAmount);
+        } 
+        // Solo se actualiza el estatus del carrito si todos los elementos comprados existen en stock, de lo contrario se mantiene en status='active'
+        if (notPurchasedProducts.length === 0) {
+            cart.status = 'completed';
+        }
+        await cart.save();
+        return res.status(200).json({
+            message: 'Compra realizada con éxito',
+            userEmail: cart.userEmail,
+            purchasedProducts: purchasedProducts,
+            notPurchasedProducts: notPurchasedProducts,
+            totalPurchasedAmount: totalPurchasedAmount,
+            totalNotPurchasedAmount: totalNotPurchasedAmount, 
+            cartId: cartId
+        });
+
+    } catch (error) {
+        console.error('Error al procesar la compra:', error);
+        return res.status(500).json({ error: 'Error interno del servidor' });
+    }
+},
 }
-
-
 
 
 

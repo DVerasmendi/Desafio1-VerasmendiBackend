@@ -1,153 +1,74 @@
-<!-- views/realTimeProducts.handlebars -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Productos en Tiempo Real</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            background-color: #f4f4f4;
-            color: #333;
-            text-align: center; 
-        }
-        h1 {
-            color: #333;
-        }
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        li {
-            margin-bottom: 10px;
-            border: 1px solid #ddd;
-            padding: 10px;
-            background-color: #f9f9f9;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            text-align: left; 
-        }
-        img {
-            max-width: 100px;
-            height: auto;
-            border-radius: 4px;
-        }
-        button {
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-        #add-product-container {
-            border: 1px solid #ddd;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-            text-align: center; 
-        }
-        #add-product-container h1 {
-            margin-bottom: 10px;
-        }
-        #product-form {
-            display: flex;
-            flex-direction: column;
-        }
-        #product-form input {
-            margin-bottom: 10px;
-            padding: 10px;
-        }
-        #product-form button {
-            padding: 10px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        #product-form button:hover {
-            background-color: #45a049;
-        }
-    </style>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
+<body class="bg-gray-100">
 
-<!-- Formulario para agregar un nuevo producto -->
-<div id="add-product-container">
-    <h1>Agregar un Nuevo Producto</h1>
-    <form id="product-form">
-        <input type="text" id="title" placeholder="Título del producto">
-        <input type="text" id="description" placeholder="Descripción del producto">
-        <button type="button" onclick="addProduct()">Agregar Producto</button>
-    </form>
+<div class="mx-auto">
+    <div class="flex flex-col justify-center items-center mt-8">
+        <h3 class="text-background" style="font-size:1.2rem"><em><strong>{{welcomeMessage}}</strong></em></h3>
+    </div>
+    <hr class="my-4">
+    <div class="flex flex-col justify-center items-center mt-8">
+        <h1 class="text-2xl font-bold  text-background">Agregar un Nuevo Producto</h1>
+    </div>
+    <div class="container row justify-content-center">
+        <form id="product-form" class="mt-4">
+            <div class="mb-3 col-6">
+                <input type="text" id="name" name="name" class="form-control text-background form-control col-12" placeholder="Nombre del producto">
+            </div>
+            <div class="mb-3 col-6">
+                <input type="text" id="description" name="description" class="form-control text-background form-control col-12" placeholder="Descripción del producto">
+            </div>
+            <div class="mb-3 col-6">
+                <input type="number" id="price" name="price" class="form-control text-background form-control col-12" placeholder="Precio">
+            </div>
+            <div class="mb-3 col-6">
+                <input type="number" id="stock" name="stock" class="form-control text-background form-control col-12" placeholder="Stock">
+            </div>
+            <div class="mb-3 col-6">
+                <input type="text" id="imageUrl" name="imageUrl" class="form-control text-background form-control col-12" placeholder="URL de la imagen">
+            </div>
+            <div class="mb-3 col-6">
+                <select id="category" name="category" class="form-control text-background form-control col-12">
+                    <option value="">Selecciona una</option>
+                {{#each uniqueCategories}}
+                    <option value="{{this}}">{{this}}</option>
+                {{/each}}
+                </select>
+            </div>
+            <button type="button" class="btn btn-success btn-lg mt-4" onclick="addProductFromForm()">Agregar Producto</button>
+        </form>
+    </div>
+    <hr class="my-4">
+    <div class="flex justify-center items-center mt-8">
+        <h1 class="text-2xl font-bold mb-5 text-background">Lista de Productos en DataBase</h1>
+    </div>
+
+    <div class="d-flex flex-column justify-content-center align-items-center">
+                {{#each products}}
+                <div class="product card d-flex justify-content-center align-items-center p-2 col-8 mb-3">
+                    <img src="{{this.imageUrl}}" alt="{{this.name}}" class="w-48 h-auto rounded-md mt-2 border border-white">
+                    <div class="card-body text-background">
+                    <h2 class="text-xl font-bold">{{this.name}}</h2>
+                    <p class="mt-2"><strong>Descripción:</strong> {{this.description}}</p>
+                    <p class="mt-2"><strong>Price:</strong> {{this.price}}</p>
+                    <p class="mt-2"><strong>Stock:</strong> {{this.stock}}</p>
+                    <p class="mt-2"><strong>Categoria:</strong> {{this.category}}</p>
+                    </div>
+                    <div class="mt-4">
+                        <button type="button" class="btn btn-danger" onclick="deleteProduct('{{this._id}}')">Eliminar</button>
+                        <button type="button" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 ml-2" onclick="editProduct('{{this._id}}', '{{this.name}}', '{{this.description}}', '{{this.price}}', '{{this.stock}}', '{{this.imageUrl}}', '{{this.category}}')">Editar</button>
+                    </div>
+                </div>
+                {{/each}}
+    </div>
 </div>
-
-<h1>Lista de Productos en Tiempo Real</h1>
-
-<!-- Lista de productos -->
-<ul id="product-list">
-    {{#each products}}
-    <li id="product-{{this.id}}">
-        <h2>{{this.title}}</h2>
-        <p><strong>Descripción:</strong> {{this.description}}</p>
-        <button type="button" onclick="removeProduct('{{this.id}}')">Eliminar</button>
-    </li>
-    {{/each}}
-</ul>
-
-<script src="/socket.io/socket.io.js"></script>
-<script>
-    const socket = io();
-
-    function addProduct() {
-        const title = document.getElementById('title').value;
-        const description = document.getElementById('description').value;
-
-        // Genera un ID único que no esté en la lista actual de productos
-        const uniqueId = generateUniqueId();
-
-        socket.emit('productAdded', { id: uniqueId, title, description });
-    }
-
-    function removeProduct(productId) {
-        socket.emit('productRemoved', { id: productId });
-    }
-
-    function generateUniqueId() {
-        const timestamp = new Date().getTime();
-        let uniqueId = `product-${timestamp}`;
-
-        // Verifica que el ID no exista en la lista actual de productos
-        const productList = document.getElementById('product-list');
-        const existingIds = Array.from(productList.children).map(product => product.id);
-
-        while (existingIds.includes(uniqueId)) {
-            // Si el ID ya existe, genera uno nuevo
-            uniqueId = `product-${new Date().getTime()}`;
-        }
-
-        return uniqueId;
-    }
-
-    socket.on('updateRealTimeProducts', ({ action, productId, updatedProduct }) => {
-        updateProductList();
-        location.reload();
-    });
-
-    function updateProductList() {
-        const productList = document.getElementById('product-list');
-    }
-</script>
-
+<script src="/public/js/productActions.js"></script>
 </body>
+
 </html>

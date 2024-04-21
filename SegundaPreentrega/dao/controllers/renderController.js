@@ -4,6 +4,10 @@ const router = express.Router();
 const productsController = require('./productsController');
 const cartsController = require('./cartsController');
 const usersController = require('./usersController');
+const messageController = require('./messageController');
+const ticketController = require('./ticketController');
+
+
 const User = require('../db/models/User');
 require('dotenv').config();
 
@@ -85,14 +89,20 @@ passport.authenticate('github', { failureRedirect: '/' }),
 
 // Ruta para verificar el usuario actual
 router.get('/api/sessions/current', (req, res) => {
-// Verificar si el usuario está autenticado
-if (req.session.logged && req.session.user) {
-    // Devolver el usuario actual
-    res.json({ user: req.session.user });
-} else {
-    // Si no hay usuario autenticado, devolver un error
-    res.status(401).json({ message: 'No hay usuario autenticado' });
-}
+    // Verificar si el usuario está autenticado
+    if (req.session.logged && req.session.user) {
+        // Obtener los campos necesarios del usuario
+        const { username, email } = req.session.user;
+
+        // Crear el DTO del usuario
+        const userDTO = { username, email };
+
+        // Devolver el DTO del usuario
+        res.json({ user: userDTO });
+    } else {
+        // Si no hay usuario autenticado, devolver un error
+        res.status(401).json({ message: 'No hay usuario autenticado' });
+    }
 });
 
 module.exports = router;
@@ -105,55 +115,68 @@ module.exports = router;
 
 //// RUTAS VARIAS ////
 // Obtener y renderizar todos los productos en el navegador web
-router.get('/', productsController.getAllProducts, (req, res) => {
+router.get('/', productsController.getAllProducts, async (req, res) => {
     try {
         const productsData = res.locals.productsData;
-         // Realizar la copia profunda del objeto antes de renderizar la vista
-        res.locals.productsData.payload = JSON.parse(JSON.stringify(productsData.payload));
-    if (productsData && productsData.payload) {
-        const user = req.session.user;
-    // Renderiza la vista con los datos obtenidos
-    try {
-    res.render('products/index', {
-        pageTitle: 'Productos',
-        products: productsData.payload,
-        totalPages: productsData.totalPages,
-        prevPage: productsData.prevPage,
-        nextPage: productsData.nextPage,
-        page: productsData.page,
-        hasPrevPage: productsData.hasPrevPage,
-        hasNextPage: productsData.hasNextPage,
-        prevLink: productsData.hasPrevPage ? `/products?page=${productsData.prevPage}` : null,
-        nextLink: productsData.hasNextPage ? `/products?page=${productsData.nextPage}` : null,
-        logged: req.session.logged || false, 
-        welcomeMessage: user ? `Bienvenido: ${user.username} | ROL: ${user.role}` : '',
-        uniqueCategories:productsData.uniqueCategories
-
-    });
+        if (productsData && productsData.payload) {
+            const user = req.session.user;
+            // Renderiza la vista adecuada según el rol del usuario
+            if (user && user.role === 'admin') {
+                res.render('realTimeProducts', {
+                    pageTitle: 'Lista de Productos en Tiempo Real',
+                    products: productsData.payload,
+                    logged: req.session.logged || false, 
+                    user_role: user.role,
+                    welcomeMessage: `Bienvenido: ${user.username} | ROL: ${user.role}`,
+                    uniqueCategories: productsData.uniqueCategories
+                });
+            } else {
+                // Si el usuario no es un administrador, renderiza la vista normal de productos, buscar el carrito correspondiente
+                let cartId;
+                const cart = await cartsController.getCartByUserId(req, res);
+                cartId = cart ? cart._id : null;
+                console.log('CARD ID: ',cartId)
+                res.render('products/index', {
+                    pageTitle: 'Productos',
+                    products: productsData.payload,
+                    totalPages: productsData.totalPages,
+                    prevPage: productsData.prevPage,
+                    nextPage: productsData.nextPage,
+                    page: productsData.page,
+                    hasPrevPage: productsData.hasPrevPage,
+                    hasNextPage: productsData.hasNextPage,
+                    prevLink: productsData.hasPrevPage ? `/products?page=${productsData.prevPage}` : null,
+                    nextLink: productsData.hasNextPage ? `/products?page=${productsData.nextPage}` : null,
+                    logged: req.session.logged || false, 
+                    user_role: user.role,
+                    welcomeMessage: user ? `Bienvenido: ${user.username} | ROL: ${user.role}` : '',
+                    uniqueCategories: productsData.uniqueCategories,
+                    cartId: cartId 
+                });
+            }
+        } else {
+            console.log('El resultado de getAllProducts es undefined o no tiene payload.');
+            res.status(500).json({ status: 'error', error: 'Error interno del servidor' });
+        }
     } catch (error) {
         console.error(error);
         res.status(500).json({ status: 'error', error: 'Error al renderizar la vista' });
     }
-    } else {
-    console.log('El resultado de getAllProducts es undefined o no tiene payload.');
-    res.status(500).json({ status: 'error', error: 'Error interno del servidor' });
-    }
-    }catch (error) {
-        // Asegúrate de incluir esta línea para manejar errores
-        console.log(error);
-        next(error);
-    }
-    
 });
 
 
+
 // Ruta para obtener y renderizar productos por categoría
-router.get('/products/category/:category?', productsController.getProductsByCategory, (req, res) => {
+router.get('/products/category/:category?', productsController.getProductsByCategory, async (req, res) => {
     try {
         const productsData = res.locals.productsData;
+        const user = req.session.user;
         // Realizar la copia profunda del objeto antes de renderizar la vista
         res.locals.productsData.payload = JSON.parse(JSON.stringify(productsData.payload));
-
+        // Si el usuario no es un administrador, renderiza la vista normal de productos, buscar el carrito correspondiente
+        let cartId;
+        const cart = await cartsController.getCartByUserId(req, res);
+        cartId = cart ? cart._id : null;
         if (productsData && productsData.payload) {
             // Renderiza la vista con los datos obtenidos
             res.render('products/index', {
@@ -168,9 +191,11 @@ router.get('/products/category/:category?', productsController.getProductsByCate
                 prevLink: productsData.hasPrevPage ? `/products/category/${req.params.category}?page=${productsData.prevPage}` : null,
                 nextLink: productsData.hasNextPage ? `/products/category/${req.params.category}?page=${productsData.nextPage}` : null,
                 logged: req.session.logged || false,
+                user_role: user.role,
                 welcomeMessage: req.session.user ? `Bienvenido ${req.session.user.username} | ROL: ${req.session.user.role}` : '',
                 categorySubtitle: req.params.category ? `Categoría: ${req.params.category}` : '',  // Muestra la categoria solo si se filtra
-                uniqueCategories: productsData.uniqueCategories
+                uniqueCategories: productsData.uniqueCategories,
+                cartId: cartId 
             });
         } else {
             console.log('El resultado de getProductsByCategory es undefined o no tiene payload.');
@@ -185,17 +210,16 @@ router.get('/products/category/:category?', productsController.getProductsByCate
 // Ruta para ver detalles de un producto
 router.get('/products/:id', async (req, res, next) => {
     const productId = req.params.id;
-
+    const user = req.session.user;
     try {
         const product = await productsController.getProductDetails(productId);
 
         if (!product) {
             return res.status(404).send('Producto no encontrado');
-        }   
-        console.log('DATILLA:',product)
-
+        }  
+        const cartId = await cartsController.getCartByUserId(req, res);
         // Renderizar la vista de detalles del producto
-        res.render('products/details', { product ,logged: req.session.logged || false});
+        res.render('products/details', { product ,cartId ,logged: req.session.logged || false, user_role: user.role});
     } catch (error) {
         next(error);
     }
@@ -204,7 +228,6 @@ router.get('/products/:id', async (req, res, next) => {
 // Ruta para obtener y renderizar detalles del carrito por ID
 router.get('/carts/:cartId', async (req, res, next) => {
     const { cartId } = req.params;
-
     try {
         const cartData = await cartsController.getCartById(req, res); // Llama al controlador de carritos
 
@@ -219,6 +242,17 @@ router.get('/carts/:cartId', async (req, res, next) => {
     }
 });
 
+// Ruta para finalizar el proceso de compra de un carrito
+router.get('/carts/:cartId/purchase', async (req, res, next) => {
+    try {
+        await cartsController.purchaseCart(req, res);
+    } catch (error) {
+        next(error);
+    }
+});
+
+
+
 /// USERS ///
 router.post('/login', async (req, res) => {
     const { username, password } = req.body;
@@ -230,7 +264,11 @@ router.post('/login', async (req, res) => {
         if (user) {
             req.session.logged = true;
             req.session.user = user;
-            console.log('USER:',user)
+            if (user.role =='admin'){
+                console.log('Es un admin! Role:',user.role)
+            }else{
+                console.log('Es un user comun Role:',user.role)
+            }
             res.redirect('/products');
         } else {
             // Si las credenciales son incorrectas, renderizar la página de login con un mensaje de error
@@ -291,6 +329,58 @@ router.post('/registerUpload', usersController.getAllUsers, async (req, res) => 
     }
 });
 
+//CHATS
+router.get('/chat', async (req, res, next) => {
+    const logged = req.session.logged || false;
+    const user = req.session.user; // Obtener el usuario de la sesión
+
+    if (user) {
+        if (user.role === 'admin') {
+            console.log('Es un admin! Role:', user.role);
+            try {
+                const messages = await messageController.getAllMessages();
+                res.render('chats/admin', { pageTitle: 'Chat para administradores', logged, isAdmin: true, messages });
+            } catch (error) {
+                console.error('Error al obtener los mensajes:', error);
+                res.status(500).json({ error: 'Error interno del servidor' });
+            }
+        } else {
+            console.log('Es un usuario común Role:', user.role);
+            // Renderizar la vista normal para el usuario común
+            res.render('chats/users', { pageTitle: 'Chat para usuarios', logged, isAdmin: false });
+        }
+    } else {
+        // Renderizar la vista sin información adicional si el usuario no está autenticado
+        res.render('chat', { pageTitle: 'Chat', logged, isAdmin: false });
+    }
+});
+
+//ORDERS
+router.get('/orders', async (req, res, next) => {
+    const logged = req.session.logged || false;
+    const user = req.session.user;
+    if (user) {
+        const tickets = await ticketController.getAllTickets();
+
+        if (user.role === 'admin') {
+            console.log('Es un admin!');
+            try {
+                res.render('orders/admin', { pageTitle: 'Pedidos Realizados', logged, tickets });
+            } catch (error) {
+                console.error('Error al obtener los mensajes:', error);
+                res.status(500).json({ error: 'Error interno del servidor' });
+            }
+        } else {
+            const tickets = await ticketController.getTicketsByPurchaser(user.email);
+            console.log('Es un usuario');
+            // Renderizar la vista normal para el usuario común
+            res.render('orders/users', { pageTitle: 'Tus pedidos', logged, tickets  });
+        }
+    } else {
+        // Renderizar la vista sin información adicional si el usuario no está autenticado
+        res.render('chat', { pageTitle: 'Chat', logged, isAdmin: false });
+    }
+});
 
 
 module.exports = router;

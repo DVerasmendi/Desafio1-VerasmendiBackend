@@ -168,3 +168,47 @@ Reestructura de nuestro servidor  02/04/2024
     - Se crea el archivo .env 
         + Se instala el paquete npm install dotenv
         + Se pasa al archivo .env las credenciales de mongoDB y passport de Github.
+/*************************************************************************************************************/
+Mejorando la arquitectura del servidor  23/04/2024
+    PRODUCTOS
+    - Se agrega vista de administrador para crear actualizar y eliminar productos (realTimeProducts)
+	    - Se agrega validación de agregar producto  
+	    - Se puede editar toda la info de cada producto.
+        - Se puede eliminar un producto.
+	CARRITO
+    - Se agrega botón para vaciar el carrito.
+    - Únicamente cada user crea carritos, el admin no crea carritos. Ni tiene acceso a la vista de carrito de user.
+        - Se agrega la creación de carrito automática al crear un user nuevo, el carrito queda asociado al userId.
+
+        COMPRAS - /:cid/purchase
+        - Se crea controller para tickets (Creación, getAll, getUser, deleteTicket)
+        - Se agrega creación de tickets con la compra relizada y se descuentan los productos del stock de la DB.
+        - Se indica en la compra final a través de una tabla los productos que se lograron comprar y los que no, con su cantidad, precio y total.
+        - Se agrega vista para ver tickets tanto para admin y users.
+
+        Posibles situaciones con la compra:
+            - Si la compra se realiza de forma exitosa (Todos los elementos están en stock) el carrito pasa a estatus COMPLETED, se crea TICKET y se crea un nuevo carrito vacio para el user.
+            - Si la compra contiene productos que no estan en stock y productos que estan en stock, se procesa la compra con los elementos que si estan en stock, se crea TICKET con dichos elementos, pero los productos sin stock se mantienen en el carrito y el estatus del carrito se mantiene en ACTIVE.
+            - Si todos los productos en el carrito NO tienen stock, la compra se procesa, pero no se crea ticket, se mantienen los productos en el carrito.
+
+
+    CHATS 
+    - Se agrega el link para la vista del chat unicamente del user con un boton en header para enviar mensajes a la tienda.
+    - Se crea la vista de chats para administradores para poder leer los mensajes enviados por los usuarios.
+    - Se crea la vista de chats para users y enviar mensajes a la tienda.
+
+
+
+
+NOTAS IMPORTANTES:
+Para poder probar la app.
+    - Como cliente: 
+        - Crear un user nuevo en Registrarse: http://localhost:8080/registerForm
+        - O sino usar un user ya creado previamente: 
+            user: peluchin
+            pass: peluchin
+
+    - Como admin:
+        - Acceder con el admin ya creado, ya que a través del sitio web no esta habilitado para crear administradores.
+            user:admin
+            pass:admin

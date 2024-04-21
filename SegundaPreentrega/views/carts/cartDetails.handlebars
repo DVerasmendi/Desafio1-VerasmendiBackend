@@ -1,52 +1,55 @@
 <div class="container mt-5">
     <div class="d-flex justify-content-center align-items-center mb-5">
-    <h1 class="text-background" style="font-size: 3rem;">Detalles del Carrito</h1>
+        <h1 class="text-background" style="font-size: 3rem;">Detalles del Carrito</h1>
     </div>
-    <table class="table table-striped table_carrito">
-        <thead class="thead-dark">
-            <tr>
-                <th class="w-25 text-center" scope="col" style="font-size:1.5rem;">Cantidad</th>
-                <th class="w-25 text-center" scope="col" style="font-size:1.5rem;">Nombre del Producto</th>
-                <th class="w-25 text-center" scope="col" style="font-size:1.5rem;">Precio Unitario</th>
-            </tr>
-        </thead>
-        <tbody>
-            {{#each items}}
+    {{#if items.length}}
+        <table class="table table-striped table_carrito">
+            <thead class="thead-dark">
                 <tr>
-                    <td class="text-center" style="font-size:1.1rem;">{{this.quantity}}</td>
-                    <td class="text-center" style="font-size:1.1rem;">{{this.name}}</td>
-                    <td class="text-center" style="font-size:1.1rem;">$ {{this.price}}</td>
+                    <th class="w-25 text-center" scope="col" style="font-size:1.5rem;">Producto</th>
+                    <th class="w-25 text-center" scope="col" style="font-size:1.5rem;">Cantidad</th>
+                    <th class="w-25 text-center" scope="col" style="font-size:1.5rem;">Precio Unitario</th>
+                    <th class="w-25 text-center" scope="col" style="font-size:1.5rem;">Total</th>
                 </tr>
-            {{/each}}
-        </tbody>
-    </table>
-                <div class="d-flex flex-column justify-content-center align-items-center mb-5">
-                    <p class="fw-bold text-background" style="font-size: 2rem; margin-bottom: 10px;">Total: ${{totalPrice}}</p>
-                    <a class="text-background btn btn-success btn-lg" role="button" id="boton_pagar">Pagar</a>
+            </thead>
+            <tbody>
+                {{#each items}}
+                    <tr>
+                        <td class="text-center" style="font-size:1.1rem;">{{this.name}}</td>
+                        <td class="text-center" style="font-size:1.1rem;">{{this.quantity}}</td>
+                        <td class="text-center" style="font-size:1.1rem;">$ {{this.price}}</td>
+                        <td class="text-center" style="font-size: 1.1rem;">$ {{multiply this.price this.quantity}}</td>
+                    </tr>
+                {{/each}}
+            </tbody>
+        </table>
+        <div class="d-flex flex-column justify-content-center align-items-center mb-5">
+            <p class="fw-bold text-background" style="font-size: 2rem; margin-bottom: 10px;">Total: ${{totalPrice}}</p>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-5">
+                        <div class="text-center">
+                            <a class="text-background btn btn-lg btn-primary flex-fill mb-3" style="font-size: 1.2rem;" role="button" id="boton_pagar" href="#" data-cartid="{{cartId}}">Pagar Produtos</a>
+                            <a id="vaciarCarrito" class="text-background btn btn-lg btn-danger flex-fill mb-3" style="font-size: 1.2rem;" href="#" role="button" data-cartid="{{cartId}}">Vaciar Carrito</a>
+
+                        </div>
+                    </div>
                 </div>
-    </div>            
+            </div>
+        </div>
+
+
+        <div class="container text-center">
+        <a class="text-background btn btn-dark btn-lg mb-5" href="/products" role="button">Volver</a>
+        </div>
+    {{else}}
+        <div class="d-flex justify-content-center align-items-center mb-5">
+        <h3 class="text-background" style="font-size: 2rem;">Su carrito está vacío por ahora.</h3>
+        </div>
+        <div class="container text-center">
+        <a class="text-background btn btn-danger btn-lg mb-5" href="/products" role="button">Volver</a>
+        </div>
+    </div>
+    {{/if}}
 </div>
-
-<script>
-document.getElementById('boton_pagar').addEventListener('click', function() {
-var cartId = '{{ cartId }}';
-Swal.fire({
-title: 'Procesando pedido',
-html: 'Por favor espere unos minutos mientras procesamos su compra',
-allowOutsideClick: false,
-timerProgressBar: true,
-didOpen: () => {
-Swal.showLoading()
-}
-});
-    setTimeout(() => {
-    Swal.close(); 
-    Swal.fire({
-    title: 'Compra procesada con éxito',
-    text:  `Carrito: ${cartId}`,
-    icon: 'success'
-    });
-    }, 4000);
-
-});
-</script>
+<script src="/public/js/purchasedetails.js"></script>
