@@ -79,8 +79,9 @@ passport.authenticate('github', { failureRedirect: '/' }),
 // Redirige al usuario despues de la autenticacion exitosa
             req.session.logged = true;
             req.session.user = {
-                id: req.user.id,
+                _id: req.user.id,
                 username: req.user.username,
+                email: req.user.email,
                 role: 'user', 
             };
             res.redirect('/products');
