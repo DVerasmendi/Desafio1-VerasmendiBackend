@@ -83,3 +83,27 @@ exports.addUser = async (req, res) => {
         res.status(500).json({ status: 'error', message: 'Error interno del servidor' });
     }
 };
+
+
+// Define los tipos de error como un objeto
+const ErrorType = {
+    INVALID_PARAM: 'INVALID_PARAM',
+    USER_NOT_FOUND: 'USER_NOT_FOUND',
+    INTERNAL_SERVER_ERROR: 'INTERNAL_SERVER_ERROR',
+    // Agrega más tipos de error si es necesario
+};
+
+// Exporta los tipos de error para que estén disponibles en otros módulos
+module.exports.ErrorType = ErrorType;
+
+// Define la función para obtener un usuario por su ID
+exports.getUserById = async (userId) => {
+    try {
+        // Logica para buscar el usuario en la base de datos por su ID
+        const user = await User.findById(userId);
+        return user; // Retorna el usuario encontrado
+    } catch (error) {
+        // Si ocurre un error, lanzalo y manejarlo en otro lugar
+        throw error;
+    }
+};

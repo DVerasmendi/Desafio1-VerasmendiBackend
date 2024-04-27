@@ -6,7 +6,7 @@ const cartsController = require('./cartsController');
 const usersController = require('./usersController');
 const messageController = require('./messageController');
 const ticketController = require('./ticketController');
-
+const { ErrorType } = require('./usersController');
 
 const User = require('../db/models/User');
 require('dotenv').config();
@@ -164,8 +164,6 @@ router.get('/', productsController.getAllProducts, async (req, res) => {
         res.status(500).json({ status: 'error', error: 'Error al renderizar la vista' });
     }
 });
-
-
 
 // Ruta para obtener y renderizar productos por categoría
 router.get('/products/category/:category?', productsController.getProductsByCategory, async (req, res) => {
@@ -380,6 +378,39 @@ router.get('/orders', async (req, res, next) => {
     } else {
         // Renderizar la vista sin información adicional si el usuario no está autenticado
         res.render('chat', { pageTitle: 'Chat', logged, isAdmin: false });
+    }
+});
+
+
+//USERS
+router.get('/users/:uid', async (req, res, next) => {
+    const uid = req.params.uid;
+    // Verificar si el uid es un número válido
+    if (uid.length !== 24 || !/^[0-9a-fA-F]+$/.test(uid)) {
+        // Si el uid no es un número válido, lanza un error de tipo "INVALID_PARAM"
+        return res.status(400).json({ error: ErrorType.INVALID_PARAM });
+    }
+
+    try {
+        // Lógica para obtener el usuario por su UID
+        const user = await usersController.getUserById(uid);
+        if (!user) {
+            // Si no se encuentra el usuario, devuelve un mensaje de error
+            return res.status(404).json({ error: ErrorType.USER_NOT_FOUND });
+        }
+        // Crear el DTO del usuario
+        const userDTO = {
+            username: user.username,
+            email: user.email,
+            age: user.age
+        };
+        // Devolver el DTO del usuario
+        res.json({ user: userDTO });
+
+    } catch (error) {
+        console.error('Error al obtener el usuario:', error);
+        // Manejar otros errores, como errores internos del servidor
+        res.status(500).json({ error: ErrorType.INTERNAL_SERVER_ERROR });
     }
 });
 

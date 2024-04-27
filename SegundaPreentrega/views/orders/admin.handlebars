@@ -1,7 +1,7 @@
-<div id="chat-container">
+<div class="container">
     <h1 class="text-background" style="font-size: 2.5rem;">{{pageTitle}}</h1>
 {{#if tickets.length}}
-<div class="container pt-2">
+<div class="container">
     {{#each tickets}}
     <div class="card mb-3 mt-3">
         <div class="card-header" style="font-size: 1.2rem;" >
@@ -27,7 +27,7 @@
     {{/each}}
 </div>
 <div class="container text-center">
-    <a class="text-background btn btn-danger btn-lg mb-5" href="/products" role="button">Volver</a>
+<a class="text-background btn btn-danger btn-lg mb-5" href="/products" role="button">Volver</a>
 </div>
 {{else}}
         <div class="d-flex justify-content-center align-items-center mb-5">
@@ -36,5 +36,6 @@
         <div class="container text-center">
         <a class="text-background btn btn-danger btn-lg mb-5" href="/products" role="button">Volver</a>
         </div>
+    </div>
     {{/if}}
 </div>

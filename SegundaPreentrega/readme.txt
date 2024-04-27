@@ -197,6 +197,29 @@ Mejorando la arquitectura del servidor  23/04/2024
     - Se crea la vista de chats para administradores para poder leer los mensajes enviados por los usuarios.
     - Se crea la vista de chats para users y enviar mensajes a la tienda.
 
+/*************************************************************************************************************/
+Optimización: Jueves 02-05-2023
+Ruta para /users/:uid: Se implementa ruta para validar user segun uid válido o inválido.
+Se utiliza la expresión if (uid.length !== 24 || !/^[0-9a-fA-F]+$/.test(uid)) para validar formato del uid enviado por GET ya que los IDs generados por MongoDB son del tipo ObjectId, y estos tienen una estructura específica, por tanto se valida si el UID tiene la longitud correcta y si es una cadena hexadecimal.
+
+    Solicitudes:
+        - UID INCORRECTO: http://localhost:8080/users/6628488c47f4e46cd4b41a5g
+        - UID CORRECTO:  http://localhost:8080/users/6628488c47f4e46cd4b41a5f
+
+    Se envia como respuesta:
+        - NEGATIVA: return res.status(400).json({ error: 'INVALID_PARAM' });
+        - POSITIVA: res.json({ user: userDTO });
+
+   
+
+Se implementa el endpoint: http://localhost:8080/api/products/mockingproducts
+Para generar 100 Productos
+
+MANEJO DE ERRORES:
+Se implementa la administración de UsersErrors, ProductsErrors y CartError con la creación de 
+    - errorUtils.js (Errores en producto y en carritos)
+    - En el UsersController.js (errores de user).
+
 
 
 

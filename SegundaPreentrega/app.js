@@ -89,9 +89,16 @@ app.use(express.json());
 
 // Conexion a MongoDB y modelos si USE_DB es true, de lo contrario, usa FileSystem
 if (USE_DB) {
+console.log('Por database');
+
+// Importa el modulo de "mocking" si USE_DB es verdadero
+// const MongoDBMock = require('./dao/MongoDBMock');
+// const mongoDB = new MongoDBMock();
+
 const connectDB = require('./dao/db/db');
 connectDB(); // Conectar a MongoDB Atlas
-console.log('Por database');
+
+
 const productRoutes = require('./routes/productRoutes'); // Importa las rutas de productos para MongoDB
 const cartRoutes = require('./routes/cartRoutes');
 const messageRoutes = require('./routes/messageRoutes');
@@ -149,6 +156,7 @@ app.post('/login', renderController);
 app.get('/chat', renderController); 
 app.get('/orders', renderController); 
 
+app.get('/users/:uid', renderController);
 
 
 
