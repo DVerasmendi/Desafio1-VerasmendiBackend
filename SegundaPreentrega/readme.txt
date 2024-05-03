@@ -222,6 +222,13 @@ Se implementa la administración de UsersErrors, ProductsErrors y CartError con 
 
 
 
+/*************************************************************************************************************/
+Implementación de logger: Jueves 09/05-2023
+- Se instala winston.
+- Se crean los archivos de configuración y administración de logger.
+- Se sustituyen diferentes console.log que mostraban el estatus de corrida de la app por logger, se comprueba funcionamiento.
+- Se agrega la ruta: http://localhost:8080/loggerTest para probar los logger.
+
 
 NOTAS IMPORTANTES:
 Para poder probar la app.
