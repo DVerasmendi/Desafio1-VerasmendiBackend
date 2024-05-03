@@ -7,6 +7,7 @@ const usersController = require('./usersController');
 const messageController = require('./messageController');
 const ticketController = require('./ticketController');
 const { ErrorType } = require('./usersController');
+const logger = require('../../winston-config');
 
 const User = require('../db/models/User');
 require('dotenv').config();
@@ -136,7 +137,6 @@ router.get('/', productsController.getAllProducts, async (req, res) => {
                 let cartId;
                 const cart = await cartsController.getCartByUserId(req, res);
                 cartId = cart ? cart._id : null;
-                console.log('CARD ID: ',cartId)
                 res.render('products/index', {
                     pageTitle: 'Productos',
                     products: productsData.payload,
@@ -264,9 +264,9 @@ router.post('/login', async (req, res) => {
             req.session.logged = true;
             req.session.user = user;
             if (user.role =='admin'){
-                console.log('Es un admin! Role:',user.role)
+                logger.info('Es un admin!')
             }else{
-                console.log('Es un user comun Role:',user.role)
+                logger.info('Es un user comun Role')
             }
             res.redirect('/products');
         } else {
@@ -335,7 +335,6 @@ router.get('/chat', async (req, res, next) => {
 
     if (user) {
         if (user.role === 'admin') {
-            console.log('Es un admin! Role:', user.role);
             try {
                 const messages = await messageController.getAllMessages();
                 res.render('chats/admin', { pageTitle: 'Chat para administradores', logged, isAdmin: true, messages });
@@ -344,7 +343,6 @@ router.get('/chat', async (req, res, next) => {
                 res.status(500).json({ error: 'Error interno del servidor' });
             }
         } else {
-            console.log('Es un usuario común Role:', user.role);
             // Renderizar la vista normal para el usuario común
             res.render('chats/users', { pageTitle: 'Chat para usuarios', logged, isAdmin: false });
         }
@@ -360,9 +358,7 @@ router.get('/orders', async (req, res, next) => {
     const user = req.session.user;
     if (user) {
         const tickets = await ticketController.getAllTickets();
-
         if (user.role === 'admin') {
-            console.log('Es un admin!');
             try {
                 res.render('orders/admin', { pageTitle: 'Pedidos Realizados', logged, tickets });
             } catch (error) {
@@ -371,7 +367,6 @@ router.get('/orders', async (req, res, next) => {
             }
         } else {
             const tickets = await ticketController.getTicketsByPurchaser(user.email);
-            console.log('Es un usuario');
             // Renderizar la vista normal para el usuario común
             res.render('orders/users', { pageTitle: 'Tus pedidos', logged, tickets  });
         }

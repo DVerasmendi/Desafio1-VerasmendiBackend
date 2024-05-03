@@ -5,10 +5,13 @@ const socketIO = require('socket.io');
 const { engine } = require('express-handlebars');
 const mongoose = require('mongoose');
 const path = require('path');
-
+const logger = require('./winston-config');
+const loggerTestRouter = require('./routes/loggerTest');
 const multer = require('multer');
 const upload = multer();
 const USE_DB = process.env.USE_DB || true; // Bandera para usar DB o FileSystem TRUE : MONGO ATLAS, FALSE: FILESYSTEM
+require('dotenv').config();
+
 
 const app = express();
 const server = http.createServer(app);
@@ -89,7 +92,7 @@ app.use(express.json());
 
 // Conexion a MongoDB y modelos si USE_DB es true, de lo contrario, usa FileSystem
 if (USE_DB) {
-console.log('Por database');
+    logger.debug('Conexión por database');
 
 // Importa el modulo de "mocking" si USE_DB es verdadero
 // const MongoDBMock = require('./dao/MongoDBMock');
@@ -120,13 +123,14 @@ app.use('/api/messages', messageRoutes);
 app.get('/', (req, res) => {
     const logged = req.session.logged || false;
     if (req.isApiRequest) {
+        logger.info('Solicitud HTTP');
       // Lógica para manejar solicitudes de API
     res.json({ message: 'Esta es una respuesta de la API' });
 } else {
     // Lógica para manejar solicitudes web
     const cartId = '';
     const user_role = '';
-    console.log('VARIABLE DE LOGGEO:',logged)
+    logger.http('Solicitud HTTP');
     res.render('login', { pageTitle: 'Chicken with Rice',logged, user_role, cartId});
 }
 });
@@ -157,7 +161,8 @@ app.get('/chat', renderController);
 app.get('/orders', renderController); 
 
 app.get('/users/:uid', renderController);
-
+// Montar el router loggerTest en la ruta /loggerTest
+app.use(loggerTestRouter);
 
 
 
@@ -248,7 +253,8 @@ res.render('realTimeProducts', { products: productList });
 
 
 
+
 const PORT = process.env.PORT || 8080;
 server.listen(PORT, () => {
-console.log(`Servidor Express escuchando en el puerto ${PORT}`);
+logger.info(`Servidor Express escuchando en el puerto ${PORT}`);
 });

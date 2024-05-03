@@ -1,7 +1,7 @@
 const Cart = require('../db/models/Cart');
 const Product = require('../db/models/Product');
 const ticketController = require('./ticketController');
-
+const logger = require('../../winston-config');
 
 // Controlador para gestionar operaciones en el carrito
 const cartsController = {
@@ -57,7 +57,6 @@ getCartById: async (req, res) => {
 
             return res.status(200).json(formattedResponse);
         }else{
-        console.log('ES WEB')
         if (!cart) {
             if (req.isApiRequest) {
                 return res.status(404).json({ error: 'Carrito no encontrado' });
@@ -285,9 +284,6 @@ getCartByUserId: async (req, res) => {
     const userEmail = req.session.user.email;
 
     try {
-        console.log('USERID:', userId);
-        console.log('USEREMAIL:', userEmail);
-
         // Buscar todos los carritos del usuario, tanto activos como completados
         const carts = await Cart.find({ userId }).populate('items.productId');
 
