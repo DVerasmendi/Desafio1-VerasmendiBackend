@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const config = require('../../config');
-const logger = require('../../winston-config');
+const logger = require('../../configuration/winston-config');
 
 const connectionString = 'mongodb+srv://deikerv:deiker123456@ecommerce.x7pvxzk.mongodb.net/Ecommerce';
 

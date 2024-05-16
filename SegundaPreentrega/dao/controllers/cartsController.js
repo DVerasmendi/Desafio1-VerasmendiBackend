@@ -1,7 +1,7 @@
 const Cart = require('../db/models/Cart');
 const Product = require('../db/models/Product');
 const ticketController = require('./ticketController');
-const logger = require('../../winston-config');
+const logger = require('../../configuration/winston-config');
 
 // Controlador para gestionar operaciones en el carrito
 const cartsController = {

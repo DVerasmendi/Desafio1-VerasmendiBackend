@@ -14,6 +14,33 @@
     </div>
     <hr class="my-4">
     <div class="flex flex-col justify-center items-center mt-8">
+        <h1 class="text-2xl font-bold  text-background">Cambiar Rol de Usuario</h1>
+    </div>
+<div class="d-flex flex-column justify-content-center align-items-center">
+    <div class="container row justify-content-center">
+        <form id="user-form" class="mt-4">
+            <div class="mb-3 col-6">
+                <select id="user_select" name="user_select" class="form-control text-background form-control col-12" onchange="updateRoles();">
+                    <option value="">Selecciona un usuario</option>
+                    {{#each usersillos}}
+                        <option value="{{this.username}}" data-id="{{this.id}}" data-role="{{this.role}}">{{this.username}}</option>
+                    {{/each}}
+                </select>
+            </div>
+            <div class="mb-3 col-6">
+                <select id="role_select" name="role_select" class="form-control text-background form-control col-12" style="display: none;">
+                    <option value="user">Usuario Común</option>
+                    <option value="premium">Premium</option>
+                </select>
+            </div>
+            <button id="boton_editarRole" type="button" class="text-background btn btn-dark btn-lg mb-2 flex-fill" style="display: none; font-size: 1.2rem;"><strong>Editar Role</strong></button>
+        </form>
+    </div>
+</div>
+
+
+
+    <div class="flex flex-col justify-center items-center mt-8">
         <h1 class="text-2xl font-bold  text-background">Agregar un Nuevo Producto</h1>
     </div>
     <div class="container row justify-content-center">
@@ -41,6 +68,9 @@
                 {{/each}}
                 </select>
             </div>
+            <div class="mb-3 col-6">
+                <input type="text" id="owner" name="owner" class="form-control text-background form-control col-12" placeholder="Dueño del producto" value="{{user_role}}">
+            </div>
             <button type="button" class="btn btn-success btn-lg mt-4" onclick="addProductFromForm()">Agregar Producto</button>
         </form>
     </div>
@@ -59,6 +89,7 @@
                     <p class="mt-2"><strong>Price:</strong> {{this.price}}</p>
                     <p class="mt-2"><strong>Stock:</strong> {{this.stock}}</p>
                     <p class="mt-2"><strong>Categoria:</strong> {{this.category}}</p>
+                    <p class="mt-2"><strong>Owner:</strong> {{this.owner}}</p>
                     </div>
                     <div class="mt-4">
                         <button type="button" class="btn btn-danger" onclick="deleteProduct('{{this._id}}')">Eliminar</button>

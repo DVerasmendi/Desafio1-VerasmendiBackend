@@ -70,7 +70,8 @@ exports.addProduct = async (req, res) => {
     try {
         // Verificar si el usuario es administrador
         const user = req.session.user;
-        if (user && user.role === 'admin') {
+        console.log('ROLE:',user.role)
+        if ((user && user.role === 'admin') || (user.role === 'premium')) {
             // Si es administrador, proceder a agregar el producto
             const newProduct = new Product(req.body);
             await newProduct.save();

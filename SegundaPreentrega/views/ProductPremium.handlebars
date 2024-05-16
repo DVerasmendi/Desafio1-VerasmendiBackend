@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Productos en Tiempo Real</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+
+<div class="mx-auto">
+    <div class="flex flex-col justify-center items-center mt-8">
+        <h3 class="text-background" style="font-size:1.2rem"><em><strong>{{welcomeMessage}}</strong></em></h3>
+    </div>
+    <hr class="my-4">
+    <div class="flex flex-col justify-center items-center mt-8">
+        <h1 class="text-2xl font-bold  text-background">Agregar un Nuevo Producto</h1>
+    </div>
+    <div class="container row justify-content-center">
+        <form id="product-form" class="mt-4">
+            <div class="mb-3 col-6">
+                <input type="text" id="name" name="name" class="form-control text-background form-control col-12" placeholder="Nombre del producto">
+            </div>
+            <div class="mb-3 col-6">
+                <input type="text" id="description" name="description" class="form-control text-background form-control col-12" placeholder="Descripción del producto">
+            </div>
+            <div class="mb-3 col-6">
+                <input type="number" id="price" name="price" class="form-control text-background form-control col-12" placeholder="Precio">
+            </div>
+            <div class="mb-3 col-6">
+                <input type="number" id="stock" name="stock" class="form-control text-background form-control col-12" placeholder="Stock">
+            </div>
+            <div class="mb-3 col-6">
+                <input type="text" id="imageUrl" name="imageUrl" class="form-control text-background form-control col-12" placeholder="URL de la imagen">
+            </div>
+            <div class="mb-3 col-6">
+                <select id="category" name="category" class="form-control text-background form-control col-12">
+                    <option value="">Selecciona una</option>
+                {{#each uniqueCategories}}
+                    <option value="{{this}}">{{this}}</option>
+                {{/each}}
+                </select>
+            </div>
+            <div class="mb-3 col-6">
+                <input type="text" id="owner" name="owner" class="form-control text-background form-control col-12" placeholder="Dueño del producto" value="{{user_name}}" hidden>
+            </div>
+            <button type="button" class="btn btn-success btn-lg mt-4" onclick="addProductFromForm()">Agregar Producto</button>
+        </form>
+    </div>
+    <hr class="my-4">
+    <div class="flex justify-center items-center mt-8">
+        <h1 class="text-2xl font-bold mb-5 text-background">Lista de Productos en DataBase</h1>
+    </div>
+
+    <div class="d-flex flex-column justify-content-center align-items-center">
+                {{#each products}}
+                <div class="product card d-flex justify-content-center align-items-center p-2 col-8 mb-3">
+                    <img src="{{this.imageUrl}}" alt="{{this.name}}" class="w-48 h-auto rounded-md mt-2 border border-white">
+                    <div class="card-body text-background">
+                    <h2 class="text-xl font-bold">{{this.name}}</h2>
+                    <p class="mt-2"><strong>Descripción:</strong> {{this.description}}</p>
+                    <p class="mt-2"><strong>Price:</strong> {{this.price}}</p>
+                    <p class="mt-2"><strong>Stock:</strong> {{this.stock}}</p>
+                    <p class="mt-2"><strong>Categoria:</strong> {{this.category}}</p>
+                    <p class="mt-2"><strong>Owner:</strong> {{this.owner}}</p>
+                    </div>
+                    <div class="mt-4">
+                        {{#if (eq2 this.owner ../user_name)}}
+                            <!-- Botones si el owner es el usuario actual -->
+                            <button type="button" class="btn btn-danger btn-lg" onclick="deleteProduct('{{this._id}}')">Eliminar</button>
+                            <button type="button" class="btn btn-success btn-lg" onclick="editProduct('{{this._id}}', '{{this.name}}', '{{this.description}}', '{{this.price}}', '{{this.stock}}', '{{this.imageUrl}}', '{{this.category}}')">Editar</button>
+                        {{else}}
+                            <!-- Botones si el owner no es el usuario actual -->
+                            <a href="/products/{{this._id}}" class="btn btn-primary btn-lg">Ver detalles</a>
+                            <button class="btn btn-success btn-lg" onclick="addToCart('{{this._id}}', '{{this.name}}', {{this.price}}, '{{../cartId}}')">Agregar al carrito</button>
+                        {{/if}}
+                    </div>
+
+
+                </div>
+                {{/each}}
+    </div>
+</div>
+<script src="/public/js/productActions.js"></script>
+<script src="/public/js/addtocart.js"></script>
+</body>
+
+</html>

@@ -107,3 +107,32 @@ exports.getUserById = async (userId) => {
         throw error;
     }
 };
+
+
+
+// Cambiar el rol de un usuario
+exports.changeUserRole = async (req, res) => {
+    const { userId, newRole } = req.body; 
+    if (!userId || !newRole) {
+        return res.status(400).json({ status: 'error', message: 'Falta el ID del usuario o el nuevo rol' });
+    }
+    try {
+        // Buscar el usuario en la base de datos por su ID
+        const user = await User.findById(userId);
+        
+        if (!user) {
+            return res.status(404).json({ status: 'error', message: 'Usuario no encontrado' });
+        }
+
+        // Actualizar el rol del usuario
+        user.role = newRole;
+
+        // Guardar el usuario actualizado en la base de datos
+        await user.save();
+
+        res.status(200).json({ status: 'success', message: 'El rol del usuario ha sido actualizado correctamente', updatedRole: newRole });
+    } catch (error) {
+        console.error('Error al cambiar el rol del usuario:', error);
+        res.status(500).json({ status: 'error', message: 'Error interno del servidor' });
+    }
+};

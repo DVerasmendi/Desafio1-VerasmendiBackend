@@ -41,6 +41,13 @@
                             </a>
                         </li>
                         {{/eq}}
+                        {{#eq user_role "premium"}}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/carts/{{cartId}}" style="font-size: 1.2rem; display: flex; align-items: center;">
+                                <img src="/public/images/cart.png" alt="Carrito" style="margin-right: 25px; height: 35px; width: 35px;">
+                            </a>
+                        </li>
+                        {{/eq}}
                             <li class="nav-item">
                                 <a class="nav-link" href="/logout" style="font-size: 1.2rem;">Cerrar Sesión</a>
                             </li> 

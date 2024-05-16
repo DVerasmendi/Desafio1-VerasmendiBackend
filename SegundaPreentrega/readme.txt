@@ -229,6 +229,23 @@ Implementación de logger: Jueves 09/05-2023
 - Se sustituyen diferentes console.log que mostraban el estatus de corrida de la app por logger, se comprueba funcionamiento.
 - Se agrega la ruta: http://localhost:8080/loggerTest para probar los logger.
 
+/*************************************************************************************************************/
+Implementación de logger: Jueves 21/05-2023
+- Se instalan las diferentes herramientas para hacer el envio de emails: mailer, google apis.
+- Se realiza la configuración para enviar email con : https://console.cloud.google.com y https://developers.google.com
+- Se crean las rutas, render y vistas necesarias para procesar este requerimiento de cambio de clave.
+- NOTA IMPORTANTE: Tener en cuenta que el parametro OAUTH_REFRESH_TOKEN se vence, al vencerse no se puede enviar email.
+
+- Usuario premium creado: 
+    - user: bello
+    - pass: bello
+
+- Se crea una vista para usuario premium.
+- Se hacen ajustes en base a lo solicitado en la vista premium para poder crear, editar, eliminar el producto del usuario, mas los otros no.
+- Se pueden agregar al carrito del premium unicamente los productos que no son del owner.
+- Unicamente los usuarios premium y admin pueden crear productos.
+- Se crea el endpoint /api/users/premium/:uid dentro del panel de admin para seleccionar usuario y cambiar el rol como se desee.
+
 
 NOTAS IMPORTANTES:
 Para poder probar la app.

@@ -5,6 +5,7 @@ async function addProductFromForm() {
     const stock = document.getElementById('stock').value;
     const imageUrl = document.getElementById('imageUrl').value;
     const category = document.getElementById('category').value;
+    const owner = document.getElementById('owner').value;
 
     if (name !== '' &&  description !== '' &&  price !== '' &&  stock !== '' &&  imageUrl !== ''  &&  category !== '' ){
     try {
@@ -19,7 +20,8 @@ async function addProductFromForm() {
                 price,
                 stock,
                 imageUrl,
-                category
+                category,
+                owner
             }),
         });
 
@@ -178,3 +180,95 @@ async function editProduct(productId, name, description, price, stock, imageUrl,
     }
 }
 
+function updateRoles() {
+    const userSelect = document.getElementById('user_select');
+    const roleSelect = document.getElementById('role_select');
+    const editRoleButton = document.getElementById('boton_editarRole');
+
+    const selectedUser = userSelect.options[userSelect.selectedIndex];
+    const userRole = selectedUser.getAttribute('data-role');
+
+    if (userSelect.selectedIndex > 0) {
+        // Muestra el segundo select y el botón si se selecciona un usuario
+        roleSelect.style.display = 'block';
+        editRoleButton.style.display = 'block';
+
+        // Actualiza el segundo select según el role del usuario seleccionado
+        for (let option of roleSelect.options) {
+            if (option.value === userRole) {
+                option.selected = true;
+            } else {
+                option.selected = false;
+            }
+        }
+    } else {
+        // Oculta el segundo select y el botón si no se selecciona ningún usuario
+        roleSelect.style.display = 'none';
+        editRoleButton.style.display = 'none';
+    }
+}
+
+const boton_editarRole = document.getElementById('boton_editarRole');
+if (boton_editarRole){
+document.getElementById('boton_editarRole').addEventListener('click', async function() {
+    const userSelect = document.getElementById('user_select');
+    const roleSelect = document.getElementById('role_select');
+    const selectedUser = userSelect.options[userSelect.selectedIndex];
+    const userId = selectedUser.getAttribute('data-id');
+    const newRole = roleSelect.value;
+    console.log('USERID:',userId)
+    console.log('NEW ROL:',newRole)
+    if (!userId || !newRole) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Debes seleccionar un usuario y un rol.'
+        });
+        return;
+    }
+
+    Swal.fire({
+        title: 'Procesando datos',
+        html: 'Por favor espera unos momentos mientras actualizamos el rol.',
+        allowOutsideClick: false,
+        timerProgressBar: true,
+        didOpen: () => {
+            Swal.showLoading()
+        }
+    });
+
+    try {
+        const response = await fetch(`/api/users/premium/${userId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ newRole: newRole, userId: userId })
+        });
+
+        const data = await response.json();
+        Swal.close();
+
+        if (response.ok) {
+            Swal.fire({
+                icon: 'success',
+                title: '¡Éxito!',
+                text: 'El rol ha sido actualizado correctamente.'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.reload();
+                }
+            });
+        } else {
+            throw new Error(data.message || 'Error en la respuesta del servidor');
+        }
+    } catch (error) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: error.message || 'No se pudo actualizar el rol. Por favor, intenta de nuevo.',
+        });
+    }
+});
+
+}

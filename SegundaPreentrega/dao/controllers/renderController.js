@@ -7,7 +7,7 @@ const usersController = require('./usersController');
 const messageController = require('./messageController');
 const ticketController = require('./ticketController');
 const { ErrorType } = require('./usersController');
-const logger = require('../../winston-config');
+const logger = require('../../configuration/winston-config');
 
 const User = require('../db/models/User');
 require('dotenv').config();
@@ -26,7 +26,7 @@ passport.use(new GitHubStrategy({
 },
 async (accessToken, refreshToken, profile, done) => {
     try {
-    console.log('ACCESS TOKEN:',accessToken)
+    //console.log('ACCESS TOKEN:',accessToken)
     // Verifica si el usuario ya está registrado en tu base de datos
     const existingUser = await User.findOne({ githubId: profile.id });
 
@@ -117,22 +117,49 @@ module.exports = router;
 
 //// RUTAS VARIAS ////
 // Obtener y renderizar todos los productos en el navegador web
-router.get('/', productsController.getAllProducts, async (req, res) => {
+router.get('/', usersController.getAllUsers, productsController.getAllProducts, async (req, res) => {
     try {
         const productsData = res.locals.productsData;
+        const usersData = res.locals.usersData;
+
         if (productsData && productsData.payload) {
             const user = req.session.user;
+            const safeUsers = usersData.users.map(user => {
+                return {
+                id: user._id.toString(),
+                username: user.username,
+                email: user.email,
+                role: user.role
+            };
+            });
             // Renderiza la vista adecuada según el rol del usuario
             if (user && user.role === 'admin') {
                 res.render('realTimeProducts', {
                     pageTitle: 'Lista de Productos en Tiempo Real',
                     products: productsData.payload,
+                    usersillos: safeUsers,
                     logged: req.session.logged || false, 
                     user_role: user.role,
+                    user_name: user.username,
                     welcomeMessage: `Bienvenido: ${user.username} | ROL: ${user.role}`,
                     uniqueCategories: productsData.uniqueCategories
                 });
-            } else {
+            } else if (user.role === 'premium') {
+                // Si el usuario no es un administrador, renderiza la vista normal de productos, buscar el carrito correspondiente
+                let cartId;
+                const cart = await cartsController.getCartByUserId(req, res);
+                cartId = cart ? cart._id : null;
+                res.render('ProductPremium', {
+                    pageTitle: 'Lista de Productos en Tiempo Real',
+                    products: productsData.payload,
+                    logged: req.session.logged || false, 
+                    user_role: user.role,
+                    user_name: user.username,
+                    welcomeMessage: `Bienvenido: ${user.username} | ROL: ${user.role}`,
+                    uniqueCategories: productsData.uniqueCategories,
+                    cartId: cartId 
+                });
+            }else {
                 // Si el usuario no es un administrador, renderiza la vista normal de productos, buscar el carrito correspondiente
                 let cartId;
                 const cart = await cartsController.getCartByUserId(req, res);
@@ -156,7 +183,7 @@ router.get('/', productsController.getAllProducts, async (req, res) => {
                 });
             }
         } else {
-            console.log('El resultado de getAllProducts es undefined o no tiene payload.');
+            console.error('El resultado de getAllProducts es undefined o no tiene payload.');
             res.status(500).json({ status: 'error', error: 'Error interno del servidor' });
         }
     } catch (error) {
@@ -197,11 +224,11 @@ router.get('/products/category/:category?', productsController.getProductsByCate
                 cartId: cartId 
             });
         } else {
-            console.log('El resultado de getProductsByCategory es undefined o no tiene payload.');
+            console.error('El resultado de getProductsByCategory es undefined o no tiene payload.');
             res.status(500).json({ status: 'error', error: 'Error interno del servidor' });
         }
     } catch (error) {
-        console.log(error);
+        console.error(error);
         res.status(500).json({ status: 'error', error: 'Error al renderizar la vista' });
     }
 });
@@ -265,7 +292,10 @@ router.post('/login', async (req, res) => {
             req.session.user = user;
             if (user.role =='admin'){
                 logger.info('Es un admin!')
-            }else{
+            }else if (user.role =='premium'){
+                logger.info('Es un premium!')
+            }
+            else{
                 logger.info('Es un user comun Role')
             }
             res.redirect('/products');
@@ -309,7 +339,7 @@ router.post('/registerUpload', usersController.getAllUsers, async (req, res) => 
             const userExists = usersData.users.some(user => user.username === username || user.email === email);
 
             if (userExists) {
-                console.log('El usuario ya existe.');
+                console.error('El usuario ya existe.');
                 // Devolver un JSON indicando que el usuario ya existe
                 res.status(400).json({ status: 'error', message: 'El usuario ya existe' });
             } else {
@@ -319,7 +349,7 @@ router.post('/registerUpload', usersController.getAllUsers, async (req, res) => 
                 res.status(200).json({ status: 'success', message: 'Registro exitoso' });
             }
         } else {
-            console.log('El resultado de getAllUsers es undefined o no tiene users.');
+            console.error('El resultado de getAllUsers es undefined o no tiene users.');
             res.status(500).json({ status: 'error', message: 'Error interno del servidor' });
         }
     } catch (error) {

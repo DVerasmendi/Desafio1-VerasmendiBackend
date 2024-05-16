@@ -5,7 +5,7 @@ const socketIO = require('socket.io');
 const { engine } = require('express-handlebars');
 const mongoose = require('mongoose');
 const path = require('path');
-const logger = require('./winston-config');
+const logger = require('./configuration/winston-config');
 const loggerTestRouter = require('./routes/loggerTest');
 const multer = require('multer');
 const upload = multer();
@@ -67,6 +67,9 @@ const hbs = exphbs.create({
         eq: function (a, b, options) {
             return a === b ? options.fn(this) : options.inverse(this);
         },
+        eq2: function (a, b) {
+            return a === b;
+        },
         eachWithCartId: function(context, options) {
             let ret = '';
             for (let i = 0, j = context.length; i < j; i++) {
@@ -105,7 +108,8 @@ connectDB(); // Conectar a MongoDB Atlas
 const productRoutes = require('./routes/productRoutes'); // Importa las rutas de productos para MongoDB
 const cartRoutes = require('./routes/cartRoutes');
 const messageRoutes = require('./routes/messageRoutes');
-
+const authRoutes = require('./routes/authRoutes');
+const UsersRoutes = require('./routes/UsersRoutes');
 
 app.use((req, res, next) => {
     // Verificar si la ruta tiene el prefijo /api/
@@ -117,7 +121,8 @@ app.use((req, res, next) => {
 app.use('/api/products', productRoutes); // Usa rutas de productos para operaciones de DB
 app.use('/api/carts', cartRoutes); 
 app.use('/api/messages', messageRoutes); 
-
+app.use('/api/auth', authRoutes);
+app.use('/api/users', UsersRoutes);
 
 // Rutas para la web
 app.get('/', (req, res) => {
