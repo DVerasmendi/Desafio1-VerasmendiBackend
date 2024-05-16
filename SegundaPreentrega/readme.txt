@@ -230,7 +230,7 @@ Implementación de logger: Jueves 09/05-2023
 - Se agrega la ruta: http://localhost:8080/loggerTest para probar los logger.
 
 /*************************************************************************************************************/
-Implementación de logger: Jueves 21/05-2023
+Tercera práctica integradora: Jueves 21/05-2023
 - Se instalan las diferentes herramientas para hacer el envio de emails: mailer, google apis.
 - Se realiza la configuración para enviar email con : https://console.cloud.google.com y https://developers.google.com
 - Se crean las rutas, render y vistas necesarias para procesar este requerimiento de cambio de clave.
