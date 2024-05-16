@@ -259,3 +259,7 @@ Para poder probar la app.
         - Acceder con el admin ya creado, ya que a través del sitio web no esta habilitado para crear administradores.
             user:admin
             pass:admin
+
+Envio de emails: 
+https://console.cloud.google.com/apis/credentials
+https://developers.google.com/oauthplayground
