@@ -2,7 +2,7 @@ const nodemailer = require('nodemailer');
 const { google } = require('googleapis');
 require('dotenv').config();
 
-// Definir la funcion asincronica createTransporter
+// Definir la función asincrónica createTransporter
 async function createTransporter() {
     const OAuth2 = google.auth.OAuth2;
     const oauth2Client = new OAuth2(
@@ -17,6 +17,8 @@ async function createTransporter() {
 
     const accessToken = await oauth2Client.getAccessToken();
 
+    console.log('Access Token:', accessToken);  
+
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -25,7 +27,7 @@ async function createTransporter() {
             clientId: process.env.OAUTH_CLIENTID,
             clientSecret: process.env.OAUTH_CLIENT_SECRET,
             refreshToken: process.env.OAUTH_REFRESH_TOKEN,
-            accessToken: accessToken.token
+            accessToken: accessToken.token  
         }
     });
 

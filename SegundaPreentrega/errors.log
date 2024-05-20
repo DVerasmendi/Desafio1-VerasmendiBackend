@@ -490,3 +490,64 @@
 2024-05-16 18:17:24 [DEBUG]: Conexión por database
 2024-05-16 18:17:26 [INFO]: Servidor Express escuchando en el puerto 8080
 2024-05-16 18:17:27 [DEBUG]: MongoDB Connected...
+2024-05-20 18:17:31 [DEBUG]: Conexión por database
+2024-05-20 18:17:34 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-20 18:17:35 [DEBUG]: MongoDB Connected...
+2024-05-20 18:17:45 [HTTP]: Solicitud HTTP
+2024-05-20 18:19:32 [DEBUG]: Conexión por database
+2024-05-20 18:19:35 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-20 18:19:37 [DEBUG]: MongoDB Connected...
+2024-05-20 18:19:39 [HTTP]: Solicitud HTTP
+2024-05-20 18:23:37 [DEBUG]: Conexión por database
+2024-05-20 18:23:39 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-20 18:23:41 [DEBUG]: MongoDB Connected...
+2024-05-20 18:29:40 [DEBUG]: Conexión por database
+2024-05-20 18:29:43 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-20 18:29:45 [DEBUG]: MongoDB Connected...
+2024-05-20 18:29:48 [HTTP]: Solicitud HTTP
+2024-05-20 18:34:56 [DEBUG]: Conexión por database
+2024-05-20 18:34:58 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-20 18:35:00 [DEBUG]: MongoDB Connected...
+2024-05-20 18:35:40 [DEBUG]: Conexión por database
+2024-05-20 18:35:43 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-20 18:35:45 [DEBUG]: MongoDB Connected...
+2024-05-20 18:36:01 [DEBUG]: Conexión por database
+2024-05-20 18:36:03 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-20 18:36:03 [HTTP]: Solicitud HTTP
+2024-05-20 18:36:05 [DEBUG]: MongoDB Connected...
+2024-05-20 18:41:51 [DEBUG]: Conexión por database
+2024-05-20 18:41:53 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-20 18:41:55 [DEBUG]: MongoDB Connected...
+2024-05-20 18:41:57 [HTTP]: Solicitud HTTP
+2024-05-20 18:42:46 [DEBUG]: Conexión por database
+2024-05-20 18:42:50 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-20 18:42:50 [HTTP]: Solicitud HTTP
+2024-05-20 18:42:51 [DEBUG]: MongoDB Connected...
+2024-05-20 18:46:29 [DEBUG]: Conexión por database
+2024-05-20 18:46:32 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-20 18:46:33 [DEBUG]: MongoDB Connected...
+2024-05-20 18:47:19 [DEBUG]: Conexión por database
+2024-05-20 18:47:22 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-20 18:47:24 [DEBUG]: MongoDB Connected...
+2024-05-20 18:48:44 [DEBUG]: Conexión por database
+2024-05-20 18:48:46 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-20 18:48:46 [HTTP]: Solicitud HTTP
+2024-05-20 18:48:48 [DEBUG]: MongoDB Connected...
+2024-05-20 18:48:48 [HTTP]: Solicitud HTTP
+2024-05-20 18:54:09 [DEBUG]: Conexión por database
+2024-05-20 18:54:11 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-20 18:54:11 [HTTP]: Solicitud HTTP
+2024-05-20 18:54:13 [DEBUG]: MongoDB Connected...
+2024-05-20 19:02:59 [DEBUG]: Conexión por database
+2024-05-20 19:03:01 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-20 19:03:01 [HTTP]: Solicitud HTTP
+2024-05-20 19:03:02 [DEBUG]: MongoDB Connected...
+2024-05-20 19:21:45 [DEBUG]: Conexión por database
+2024-05-20 19:21:47 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-20 19:21:48 [DEBUG]: MongoDB Connected...
+2024-05-20 19:21:50 [HTTP]: Solicitud HTTP
+2024-05-20 19:23:32 [HTTP]: Solicitud HTTP
+2024-05-20 19:23:47 [DEBUG]: Conexión por database
+2024-05-20 19:23:50 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-20 19:23:52 [DEBUG]: MongoDB Connected...
+2024-05-20 19:25:05 [HTTP]: Solicitud HTTP

@@ -248,6 +248,9 @@ Tercera práctica integradora: Jueves 21/05-2023
 
 
 NOTAS IMPORTANTES:
+Para ver el envio del correo electronico hice un video ya que el access token se refresca y se bloquea el envio de correos, puede verlo en el video adjunto del proyecto name: chickenwithriseEmail.mp4
+
+
 Para poder probar la app.
     - Como cliente: 
         - Crear un user nuevo en Registrarse: http://localhost:8080/registerForm
@@ -260,7 +263,16 @@ Para poder probar la app.
             user:admin
             pass:admin
 
-Envio de emails: 
+ENVIO DE EMAILS NOTAS IMPORTANTES: 
+Creo proyecto en console.cloud.google: https://prnt.sc/mMlf2cnH8WPW
+Habilito API Gmail en el proyecto: https://prnt.sc/2sPbg97kn34H
+Creo API Keys: https://prnt.sc/wR96GZyfl6j_
+Habilito el uso del proyecto desde el email de mi tienda para poder usarlo: https://prnt.sc/uCmSGmdEdauR
+Me voy a https://developers.google.com/oauthplayground
+Configuro en la rosca de seguridad mis credenciales "OAuth Client ID" y "OAuth Client secret": https://prnt.sc/tI5Bsp5pyr4Y
+
+Coloco en el Step 1 mi scope: https://mail.google.com/
+Adquiero el Access token que varia y listo
+
 https://console.cloud.google.com/apis/credentials
 https://developers.google.com/oauthplayground
-
