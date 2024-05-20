@@ -248,7 +248,7 @@ Tercera práctica integradora: Jueves 21/05-2023
 
 
 NOTAS IMPORTANTES:
-Para ver el envio del correo electronico hice un video ya que el access token se refresca y se bloquea el envio de correos, puede verlo en el video adjunto del proyecto name: chickenwithriseEmail.mp4
+Para ver el envio del correo electronico hice un video ya que el access token se refresca y se bloquea el envio de correos, puede verlo en el video adjunto del proyecto name: chickenwithriceEmail.mp4
 
 
 Para poder probar la app.
