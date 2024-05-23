@@ -117,6 +117,10 @@ app.use((req, res, next) => {
     next();
 });
 
+// Importa y usa Swagger
+const swaggerApp = require('./configuration/swagger');
+app.use('/', swaggerApp);
+
 // Rutas API
 app.use('/api/products', productRoutes); // Usa rutas de productos para operaciones de DB
 app.use('/api/carts', cartRoutes); 

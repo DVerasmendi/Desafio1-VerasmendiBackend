@@ -246,6 +246,10 @@ Tercera práctica integradora: Jueves 21/05-2023
 - Unicamente los usuarios premium y admin pueden crear productos.
 - Se crea el endpoint /api/users/premium/:uid dentro del panel de admin para seleccionar usuario y cambiar el rol como se desee.
 
+/*************************************************************************************************************/
+Documentar API: Martes 28/05/2023
+- Se instala swagger y se realiza documentación de rutas de API.
+
 
 NOTAS IMPORTANTES:
 Para ver el envio del correo electronico hice un video ya que el access token se refresca y se bloquea el envio de correos, puede verlo en el video adjunto del proyecto name: chickenwithriceEmail.mp4
