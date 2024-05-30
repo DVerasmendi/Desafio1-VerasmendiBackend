@@ -42,11 +42,11 @@ const cartsController = require('../dao/controllers/cartsController');
  *                   type: array
  *                   items:
  *                     type: object
- *                       properties:
- *                         productId:
- *                           type: string
- *                         quantity:
- *                           type: integer
+ *                     properties:
+ *                       productId:
+ *                         type: string
+ *                       quantity:
+ *                         type: integer
  *                 createdAt:
  *                   type: string
  *                 updatedAt:

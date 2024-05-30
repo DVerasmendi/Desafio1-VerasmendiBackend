@@ -248,7 +248,7 @@ Tercera práctica integradora: Jueves 21/05-2023
 
 /*************************************************************************************************************/
 Documentar API: Martes 28/05/2023
-- Se instala swagger y se realiza documentación de rutas de API.
+- Se instala swagger y se realiza documentación de rutas de API: http://localhost:8080/api-docs/
 
 
 NOTAS IMPORTANTES:
