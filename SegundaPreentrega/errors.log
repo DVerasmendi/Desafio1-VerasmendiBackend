@@ -1308,3 +1308,22 @@
 2024-06-01 22:38:31 [INFO]: Servidor Express escuchando en el puerto 8081
 2024-06-01 22:38:35 [INFO]: Servidor Express escuchando en el puerto 8081
 2024-06-01 22:38:37 [HTTP]: Solicitud HTTP
+2024-06-01 22:49:49 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-01 22:50:12 [HTTP]: Solicitud HTTP
+2024-06-01 22:50:15 [INFO]: Es un user comun Role
+2024-06-01 22:51:02 [HTTP]: Solicitud HTTP
+2024-06-01 22:51:07 [INFO]: Es un admin!
+2024-06-01 22:52:10 [HTTP]: Solicitud HTTP
+2024-06-01 22:52:13 [INFO]: Es un premium!
+2024-06-01 22:53:26 [HTTP]: Solicitud HTTP
+2024-06-01 22:53:29 [HTTP]: Solicitud HTTP
+2024-06-01 22:53:34 [INFO]: Es un premium!
+2024-06-01 22:53:43 [HTTP]: Solicitud HTTP
+2024-06-01 22:54:23 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 22:54:28 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 22:54:30 [INFO]: Es un user comun Role
+2024-06-01 22:54:30 [INFO]: Es un user comun Role
+2024-06-01 22:54:32 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 22:54:36 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 22:54:40 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 22:54:42 [HTTP]: Solicitud HTTP
