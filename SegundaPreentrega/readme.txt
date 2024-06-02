@@ -251,6 +251,16 @@ Documentar API: Martes 28/05/2023
 - Se instala swagger y se realiza documentación de rutas de API: http://localhost:8080/api-docs/
 
 
+
+*************************************************************************************************************/
+Módulos de testing para proyecto final: Martes 04/06/2023
+- Se instalo el modulo de mocha, pero no logre implementarlo, cambie por supertest y jest.
+- Se creo la carpeta test con la carpeta controllers en los cuales estan los diferentes archivos y pruebas para las rutas.
+- Se aprueban todos los test.
+- Ejecutar modulo de test : npm test
+
+
+
 NOTAS IMPORTANTES:
 Para ver el envio del correo electronico hice un video ya que el access token se refresca y se bloquea el envio de correos, puede verlo en el video adjunto del proyecto name: chickenwithriceEmail.mp4
 

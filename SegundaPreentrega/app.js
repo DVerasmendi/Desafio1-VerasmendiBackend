@@ -9,27 +9,53 @@ const logger = require('./configuration/winston-config');
 const loggerTestRouter = require('./routes/loggerTest');
 const multer = require('multer');
 const upload = multer();
-const USE_DB = process.env.USE_DB || true; // Bandera para usar DB o FileSystem TRUE : MONGO ATLAS, FALSE: FILESYSTEM
 require('dotenv').config();
-
 
 const app = express();
 const server = http.createServer(app);
 const io = socketIO(server);
 
+const env = process.env.NODE_ENV || 'production';
+const useDB = process.env.USE_DB === 'true';
+
+//logger.debug(`App environment: ${env}`);
+
 app.use(upload.none());
 // Configuración de express-session
 app.use(session({
-secret: 'tu_secreto_aqui',
-resave: false,
-saveUninitialized: false
+    secret: 'tu_secreto_aqui',
+    resave: false,
+    saveUninitialized: false
 }));
-
-
 
 // Middleware para analizar el cuerpo de la solicitud
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+// Middleware para simular la sesión del usuario
+app.use((req, res, next) => {
+    if (req.headers.cookie) {
+        const cookies = req.headers.cookie.split(';');
+        cookies.forEach(cookie => {
+            const [name, value] = cookie.trim().split('=');
+            if (name === 'session') {
+                try {
+                    req.session.user = JSON.parse(decodeURIComponent(value)).user;
+                } catch (e) {
+                    console.error('Error parsing session cookie:', e);
+                }
+            }
+        });
+    }
+    next();
+});
+
+// Middleware para identificar solicitudes API
+app.use((req, res, next) => {
+    req.isApiRequest = req.path.startsWith('/api') || req.headers['content-type'] === 'application/json';
+    //console.log('ES POSTMAN', req.isApiRequest, req.session.user);
+    next();
+});
 
 
 
@@ -63,7 +89,6 @@ const hbs = exphbs.create({
             delete this._blocks[name];
             return content;
         },
-        // 
         eq: function (a, b, options) {
             return a === b ? options.fn(this) : options.inverse(this);
         },
@@ -72,7 +97,7 @@ const hbs = exphbs.create({
         },
         eachWithCartId: function(context, options) {
             let ret = '';
-            for (let i = 0, j = context.length; i < j; i++) {
+            for (let i = 0; i < context.length; i++) {
                 context[i].cartId = options.data.root.cartId;
                 ret = ret + options.fn(context[i]);
             }
@@ -88,182 +113,86 @@ app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname, 'views'));
 
-
-
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 
-// Conexion a MongoDB y modelos si USE_DB es true, de lo contrario, usa FileSystem
-if (USE_DB) {
-    logger.debug('Conexión por database');
-
-// Importa el modulo de "mocking" si USE_DB es verdadero
-// const MongoDBMock = require('./dao/MongoDBMock');
-// const mongoDB = new MongoDBMock();
-
-const connectDB = require('./dao/db/db');
-connectDB(); // Conectar a MongoDB Atlas
-
-
-const productRoutes = require('./routes/productRoutes'); // Importa las rutas de productos para MongoDB
-const cartRoutes = require('./routes/cartRoutes');
-const messageRoutes = require('./routes/messageRoutes');
-const authRoutes = require('./routes/authRoutes');
-const UsersRoutes = require('./routes/UsersRoutes');
-
 app.use((req, res, next) => {
-    // Verificar si la ruta tiene el prefijo /api/
-    req.isApiRequest = req.path.startsWith('/api');
+    req.isApiRequest = req.path.startsWith('/api') || req.headers['content-type'] === 'application/json';
+    //console.log('ES POSTMAN', req.isApiRequest)
     next();
 });
 
-// Importa y usa Swagger
-const swaggerApp = require('./configuration/swagger');
-app.use('/', swaggerApp);
+// Conexion a MongoDB y modelos si USE_DB es true, de lo contrario, usa FileSystem
+if (useDB) {
+    //logger.debug('Conexión por database');
 
-// Rutas API
-app.use('/api/products', productRoutes); // Usa rutas de productos para operaciones de DB
-app.use('/api/carts', cartRoutes); 
-app.use('/api/messages', messageRoutes); 
-app.use('/api/auth', authRoutes);
-app.use('/api/users', UsersRoutes);
+    const connectDB = require('./dao/db/db');
+    connectDB(); // Conectar a MongoDB Atlas
 
-// Rutas para la web
-app.get('/', (req, res) => {
-    const logged = req.session.logged || false;
-    if (req.isApiRequest) {
-        logger.info('Solicitud HTTP');
-      // Lógica para manejar solicitudes de API
-    res.json({ message: 'Esta es una respuesta de la API' });
-} else {
-    // Lógica para manejar solicitudes web
-    const cartId = '';
-    const user_role = '';
-    logger.http('Solicitud HTTP');
-    res.render('login', { pageTitle: 'Chicken with Rice',logged, user_role, cartId});
-}
-});
+    const productRoutes = require('./routes/productRoutes'); // Importa las rutas de productos para MongoDB
+    const cartRoutes = require('./routes/cartRoutes');
+    const messageRoutes = require('./routes/messageRoutes');
+    const authRoutes = require('./routes/authRoutes');
+    const UsersRoutes = require('./routes/UsersRoutes');
 
+    app.use((req, res, next) => {
+        req.isApiRequest = req.path.startsWith('/api') || req.headers['content-type'] === 'application/json';
+        next();
+    });
+    
+    const swaggerApp = require('./configuration/swagger');
+    app.use('/', swaggerApp);
 
+    app.use('/api/products', productRoutes);
+    app.use('/api/carts', cartRoutes); 
+    app.use('/api/messages', messageRoutes); 
+    app.use('/api/auth', authRoutes);
+    app.use('/api/users', UsersRoutes);
 
-// LOGOUT //
-app.get('/logout', (req, res) => {
-    req.session.destroy(err => {
-        if (err) {
-        console.error(err);
-        }
-        res.redirect('/');
-});
-});
-
-
-const renderController = require('./dao/controllers/renderController');
-// RUTAS WEB
-app.use('/', renderController);
-app.use('/products', renderController);
-app.get('/register', renderController); 
-app.post('/registerUpload', renderController); 
-app.get('/api/sessions/github', renderController); 
-app.get('/api/sessions/current', renderController); 
-app.post('/login', renderController); 
-app.get('/chat', renderController); 
-app.get('/orders', renderController); 
-
-app.get('/users/:uid', renderController);
-// Montar el router loggerTest en la ruta /loggerTest
-app.use(loggerTestRouter);
-
-
-
-
-// Middleware de manejo de errores final
-app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).json({ status: 'error', error: 'Error interno del servidor' });
-});
-
-} else {
-console.log('Por FileSystem');
-const ProductManager = require('./dao/fileSystem/ProductManager');
-const CartManager = require('./dao/fileSystem/CartManager');
-const routes = require('./routes');
-
-
-const productManager = new ProductManager('./dao/fileSystem/productos.json');
-const cartManager = new CartManager('./dao/fileSystem/carts.json');
-
-
-
-app.use(routes(io, productManager, cartManager));
-
-
-io.on('connection', (socket) => {
-console.log('Usuario conectado');
-
-socket.on('productAdded', (newProductData) => {
-    // Lógica para agregar productos
-    try {
-        console.log('DATA:',newProductData)
-        const newProduct = {
-            title: newProductData.title,
-            description: newProductData.description,
-            id:newProductData.id,
-        };
-
-        // Verifica si ya existe un producto con el mismo ID
-        const existingProduct = productManager.getProductById(newProductData.id);
-        if (existingProduct) {
-            console.log(`El producto con ID ${newProductData.id} ya existe. No se agregará.`);
+    app.get('/', (req, res) => {
+        const logged = req.session.logged || false;
+        if (req.isApiRequest) {
+            logger.info('Solicitud HTTP');
+            res.json({ message: 'Esta es una respuesta de la API' });
         } else {
-            // Agrega el producto solo si no existe un producto con el mismo ID
-            productManager.addProduct(newProduct);
-            io.emit('updateRealTimeProducts', { action: 'add', product: newProduct });
-            console.log('Producto agregado correctamente al sistema');
+            const cartId = '';
+            const user_role = '';
+            logger.http('Solicitud HTTP');
+            res.render('login', { pageTitle: 'Chicken with Rice', logged, user_role, cartId });
         }
-    } catch (error) {
-        console.error('Error al agregar el producto al sistema:', error);
-    }
-});
+    });
 
-socket.on('productRemoved', (productId) => {
-    // Lógica para eliminar el producto utilizando ProductManager
-    try {
-        console.log('ID A BORRAR:', productId.id)
-        const productIds = productId.id
-        const removedProduct = productManager.deleteProduct(productIds);
-        if (removedProduct) {
-            io.emit('updateRealTimeProducts', { action: 'remove', productIds });
-            console.log(`Producto eliminado correctamente del sistema. ID: ${productIds}`);
-        } else {
-            console.error(`No se encontró el producto con ID: ${productIds}`);
-        }
-    } catch (error) {
-        console.error('Error al eliminar el producto del sistema:', error);
-    }
-});
+    app.get('/logout', (req, res) => {
+        req.session.destroy(err => {
+            if (err) {
+                console.error(err);
+            }
+            res.redirect('/');
+        });
+    });
 
-socket.on('disconnect', () => {
-    console.log('Usuario desconectado');
-});
-});
+    const renderController = require('./dao/controllers/renderController');
+    app.use('/', renderController);
+    app.use('/products', renderController);
+    app.get('/register', renderController); 
+    app.post('/registerUpload', renderController); 
+    app.get('/api/sessions/github', renderController); 
+    app.get('/api/sessions/current', renderController); 
+    app.post('/login', renderController); 
+    app.get('/chat', renderController); 
+    app.get('/orders', renderController); 
+    app.get('/users/:uid', renderController);
+    app.use(loggerTestRouter);
 
-// Ruta para el endpoint raíz
-app.get('/', (req, res) => {
-const productList = productManager.getProductList();
-res.render('home', { products: productList });
-});
-
-app.get('/realtimeproducts', (req, res) => {
-const productList = productManager.getProductList();
-res.render('realTimeProducts', { products: productList });
-});
-
+    app.use((err, req, res, next) => {
+        console.error(err.stack);
+        res.status(500).json({ status: 'error', error: 'Error interno del servidor' });
+    });
 }
 
-
-
-
-const PORT = process.env.PORT || 8080;
-server.listen(PORT, () => {
-logger.info(`Servidor Express escuchando en el puerto ${PORT}`);
+const PORT = process.env.NODE_ENV === 'test' ? (process.env.TEST_PORT || 8081) : (process.env.PORT || 8080);
+const serverInstance = server.listen(PORT, () => {
+    logger.info(`Servidor Express escuchando en el puerto ${PORT}`);
 });
+
+module.exports = { app, serverInstance };

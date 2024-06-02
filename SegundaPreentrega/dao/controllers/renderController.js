@@ -26,7 +26,6 @@ passport.use(new GitHubStrategy({
 },
 async (accessToken, refreshToken, profile, done) => {
     try {
-    //console.log('ACCESS TOKEN:',accessToken)
     // Verifica si el usuario ya está registrado en tu base de datos
     const existingUser = await User.findOne({ githubId: profile.id });
 
@@ -290,26 +289,38 @@ router.post('/login', async (req, res) => {
         if (user) {
             req.session.logged = true;
             req.session.user = user;
-            if (user.role =='admin'){
-                logger.info('Es un admin!')
-            }else if (user.role =='premium'){
-                logger.info('Es un premium!')
+            if (user.role == 'admin') {
+                logger.info('Es un admin!');
+            } else if (user.role == 'premium') {
+                logger.info('Es un premium!');
+            } else {
+                logger.info('Es un user comun Role');
             }
-            else{
-                logger.info('Es un user comun Role')
+
+            if (req.isApiRequest) {
+                res.status(200).json({ message: 'Login successful', user });
+            } else {
+                res.redirect('/products');
             }
-            res.redirect('/products');
         } else {
-            // Si las credenciales son incorrectas, renderizar la página de login con un mensaje de error
-            res.render('failedlogin');
+            if (req.isApiRequest) {
+                res.status(401).json({ message: 'Invalid credentials' });
+            } else {
+                res.render('failedlogin');
+            }
         }
     } catch (error) {
         console.error('Error al buscar el usuario:', error);
-        res.status(500).render('failedlogin', {
-            error: 'Error interno del servidor'
-        });
+        if (req.isApiRequest) {
+            res.status(500).json({ error: 'Internal server error' });
+        } else {
+            res.status(500).render('failedlogin', {
+                error: 'Error interno del servidor'
+            });
+        }
     }
 });
+
 
 
 // Controlador para renderizar el formulario de registro

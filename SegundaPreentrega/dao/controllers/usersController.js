@@ -10,7 +10,6 @@ exports.verifyLogin = async (username, password) => {
     try {
         // Buscar el usuario en la base de datos por el nombre de usuario
         const user = await User.findOne({ username });
-
         // Si no se encuentra el usuario, retornar null
         if (!user) {
             return null;

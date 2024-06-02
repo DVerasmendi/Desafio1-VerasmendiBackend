@@ -572,3 +572,739 @@
 2024-05-30 13:44:36 [INFO]: Servidor Express escuchando en el puerto 8080
 2024-05-30 13:44:38 [DEBUG]: MongoDB Connected...
 2024-05-30 13:44:42 [HTTP]: Solicitud HTTP
+2024-05-30 19:10:47 [DEBUG]: Conexión por database
+2024-05-30 19:10:51 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-30 19:10:52 [DEBUG]: MongoDB Connected...
+2024-05-30 19:31:27 [DEBUG]: Conexión por database
+2024-05-30 19:31:30 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-30 19:31:31 [DEBUG]: MongoDB Connected...
+2024-05-30 19:45:41 [DEBUG]: Conexión por database
+2024-05-30 19:45:45 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-30 19:45:47 [DEBUG]: MongoDB Connected...
+2024-05-30 19:47:53 [DEBUG]: Conexión por database
+2024-05-30 19:47:56 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-30 19:47:57 [DEBUG]: MongoDB Connected...
+2024-05-30 19:48:09 [HTTP]: Solicitud HTTP
+2024-05-30 19:48:13 [HTTP]: Solicitud HTTP
+2024-05-30 19:48:15 [HTTP]: Solicitud HTTP
+2024-05-30 19:48:21 [HTTP]: Solicitud HTTP
+2024-05-30 19:52:16 [DEBUG]: Conexión por database
+2024-05-30 19:52:19 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-30 19:52:21 [DEBUG]: MongoDB Connected...
+2024-05-30 19:52:25 [HTTP]: Solicitud HTTP
+2024-05-30 19:52:28 [HTTP]: Solicitud HTTP
+2024-05-30 19:52:40 [HTTP]: Solicitud HTTP
+2024-05-30 19:52:48 [HTTP]: Solicitud HTTP
+2024-05-30 19:59:00 [DEBUG]: Conexión por database
+2024-05-30 19:59:04 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-30 19:59:06 [DEBUG]: MongoDB Connected...
+2024-05-30 20:00:21 [DEBUG]: Conexión por database
+2024-05-30 20:00:23 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 09:28:24 [DEBUG]: Conexión por database
+2024-05-31 09:28:27 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 09:28:29 [DEBUG]: MongoDB Connected...
+2024-05-31 11:03:16 [DEBUG]: Conexión por database
+2024-05-31 11:03:18 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 11:03:20 [DEBUG]: MongoDB Connected...
+2024-05-31 11:03:50 [HTTP]: Solicitud HTTP
+2024-05-31 11:04:00 [INFO]: Es un user comun Role
+2024-05-31 11:06:44 [DEBUG]: Conexión por database
+2024-05-31 11:06:47 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 11:06:49 [DEBUG]: MongoDB Connected...
+2024-05-31 11:13:45 [DEBUG]: Conexión por database
+2024-05-31 11:13:48 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 11:13:50 [DEBUG]: MongoDB Connected...
+2024-05-31 11:14:11 [DEBUG]: Conexión por database
+2024-05-31 11:14:14 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 11:14:16 [DEBUG]: MongoDB Connected...
+2024-05-31 11:14:39 [DEBUG]: Conexión por database
+2024-05-31 11:14:41 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 11:14:42 [DEBUG]: MongoDB Connected...
+2024-05-31 11:14:47 [HTTP]: Solicitud HTTP
+2024-05-31 11:14:51 [INFO]: Es un user comun Role
+2024-05-31 11:18:20 [DEBUG]: Conexión por database
+2024-05-31 11:18:23 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 11:18:24 [DEBUG]: MongoDB Connected... Environment: production
+2024-05-31 11:18:41 [DEBUG]: Conexión por database
+2024-05-31 11:18:44 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 11:18:45 [DEBUG]: MongoDB Connected... Environment: production
+2024-05-31 11:22:40 [DEBUG]: Conexión por database
+2024-05-31 11:22:42 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 11:22:44 [DEBUG]: MongoDB Connected... Environment: production
+2024-05-31 11:22:50 [HTTP]: Solicitud HTTP
+2024-05-31 11:22:53 [INFO]: Es un user comun Role
+2024-05-31 11:22:56 [HTTP]: Solicitud HTTP
+2024-05-31 11:45:12 [DEBUG]: App environment: production
+2024-05-31 11:45:12 [DEBUG]: Conexión por database
+2024-05-31 11:45:14 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 11:45:16 [DEBUG]: MongoDB Connected to mongodb+srv://deikerv:deiker123456@ecommerce.x7pvxzk.mongodb.net/Ecommerce... Environment: production
+2024-05-31 11:50:05 [DEBUG]: App environment: test
+2024-05-31 11:50:05 [DEBUG]: Conexión por database
+2024-05-31 11:50:07 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 11:50:09 [DEBUG]: MongoDB Connected to mongodb+srv://deikerv:deiker123456@ecommerce.x7pvxzk.mongodb.net/EcommerceTest... Environment: test
+2024-05-31 11:53:25 [DEBUG]: App environment: production
+2024-05-31 11:53:25 [DEBUG]: Conexión por database
+2024-05-31 11:53:27 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 11:53:29 [DEBUG]: MongoDB Connected to mongodb+srv://deikerv:deiker123456@ecommerce.x7pvxzk.mongodb.net/Ecommerce... Environment: production
+2024-05-31 11:53:49 [HTTP]: Solicitud HTTP
+2024-05-31 11:53:52 [INFO]: Es un user comun Role
+2024-05-31 11:54:03 [HTTP]: Solicitud HTTP
+2024-05-31 11:54:07 [INFO]: Es un admin!
+2024-05-31 11:54:31 [DEBUG]: App environment: test
+2024-05-31 11:54:31 [DEBUG]: Conexión por database
+2024-05-31 11:54:34 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 11:54:36 [DEBUG]: MongoDB Connected to mongodb+srv://deikerv:deiker123456@ecommerce.x7pvxzk.mongodb.net/EcommerceTest... Environment: test
+2024-05-31 11:57:06 [DEBUG]: App environment: test
+2024-05-31 11:57:06 [DEBUG]: Conexión por database
+2024-05-31 11:57:08 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 11:57:10 [DEBUG]: MongoDB Connected to mongodb+srv://deikerv:deiker123456@ecommerce.x7pvxzk.mongodb.net/EcommerceTest... Environment: test
+2024-05-31 11:57:34 [DEBUG]: App environment: test
+2024-05-31 11:57:34 [DEBUG]: Conexión por database
+2024-05-31 11:57:37 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 11:57:38 [DEBUG]: MongoDB Connected to mongodb+srv://deikerv:deiker123456@ecommerce.x7pvxzk.mongodb.net/EcommerceTest... Environment: test
+2024-05-31 12:05:46 [DEBUG]: App environment: test
+2024-05-31 12:05:46 [DEBUG]: Conexión por database
+2024-05-31 12:05:50 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 12:05:52 [DEBUG]: MongoDB Connected to mongodb+srv://deikerv:deiker123456@ecommerce.x7pvxzk.mongodb.net/EcommerceTest... Environment: test
+2024-05-31 12:08:21 [DEBUG]: App environment: test
+2024-05-31 12:08:21 [DEBUG]: Conexión por database
+2024-05-31 12:08:23 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 12:08:25 [DEBUG]: MongoDB Connected to mongodb+srv://deikerv:deiker123456@ecommerce.x7pvxzk.mongodb.net/EcommerceTest... Environment: test
+2024-05-31 12:14:58 [DEBUG]: App environment: test
+2024-05-31 12:14:58 [DEBUG]: Conexión por database
+2024-05-31 12:15:01 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 12:15:02 [DEBUG]: MongoDB Connected to mongodb+srv://deikerv:deiker123456@ecommerce.x7pvxzk.mongodb.net/EcommerceTest... Environment: test
+2024-05-31 12:16:14 [DEBUG]: App environment: test
+2024-05-31 12:16:14 [DEBUG]: Conexión por database
+2024-05-31 12:16:16 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 12:16:18 [DEBUG]: MongoDB Connected to mongodb+srv://deikerv:deiker123456@ecommerce.x7pvxzk.mongodb.net/EcommerceTest... Environment: test
+2024-05-31 12:16:37 [DEBUG]: App environment: test
+2024-05-31 12:16:37 [DEBUG]: Conexión por database
+2024-05-31 12:16:39 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 12:16:41 [DEBUG]: MongoDB Connected to mongodb+srv://deikerv:deiker123456@ecommerce.x7pvxzk.mongodb.net/EcommerceTest... Environment: test
+2024-05-31 12:17:40 [DEBUG]: App environment: test
+2024-05-31 12:17:40 [DEBUG]: Conexión por database
+2024-05-31 12:17:43 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 12:17:45 [DEBUG]: MongoDB Connected to mongodb+srv://deikerv:deiker123456@ecommerce.x7pvxzk.mongodb.net/EcommerceTest... Environment: test
+2024-05-31 12:18:10 [HTTP]: Solicitud HTTP
+2024-05-31 12:18:21 [INFO]: Es un user comun Role
+2024-05-31 12:18:28 [HTTP]: Solicitud HTTP
+2024-05-31 12:19:07 [DEBUG]: App environment: test
+2024-05-31 12:19:07 [DEBUG]: Conexión por database
+2024-05-31 12:19:10 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 12:19:12 [DEBUG]: MongoDB Connected to mongodb+srv://deikerv:deiker123456@ecommerce.x7pvxzk.mongodb.net/EcommerceTest... Environment: test
+2024-05-31 12:22:24 [DEBUG]: App environment: test
+2024-05-31 12:22:24 [DEBUG]: Conexión por database
+2024-05-31 12:22:27 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 12:22:29 [DEBUG]: MongoDB Connected to mongodb+srv://deikerv:deiker123456@ecommerce.x7pvxzk.mongodb.net/EcommerceTest... Environment: test
+2024-05-31 12:25:26 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 12:26:00 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 12:38:02 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 12:42:31 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 12:43:04 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 12:46:18 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 12:56:01 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 12:57:03 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 13:04:31 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 13:12:54 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 13:13:21 [HTTP]: Solicitud HTTP
+2024-05-31 13:13:24 [INFO]: Es un user comun Role
+2024-05-31 13:14:35 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 13:14:37 [HTTP]: Solicitud HTTP
+2024-05-31 13:20:26 [DEBUG]: Conexión por database
+2024-05-31 13:20:32 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 13:23:30 [HTTP]: Solicitud HTTP
+2024-05-31 13:23:34 [INFO]: Es un user comun Role
+2024-05-31 13:23:53 [HTTP]: Solicitud HTTP
+2024-05-31 13:24:04 [HTTP]: Solicitud HTTP
+2024-05-31 13:24:07 [INFO]: Es un admin!
+2024-05-31 13:24:14 [HTTP]: Solicitud HTTP
+2024-05-31 13:24:17 [INFO]: Es un user comun Role
+2024-05-31 13:24:36 [DEBUG]: Conexión por database
+2024-05-31 13:24:39 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 13:24:44 [HTTP]: Solicitud HTTP
+2024-05-31 13:24:47 [INFO]: Es un user comun Role
+2024-05-31 13:27:09 [DEBUG]: App environment: production
+2024-05-31 13:27:09 [DEBUG]: Conexión por database
+2024-05-31 13:27:13 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 13:27:14 [HTTP]: Solicitud HTTP
+2024-05-31 13:27:19 [INFO]: Es un user comun Role
+2024-05-31 13:27:28 [HTTP]: Solicitud HTTP
+2024-05-31 13:27:31 [HTTP]: Solicitud HTTP
+2024-05-31 13:27:36 [INFO]: Es un admin!
+2024-05-31 13:27:41 [HTTP]: Solicitud HTTP
+2024-05-31 13:28:06 [HTTP]: Solicitud HTTP
+2024-05-31 13:28:38 [DEBUG]: App environment: test
+2024-05-31 13:28:38 [DEBUG]: Conexión por database
+2024-05-31 13:28:38 [DEBUG]: App environment: test
+2024-05-31 13:28:38 [DEBUG]: Conexión por database
+2024-05-31 13:28:44 [HTTP]: Solicitud HTTP
+2024-05-31 13:29:09 [DEBUG]: App environment: test
+2024-05-31 13:29:09 [DEBUG]: Conexión por database
+2024-05-31 13:29:14 [HTTP]: Solicitud HTTP
+2024-05-31 13:30:57 [DEBUG]: App environment: test
+2024-05-31 13:30:57 [DEBUG]: App environment: test
+2024-05-31 13:30:57 [DEBUG]: Conexión por database
+2024-05-31 13:30:57 [DEBUG]: Conexión por database
+2024-05-31 13:31:03 [HTTP]: Solicitud HTTP
+2024-05-31 13:37:46 [DEBUG]: App environment: production
+2024-05-31 13:37:46 [DEBUG]: Conexión por database
+2024-05-31 13:37:49 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 13:38:08 [HTTP]: Solicitud HTTP
+2024-05-31 13:38:12 [INFO]: Es un admin!
+2024-05-31 13:38:23 [HTTP]: Solicitud HTTP
+2024-05-31 13:39:00 [DEBUG]: App environment: test
+2024-05-31 13:39:00 [DEBUG]: App environment: test
+2024-05-31 13:39:00 [DEBUG]: Conexión por database
+2024-05-31 13:39:00 [DEBUG]: Conexión por database
+2024-05-31 13:39:06 [HTTP]: Solicitud HTTP
+2024-05-31 13:40:00 [DEBUG]: App environment: test
+2024-05-31 13:40:00 [DEBUG]: Conexión por database
+2024-05-31 13:40:00 [DEBUG]: App environment: test
+2024-05-31 13:40:00 [DEBUG]: Conexión por database
+2024-05-31 13:40:06 [HTTP]: Solicitud HTTP
+2024-05-31 13:43:52 [DEBUG]: App environment: production
+2024-05-31 13:43:52 [DEBUG]: Conexión por database
+2024-05-31 13:43:55 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 13:44:05 [INFO]: Es un user comun Role
+2024-05-31 13:44:10 [HTTP]: Solicitud HTTP
+2024-05-31 13:44:23 [DEBUG]: App environment: test
+2024-05-31 13:44:23 [DEBUG]: App environment: test
+2024-05-31 13:44:23 [DEBUG]: Conexión por database
+2024-05-31 13:44:27 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 13:44:23 [DEBUG]: Conexión por database
+2024-05-31 13:44:28 [HTTP]: Solicitud HTTP
+2024-05-31 13:45:09 [DEBUG]: App environment: test
+2024-05-31 13:45:09 [DEBUG]: Conexión por database
+2024-05-31 13:45:12 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 13:45:14 [HTTP]: Solicitud HTTP
+2024-05-31 13:46:29 [DEBUG]: App environment: test
+2024-05-31 13:46:29 [DEBUG]: Conexión por database
+2024-05-31 13:46:32 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 13:46:34 [HTTP]: Solicitud HTTP
+2024-05-31 13:49:45 [DEBUG]: App environment: test
+2024-05-31 13:49:45 [DEBUG]: Conexión por database
+2024-05-31 13:49:48 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 13:49:50 [HTTP]: Solicitud HTTP
+2024-05-31 13:51:31 [DEBUG]: App environment: test
+2024-05-31 13:51:31 [DEBUG]: Conexión por database
+2024-05-31 13:51:35 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 13:51:38 [HTTP]: Solicitud HTTP
+2024-05-31 13:55:57 [DEBUG]: App environment: test
+2024-05-31 13:55:57 [DEBUG]: Conexión por database
+2024-05-31 13:56:00 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 13:56:02 [HTTP]: Solicitud HTTP
+2024-05-31 13:57:33 [DEBUG]: App environment: test
+2024-05-31 13:57:33 [DEBUG]: Conexión por database
+2024-05-31 13:57:36 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 13:57:33 [DEBUG]: App environment: test
+2024-05-31 13:57:33 [DEBUG]: Conexión por database
+2024-05-31 13:57:38 [HTTP]: Solicitud HTTP
+2024-05-31 13:58:46 [DEBUG]: App environment: test
+2024-05-31 13:58:46 [DEBUG]: Conexión por database
+2024-05-31 13:58:51 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 13:58:46 [DEBUG]: App environment: test
+2024-05-31 13:58:46 [DEBUG]: Conexión por database
+2024-05-31 13:58:52 [HTTP]: Solicitud HTTP
+2024-05-31 14:00:44 [DEBUG]: App environment: test
+2024-05-31 14:00:44 [DEBUG]: Conexión por database
+2024-05-31 14:00:50 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-05-31 14:00:44 [DEBUG]: App environment: test
+2024-05-31 14:00:44 [DEBUG]: Conexión por database
+2024-05-31 14:00:52 [HTTP]: Solicitud HTTP
+2024-05-31 14:02:12 [DEBUG]: App environment: production
+2024-05-31 14:02:12 [DEBUG]: Conexión por database
+2024-05-31 14:02:14 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 14:02:27 [DEBUG]: App environment: test
+2024-05-31 14:02:27 [DEBUG]: Conexión por database
+2024-05-31 14:02:31 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-05-31 14:02:27 [DEBUG]: App environment: test
+2024-05-31 14:02:27 [DEBUG]: Conexión por database
+2024-05-31 14:02:33 [HTTP]: Solicitud HTTP
+2024-05-31 14:03:15 [DEBUG]: App environment: test
+2024-05-31 14:03:15 [DEBUG]: Conexión por database
+2024-05-31 14:03:19 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-05-31 14:03:15 [DEBUG]: App environment: test
+2024-05-31 14:03:15 [DEBUG]: Conexión por database
+2024-05-31 14:03:21 [HTTP]: Solicitud HTTP
+2024-05-31 14:03:53 [DEBUG]: App environment: test
+2024-05-31 14:03:53 [DEBUG]: Conexión por database
+2024-05-31 14:03:58 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-05-31 14:03:53 [DEBUG]: App environment: test
+2024-05-31 14:03:53 [DEBUG]: Conexión por database
+2024-05-31 14:04:00 [HTTP]: Solicitud HTTP
+2024-05-31 14:04:48 [DEBUG]: App environment: test
+2024-05-31 14:04:48 [DEBUG]: Conexión por database
+2024-05-31 14:04:52 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-05-31 14:04:53 [HTTP]: Solicitud HTTP
+2024-05-31 14:05:44 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-05-31 14:05:46 [HTTP]: Solicitud HTTP
+2024-05-31 14:08:09 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-05-31 14:08:11 [HTTP]: Solicitud HTTP
+2024-05-31 14:12:07 [DEBUG]: App environment: test
+2024-05-31 14:12:07 [DEBUG]: Conexión por database
+2024-05-31 14:12:11 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-05-31 14:12:07 [DEBUG]: App environment: test
+2024-05-31 14:12:07 [DEBUG]: Conexión por database
+2024-05-31 14:12:13 [HTTP]: Solicitud HTTP
+2024-05-31 14:14:42 [DEBUG]: Conexión por database
+2024-05-31 14:14:47 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-05-31 14:14:42 [DEBUG]: Conexión por database
+2024-05-31 14:14:49 [HTTP]: Solicitud HTTP
+2024-05-31 14:16:23 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-05-31 14:16:25 [HTTP]: Solicitud HTTP
+2024-05-31 14:17:41 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-05-31 14:17:42 [HTTP]: Solicitud HTTP
+2024-05-31 14:18:42 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-05-31 14:18:44 [HTTP]: Solicitud HTTP
+2024-05-31 14:19:39 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-05-31 14:19:41 [HTTP]: Solicitud HTTP
+2024-05-31 14:20:05 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-05-31 14:20:07 [HTTP]: Solicitud HTTP
+2024-05-31 14:20:49 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-05-31 14:20:50 [HTTP]: Solicitud HTTP
+2024-05-31 14:30:28 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-05-31 14:30:30 [HTTP]: Solicitud HTTP
+2024-05-31 14:30:50 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-05-31 14:30:52 [HTTP]: Solicitud HTTP
+2024-05-31 14:31:20 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-05-31 14:31:22 [HTTP]: Solicitud HTTP
+2024-05-31 14:34:41 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-05-31 14:34:42 [HTTP]: Solicitud HTTP
+2024-05-31 14:34:46 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-05-31 14:34:56 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-05-31 14:34:58 [HTTP]: Solicitud HTTP
+2024-05-31 14:35:01 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-05-31 14:35:53 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-05-31 14:35:55 [HTTP]: Solicitud HTTP
+2024-05-31 14:35:58 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-05-31 14:37:15 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-05-31 14:37:21 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-05-31 14:37:23 [HTTP]: Solicitud HTTP
+2024-05-31 14:40:24 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-05-31 14:40:31 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-05-31 14:40:33 [HTTP]: Solicitud HTTP
+2024-05-31 14:41:21 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 14:50:34 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 14:51:05 [HTTP]: Solicitud HTTP
+2024-05-31 14:51:09 [INFO]: Es un user comun Role
+2024-05-31 14:51:19 [HTTP]: Solicitud HTTP
+2024-05-31 14:51:24 [INFO]: Es un admin!
+2024-05-31 14:51:34 [HTTP]: Solicitud HTTP
+2024-05-31 14:51:59 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-05-31 14:52:07 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-05-31 14:52:11 [HTTP]: Solicitud HTTP
+2024-05-31 14:55:18 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-05-31 14:55:23 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-05-31 14:55:25 [HTTP]: Solicitud HTTP
+2024-05-31 15:01:04 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-05-31 15:01:10 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-05-31 15:01:11 [HTTP]: Solicitud HTTP
+2024-05-31 15:05:07 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-05-31 15:05:15 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-05-31 15:05:17 [HTTP]: Solicitud HTTP
+2024-05-31 15:08:49 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-05-31 15:10:16 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-05-31 15:10:23 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-05-31 15:10:25 [HTTP]: Solicitud HTTP
+2024-05-31 15:16:15 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 15:16:17 [HTTP]: Solicitud HTTP
+2024-05-31 15:16:20 [INFO]: Es un user comun Role
+2024-05-31 15:16:24 [HTTP]: Solicitud HTTP
+2024-05-31 15:16:28 [INFO]: Es un admin!
+2024-05-31 15:17:12 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 15:17:19 [HTTP]: Solicitud HTTP
+2024-05-31 15:17:44 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-05-31 15:17:56 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-05-31 15:18:59 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-05-31 15:19:10 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-05-31 15:24:22 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-05-31 15:24:39 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-05-31 15:24:41 [HTTP]: Solicitud HTTP
+2024-05-31 16:04:18 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 16:05:02 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 16:05:09 [HTTP]: Solicitud HTTP
+2024-05-31 16:05:30 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 16:05:30 [HTTP]: Solicitud HTTP
+2024-05-31 16:06:20 [INFO]: Es un user comun Role
+2024-05-31 16:06:25 [HTTP]: Solicitud HTTP
+2024-05-31 16:06:29 [INFO]: Es un admin!
+2024-05-31 16:06:35 [HTTP]: Solicitud HTTP
+2024-05-31 16:07:14 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-05-31 16:10:55 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 16:21:43 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 16:24:44 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 16:26:01 [HTTP]: Solicitud HTTP
+2024-05-31 16:26:05 [INFO]: Es un user comun Role
+2024-05-31 16:26:10 [HTTP]: Solicitud HTTP
+2024-05-31 16:26:14 [INFO]: Es un admin!
+2024-05-31 16:26:17 [HTTP]: Solicitud HTTP
+2024-05-31 16:28:33 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 16:32:32 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 16:38:11 [INFO]: Es un user comun Role
+2024-05-31 16:38:39 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 16:38:39 [HTTP]: Solicitud HTTP
+2024-05-31 16:38:43 [INFO]: Es un user comun Role
+2024-05-31 16:38:48 [HTTP]: Solicitud HTTP
+2024-05-31 16:38:53 [INFO]: Es un admin!
+2024-05-31 16:39:02 [HTTP]: Solicitud HTTP
+2024-05-31 16:41:44 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 16:41:44 [HTTP]: Solicitud HTTP
+2024-05-31 16:41:49 [INFO]: Es un user comun Role
+2024-05-31 16:41:56 [HTTP]: Solicitud HTTP
+2024-05-31 16:42:01 [INFO]: Es un admin!
+2024-05-31 16:42:16 [HTTP]: Solicitud HTTP
+2024-05-31 16:42:46 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-05-31 16:44:10 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-05-31 16:44:28 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-05-31 16:44:30 [HTTP]: Solicitud HTTP
+2024-05-31 16:47:48 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 16:49:32 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 16:52:42 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-05-31 16:53:01 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-05-31 16:53:02 [HTTP]: Solicitud HTTP
+2024-05-31 16:54:25 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 16:58:10 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 16:58:54 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 16:59:30 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 17:00:07 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 17:05:25 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 17:07:40 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 17:08:51 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 17:09:24 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 17:09:45 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 17:12:13 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 17:13:04 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 17:23:11 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 17:24:10 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 17:25:44 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 17:53:19 [INFO]: Es un user comun Role
+2024-05-31 17:53:35 [INFO]: Es un admin!
+2024-05-31 17:53:59 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 17:54:00 [HTTP]: Solicitud HTTP
+2024-05-31 17:54:05 [INFO]: Es un admin!
+2024-05-31 17:54:11 [HTTP]: Solicitud HTTP
+2024-05-31 17:54:15 [INFO]: Es un admin!
+2024-05-31 17:54:20 [HTTP]: Solicitud HTTP
+2024-05-31 17:57:44 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 17:59:32 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 18:00:38 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 18:01:03 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 18:01:58 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 18:03:15 [HTTP]: Solicitud HTTP
+2024-05-31 18:03:19 [INFO]: Es un user comun Role
+2024-05-31 18:03:29 [HTTP]: Solicitud HTTP
+2024-05-31 18:03:33 [INFO]: Es un admin!
+2024-05-31 18:03:38 [HTTP]: Solicitud HTTP
+2024-05-31 18:04:24 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-05-31 18:04:31 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-05-31 18:04:32 [HTTP]: Solicitud HTTP
+2024-05-31 19:19:30 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 19:19:58 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 19:21:32 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 19:22:10 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 19:22:56 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 19:24:06 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 19:32:12 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 19:44:29 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 19:44:31 [HTTP]: Solicitud HTTP
+2024-05-31 19:46:38 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 19:48:10 [HTTP]: Solicitud HTTP
+2024-05-31 19:48:14 [INFO]: Es un user comun Role
+2024-05-31 19:48:31 [INFO]: Es un admin!
+2024-05-31 19:49:06 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 19:49:07 [HTTP]: Solicitud HTTP
+2024-05-31 19:49:11 [INFO]: Es un admin!
+2024-05-31 19:49:14 [HTTP]: Solicitud HTTP
+2024-05-31 19:49:17 [INFO]: Es un user comun Role
+2024-05-31 19:49:21 [HTTP]: Solicitud HTTP
+2024-05-31 19:50:52 [INFO]: Es un user comun Role
+2024-05-31 19:50:55 [HTTP]: Solicitud HTTP
+2024-05-31 19:53:09 [INFO]: Es un user comun Role
+2024-05-31 19:53:26 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 19:53:32 [HTTP]: Solicitud HTTP
+2024-05-31 19:53:38 [INFO]: Es un user comun Role
+2024-05-31 19:53:54 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 19:53:54 [HTTP]: Solicitud HTTP
+2024-05-31 19:54:10 [INFO]: Es un user comun Role
+2024-05-31 19:54:14 [HTTP]: Solicitud HTTP
+2024-05-31 19:56:24 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 19:56:24 [HTTP]: Solicitud HTTP
+2024-05-31 19:56:27 [INFO]: Es un user comun Role
+2024-05-31 19:56:41 [HTTP]: Solicitud HTTP
+2024-05-31 19:57:41 [INFO]: Es un user comun Role
+2024-05-31 20:00:30 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 20:00:35 [HTTP]: Solicitud HTTP
+2024-05-31 20:00:39 [INFO]: Es un user comun Role
+2024-05-31 20:01:09 [INFO]: Es un user comun Role
+2024-05-31 20:02:05 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 20:02:10 [HTTP]: Solicitud HTTP
+2024-05-31 20:02:24 [INFO]: Es un user comun Role
+2024-05-31 20:02:29 [HTTP]: Solicitud HTTP
+2024-05-31 20:04:23 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 20:04:33 [HTTP]: Solicitud HTTP
+2024-05-31 20:04:39 [INFO]: Es un user comun Role
+2024-05-31 20:04:46 [HTTP]: Solicitud HTTP
+2024-05-31 20:04:52 [INFO]: Es un admin!
+2024-05-31 20:05:12 [HTTP]: Solicitud HTTP
+2024-05-31 23:19:21 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 23:19:27 [HTTP]: Solicitud HTTP
+2024-05-31 23:19:31 [INFO]: Es un user comun Role
+2024-05-31 23:19:39 [HTTP]: Solicitud HTTP
+2024-05-31 23:19:44 [INFO]: Es un admin!
+2024-05-31 23:19:51 [HTTP]: Solicitud HTTP
+2024-05-31 23:20:07 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 23:22:11 [INFO]: Es un admin!
+2024-05-31 23:33:55 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 23:41:43 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 23:41:48 [HTTP]: Solicitud HTTP
+2024-05-31 23:41:52 [INFO]: Es un admin!
+2024-05-31 23:51:58 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-05-31 23:52:44 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-05-31 23:52:52 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-05-31 23:52:53 [HTTP]: Solicitud HTTP
+2024-05-31 23:54:51 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-05-31 23:54:57 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-05-31 23:54:59 [HTTP]: Solicitud HTTP
+2024-05-31 23:58:04 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-05-31 23:58:10 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-05-31 23:58:12 [HTTP]: Solicitud HTTP
+2024-06-01 00:04:57 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-01 00:19:28 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-01 00:20:13 [HTTP]: Solicitud HTTP
+2024-06-01 00:20:16 [INFO]: Es un user comun Role
+2024-06-01 00:22:12 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-01 00:23:51 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-01 00:24:34 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-01 00:25:04 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-01 00:26:15 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-01 00:30:24 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-01 00:30:46 [HTTP]: Solicitud HTTP
+2024-06-01 00:30:50 [INFO]: Es un user comun Role
+2024-06-01 00:33:01 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-01 00:34:18 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-01 00:37:55 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-01 00:39:35 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-01 00:40:48 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-01 00:42:09 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-01 00:44:26 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-01 00:46:45 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-01 00:48:22 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-01 08:30:51 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 08:30:57 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 08:31:02 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 08:31:03 [HTTP]: Solicitud HTTP
+2024-06-01 08:31:09 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 08:31:17 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 08:31:22 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 08:33:39 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-01 08:35:14 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-01 08:39:30 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-01 08:45:36 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-01 08:46:06 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 08:46:12 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 08:46:51 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 08:46:56 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 08:50:22 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 08:50:27 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 08:52:05 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 08:52:10 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 08:52:53 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-01 08:54:04 [HTTP]: Solicitud HTTP
+2024-06-01 08:54:51 [HTTP]: Solicitud HTTP
+2024-06-01 08:54:55 [INFO]: Es un user comun Role
+2024-06-01 09:02:50 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 09:02:54 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 09:02:59 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 09:05:37 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 09:05:42 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 09:08:06 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-01 09:08:17 [HTTP]: Solicitud HTTP
+2024-06-01 09:08:21 [INFO]: Es un user comun Role
+2024-06-01 09:08:34 [HTTP]: Solicitud HTTP
+2024-06-01 09:08:41 [INFO]: Es un admin!
+2024-06-01 09:12:49 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 09:12:54 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 09:12:59 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 09:13:04 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 09:13:05 [HTTP]: Solicitud HTTP
+2024-06-01 09:17:57 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 09:18:02 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 09:18:07 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 09:18:59 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 09:19:04 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 09:19:08 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 09:20:06 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 09:20:12 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 09:20:17 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 09:20:21 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 09:20:46 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 09:20:51 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 09:20:56 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 09:31:52 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-01 09:31:53 [HTTP]: Solicitud HTTP
+2024-06-01 09:32:10 [HTTP]: Solicitud HTTP
+2024-06-01 09:35:44 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 09:35:50 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 09:40:54 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 09:42:03 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-01 09:42:04 [HTTP]: Solicitud HTTP
+2024-06-01 09:42:10 [INFO]: Es un user comun Role
+2024-06-01 09:42:12 [HTTP]: Solicitud HTTP
+2024-06-01 09:47:47 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-01 09:47:50 [HTTP]: Solicitud HTTP
+2024-06-01 09:47:55 [INFO]: Es un user comun Role
+2024-06-01 09:48:07 [HTTP]: Solicitud HTTP
+2024-06-01 09:48:29 [INFO]: Es un user comun Role
+2024-06-01 09:48:55 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 09:52:22 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-01 09:52:22 [HTTP]: Solicitud HTTP
+2024-06-01 09:52:26 [INFO]: Es un user comun Role
+2024-06-01 09:52:30 [HTTP]: Solicitud HTTP
+2024-06-01 09:52:36 [INFO]: Es un admin!
+2024-06-01 09:52:40 [HTTP]: Solicitud HTTP
+2024-06-01 09:52:56 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-01 09:52:58 [INFO]: Es un user comun Role
+2024-06-01 09:53:19 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 09:53:24 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 09:55:46 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 09:55:51 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 10:01:08 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-01 10:01:10 [INFO]: Es un user comun Role
+2024-06-01 10:02:54 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 10:02:59 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 10:04:29 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 10:04:34 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 10:08:59 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 10:30:56 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 10:31:25 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-01 10:32:06 [INFO]: Es un user comun Role
+2024-06-01 10:33:28 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 10:34:05 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-01 10:34:07 [INFO]: Es un user comun Role
+2024-06-01 10:34:36 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-01 10:34:40 [INFO]: Es un user comun Role
+2024-06-01 10:36:16 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 10:36:23 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 10:37:43 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 10:37:49 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 10:38:38 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 10:38:44 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 12:06:42 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 12:07:48 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-01 12:08:06 [INFO]: Es un user comun Role
+2024-06-01 12:08:34 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 12:10:49 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 12:10:51 [INFO]: Es un user comun Role
+2024-06-01 12:11:46 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 12:13:16 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 12:13:19 [INFO]: Es un user comun Role
+2024-06-01 12:13:19 [INFO]: Es un user comun Role
+2024-06-01 12:14:56 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 12:14:59 [INFO]: Es un user comun Role
+2024-06-01 12:14:59 [INFO]: Es un user comun Role
+2024-06-01 12:15:02 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 12:15:08 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 12:16:51 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 12:16:54 [INFO]: Es un user comun Role
+2024-06-01 12:16:54 [INFO]: Es un user comun Role
+2024-06-01 12:16:57 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 12:17:04 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 12:17:10 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 12:17:16 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 12:17:17 [HTTP]: Solicitud HTTP
+2024-06-01 21:34:28 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-01 21:34:35 [HTTP]: Solicitud HTTP
+2024-06-01 21:34:40 [INFO]: Es un user comun Role
+2024-06-01 21:35:28 [HTTP]: Solicitud HTTP
+2024-06-01 21:35:34 [HTTP]: Solicitud HTTP
+2024-06-01 21:35:35 [HTTP]: Solicitud HTTP
+2024-06-01 21:35:36 [HTTP]: Solicitud HTTP
+2024-06-01 21:35:36 [HTTP]: Solicitud HTTP
+2024-06-01 21:35:37 [HTTP]: Solicitud HTTP
+2024-06-01 21:36:18 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 21:36:22 [INFO]: Es un user comun Role
+2024-06-01 21:36:22 [INFO]: Es un user comun Role
+2024-06-01 21:36:25 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 21:36:31 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 21:36:37 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 21:36:44 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 21:36:46 [HTTP]: Solicitud HTTP
+2024-06-01 21:44:41 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 21:44:44 [INFO]: Es un user comun Role
+2024-06-01 21:44:44 [INFO]: Es un user comun Role
+2024-06-01 21:44:47 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 21:44:48 [HTTP]: Solicitud HTTP
+2024-06-01 21:44:51 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 21:44:57 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 21:45:02 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 21:53:35 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 21:53:39 [INFO]: Es un user comun Role
+2024-06-01 21:53:39 [INFO]: Es un user comun Role
+2024-06-01 21:53:42 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 21:53:47 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 21:53:53 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 21:53:59 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 22:01:45 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 22:01:47 [HTTP]: Solicitud HTTP
+2024-06-01 22:01:49 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 22:01:52 [INFO]: Es un user comun Role
+2024-06-01 22:01:52 [INFO]: Es un user comun Role
+2024-06-01 22:01:55 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 22:02:00 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 22:03:47 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 22:03:49 [HTTP]: Solicitud HTTP
+2024-06-01 22:03:50 [INFO]: Es un user comun Role
+2024-06-01 22:03:51 [INFO]: Es un user comun Role
+2024-06-01 22:05:06 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 22:05:11 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 22:05:14 [INFO]: Es un user comun Role
+2024-06-01 22:05:14 [INFO]: Es un user comun Role
+2024-06-01 22:05:16 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 22:05:21 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 22:05:27 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 22:05:29 [HTTP]: Solicitud HTTP
+2024-06-01 22:06:59 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 22:07:04 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 22:07:07 [INFO]: Es un user comun Role
+2024-06-01 22:07:07 [INFO]: Es un user comun Role
+2024-06-01 22:07:09 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 22:07:14 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 22:07:19 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 22:07:21 [HTTP]: Solicitud HTTP
+2024-06-01 22:07:39 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 22:07:44 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 22:09:12 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 22:09:18 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 22:09:23 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 22:09:26 [INFO]: Es un user comun Role
+2024-06-01 22:09:26 [INFO]: Es un user comun Role
+2024-06-01 22:09:29 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 22:09:35 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 22:09:36 [HTTP]: Solicitud HTTP
+2024-06-01 22:14:40 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-01 22:19:31 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-01 22:19:33 [HTTP]: Solicitud HTTP
+2024-06-01 22:23:52 [HTTP]: Solicitud HTTP
+2024-06-01 22:23:56 [INFO]: Es un user comun Role
+2024-06-01 22:24:20 [HTTP]: Solicitud HTTP
+2024-06-01 22:24:25 [INFO]: Es un admin!
+2024-06-01 22:31:52 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-01 22:32:48 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-01 22:33:21 [HTTP]: Solicitud HTTP
+2024-06-01 22:33:25 [INFO]: Es un admin!
+2024-06-01 22:33:39 [HTTP]: Solicitud HTTP
+2024-06-01 22:33:42 [INFO]: Es un premium!
+2024-06-01 22:34:55 [HTTP]: Solicitud HTTP
+2024-06-01 22:35:05 [INFO]: Es un admin!
+2024-06-01 22:35:22 [HTTP]: Solicitud HTTP
+2024-06-01 22:35:25 [INFO]: Es un user comun Role
+2024-06-01 22:35:56 [HTTP]: Solicitud HTTP
+2024-06-01 22:38:17 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 22:38:22 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 22:38:24 [INFO]: Es un user comun Role
+2024-06-01 22:38:24 [INFO]: Es un user comun Role
+2024-06-01 22:38:26 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 22:38:31 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 22:38:35 [INFO]: Servidor Express escuchando en el puerto 8081
+2024-06-01 22:38:37 [HTTP]: Solicitud HTTP

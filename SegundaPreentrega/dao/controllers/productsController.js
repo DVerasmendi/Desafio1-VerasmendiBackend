@@ -70,39 +70,75 @@ exports.addProduct = async (req, res) => {
     try {
         // Verificar si el usuario es administrador
         const user = req.session.user;
-        console.log('ROLE:',user.role)
+        //console.log('ROLE:', user?.role, 'API FLAG:', req.isApiRequest);
         if ((user && user.role === 'admin') || (user.role === 'premium')) {
-            // Si es administrador, proceder a agregar el producto
             const newProduct = new Product(req.body);
             await newProduct.save();
-            res.send(newProduct);
+            if (req.isApiRequest) {
+                res.status(200).json({ message: 'Producto agregado con éxito', product: newProduct });
+            } else {
+                res.send(newProduct);
+            }
         } else {
-            // Si no es administrador, devolver un error de autorización
+            console.log('Acceso denegado. Se requiere permiso de administrador.');
             res.status(403).json({ message: 'Acceso denegado. Se requiere permiso de administrador.' });
         }
     } catch (error) {
-        res.status(500).send(error);
+        console.error('Error al agregar el producto:', error);
+        res.status(500).json({ message: 'Error al agregar el producto', error: error.message });
     }
 };
-
-
 // Editar un producto
 exports.updateProduct = async (req, res) => {
     try {
-        const updatedProduct = await Product.findByIdAndUpdate(req.params.id, req.body, { new: true });
-        res.send(updatedProduct);
+        // Verificar si el usuario es administrador
+        const user = req.session.user;
+       //console.log('ROLE:', user?.role, 'API FLAG:', req.isApiRequest);
+        if ((user && user.role === 'admin') || (user.role === 'premium')) {
+            const updatedProduct = await Product.findByIdAndUpdate(req.params.id, req.body, { new: true });
+            if (req.isApiRequest) {
+                res.status(200).json({ message: 'Producto actualizado con éxito', product: updatedProduct });
+            } else {
+                res.send(updatedProduct);
+            }
+        } else {
+            console.log('Acceso denegado. Se requiere permiso de administrador.');
+            res.status(403).json({ message: 'Acceso denegado. Se requiere permiso de administrador.' });
+        }
     } catch (error) {
-        res.status(500).send(error);
+        console.error('Error al actualizar el producto:', error);
+        if (req.isApiRequest) {
+            res.status(500).json({ message: 'Error al actualizar el producto', error: error.message });
+        } else {
+            res.status(500).send(error);
+        }
     }
 };
 
 // Eliminar un producto
 exports.deleteProduct = async (req, res) => {
     try {
-        await Product.findByIdAndDelete(req.params.id);
-        res.send({ message: 'Producto eliminado correctamente' });
+        // Verificar si el usuario es administrador
+        const user = req.session.user;
+        //console.log('ROLE:', user?.role, 'API FLAG:', req.isApiRequest);
+        if ((user && user.role === 'admin') || (user.role === 'premium')) {
+            await Product.findByIdAndDelete(req.params.id);
+            if (req.isApiRequest) {
+                res.status(200).json({ message: 'Producto eliminado correctamente' });
+            } else {
+                res.send({ message: 'Producto eliminado correctamente' });
+            }
+        } else {
+            console.log('Acceso denegado. Se requiere permiso de administrador.');
+            res.status(403).json({ message: 'Acceso denegado. Se requiere permiso de administrador.' });
+        }
     } catch (error) {
-        res.status(500).send(error);
+        console.error('Error al eliminar el producto:', error);
+        if (req.isApiRequest) {
+            res.status(500).json({ message: 'Error al eliminar el producto', error: error.message });
+        } else {
+            res.status(500).send(error);
+        }
     }
 };
 

@@ -9,7 +9,8 @@ const cartsController = {
 createCart: async (req, res) => {
 try {
     const { userId } = req.body;
-    const newCart = await Cart.create({ userId });
+    const { userEmail } = req.body;
+    const newCart = await Cart.create({ userId, userEmail});
     res.status(201).json(newCart);
 } catch (error) {
     console.error('Error al crear el carrito:', error);
@@ -122,9 +123,8 @@ try {
     const { cartId, itemId } = req.params;
     const { quantity } = req.body;
     const cart = await Cart.findById(cartId);
-
     if (cart) {
-    const item = cart.items.id(itemId);
+    const item = cart.items.find(item => item.productId.toString() === itemId);
     if (item) {
         item.quantity = quantity;
         await cart.save();
@@ -146,11 +146,9 @@ removeItemFromCart: async (req, res) => {
     try {
         const { cartId, itemId } = req.params;
         const cart = await Cart.findById(cartId);
-
         if (cart) {
             // Filtrar los elementos del carrito excluyendo el que se desea eliminar
-            cart.items = cart.items.filter(item => item._id.toString() !== itemId);
-
+            cart.items = cart.items.filter(item => item.productId.toString() !== itemId.toString());
             await cart.save();
             res.status(200).json(cart);
         } else {
@@ -190,7 +188,7 @@ removeProductFromCart: async (req, res) => {
         // Buscar el carrito por su ID
         const cart = await Cart.findById(cartId);
         if (!cart) {
-            console.log('Carrito no encontrado');
+            console.error('Carrito no encontrado');
         }
         // Filtrar los elementos del carrito excluyendo el producto que se desea eliminar
         const initialItemCount = cart.items.length;
@@ -199,7 +197,7 @@ removeProductFromCart: async (req, res) => {
         // Verificar si el producto fue eliminado del carrito
         const finalItemCount = cart.items.length;
         if (initialItemCount === finalItemCount) {
-            console.log('Producto no encontrado en el carrito');
+            console.error('Producto no encontrado en el carrito');
         }
         // Guardar el carrito actualizado
         await cart.save();

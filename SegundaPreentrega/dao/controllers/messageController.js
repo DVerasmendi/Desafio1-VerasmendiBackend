@@ -20,7 +20,6 @@ exports.getAllMessages = async () => {
 
 exports.addMessage = async (req, res) => {
     try {
-        console.log('Se recibió una solicitud para agregar un mensaje');
         const { user, message } = req.body;
         const newMessage = new Message({ user, message });
         await newMessage.save();
