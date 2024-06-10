@@ -209,66 +209,69 @@ function updateRoles() {
 }
 
 const boton_editarRole = document.getElementById('boton_editarRole');
-if (boton_editarRole){
-document.getElementById('boton_editarRole').addEventListener('click', async function() {
-    const userSelect = document.getElementById('user_select');
-    const roleSelect = document.getElementById('role_select');
-    const selectedUser = userSelect.options[userSelect.selectedIndex];
-    const userId = selectedUser.getAttribute('data-id');
-    const newRole = roleSelect.value;
-    console.log('USERID:',userId)
-    console.log('NEW ROL:',newRole)
-    if (!userId || !newRole) {
-        Swal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: 'Debes seleccionar un usuario y un rol.'
-        });
-        return;
-    }
+if (boton_editarRole) {
+    document.getElementById('boton_editarRole').addEventListener('click', async function() {
+        const userSelect = document.getElementById('user_select');
+        const roleSelect = document.getElementById('role_select');
+        const selectedUser = userSelect.options[userSelect.selectedIndex];
+        const userId = selectedUser.getAttribute('data-id');
+        const newRole = roleSelect.value;
 
-    Swal.fire({
-        title: 'Procesando datos',
-        html: 'Por favor espera unos momentos mientras actualizamos el rol.',
-        allowOutsideClick: false,
-        timerProgressBar: true,
-        didOpen: () => {
-            Swal.showLoading()
+        if (!userId || !newRole) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Debes seleccionar un usuario y un rol.'
+            });
+            return;
+        }
+
+        Swal.fire({
+            title: 'Procesando datos',
+            html: 'Por favor espera unos momentos mientras actualizamos el rol.',
+            allowOutsideClick: false,
+            timerProgressBar: true,
+            didOpen: () => {
+                Swal.showLoading()
+            }
+        });
+
+        try {
+            const response = await fetch(`/api/users/premium/${userId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ newRole: newRole, userId: userId })
+            });
+
+            const data = await response.json();
+            Swal.close();
+
+            if (response.ok) {
+                Swal.fire({
+                    icon: 'success',
+                    title: '¡Éxito!',
+                    text: 'El rol ha sido actualizado correctamente.'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.reload();
+                    }
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: data.message || 'No se pudo actualizar el rol. Por favor, intenta de nuevo.',
+                });
+            }
+        } catch (error) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: error.message || 'No se pudo actualizar el rol. Por favor, intenta de nuevo.',
+            });
         }
     });
-
-    try {
-        const response = await fetch(`/api/users/premium/${userId}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ newRole: newRole, userId: userId })
-        });
-
-        const data = await response.json();
-        Swal.close();
-
-        if (response.ok) {
-            Swal.fire({
-                icon: 'success',
-                title: '¡Éxito!',
-                text: 'El rol ha sido actualizado correctamente.'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.reload();
-                }
-            });
-        } else {
-            throw new Error(data.message || 'Error en la respuesta del servidor');
-        }
-    } catch (error) {
-        Swal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: error.message || 'No se pudo actualizar el rol. Por favor, intenta de nuevo.',
-        });
-    }
-});
-
 }
+

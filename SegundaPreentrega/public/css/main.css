@@ -65,3 +65,27 @@ filter: blur(35px); /* Difumina el fondo para el efecto deseado */
 }
 
 
+.profile-photo {
+    position: relative;
+    display: inline-block;
+}
+.profile-photo img {
+    border-radius: 10px;
+}
+.profile-photo button {
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+.profile-photo a:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+.table-wrapper {
+    margin: 20px 0;
+}

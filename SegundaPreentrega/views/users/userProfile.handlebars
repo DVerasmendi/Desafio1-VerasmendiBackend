@@ -1,0 +1,305 @@
+<div class="jumbotron">
+    <div class="container text-center">
+        <h1 class="text-background" style="font-size:2rem; margin-bottom:20px;">Perfil de Usuario</h1>
+    </div>
+    <hr class="my-4">
+    <div class="container text-center">
+        <h3 class="text-background" style="font-size:1.5rem; margin-bottom:30px;"><em>{{welcomeMessage}}</em></h3>
+    </div>
+    <div class="container text-center mb-4">
+        <div class="profile-photo">
+                {{#hasProfilePhoto user.documents}}
+                    {{#each user.documents}}
+                        {{#eq this.title "profilephoto"}}
+                            <img src="uploads/profiles/{{this.filename}}" alt="Profile Photo" style="max-width: 200px; max-height: 300px;"/>
+                            <button type="button" onclick="showEditForm()">Editar</button>
+                        {{/eq}}
+                    {{/each}}
+                {{else}}
+                    <img src="/public/images/default-profile.png" alt="Default Profile Photo" style="max-width: 150px; max-height: 250px;"/>
+                    <button type="button" onclick="showEditForm()">Editar</button>
+                {{/hasProfilePhoto}}
+        </div>
+    </div>
+    <div class="container text-center">
+        <h3 class="text-background" style="font-size:1rem; margin-bottom:20px;">Imagen de perfil</h3>
+    </div>
+    <div id="userProfile" data-user-id="{{user.id}}">
+        <div class="container text-center">
+            <div class="d-flex flex-column align-items-center">
+                <div class="text-left w-100">
+                    <p class="text-background" style="font-size:1.2rem;"><strong>Username:</strong> {{user.username}}</p>
+                </div>
+                <div class="text-left w-100">
+                    <p class="text-background" style="font-size:1.2rem;"><strong>Email:</strong> {{user.email}}</p>
+                </div>
+                <div class="text-left w-100">
+                    <p class="text-background" style="font-size:1.2rem;"><strong>Age:</strong> {{user.age}}</p>
+                </div>
+                <div class="text-left w-100">
+                    <p class="text-background" style="font-size:1.2rem;"><strong>Role:</strong> {{user.role}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr class="my-4">
+    <div class="container text-center">
+        <h2 class="text-background" style="font-size:1.8rem;">Documentos</h2>
+    </div>
+    <div class="d-flex justify-content-center w-100">
+        {{#hasDocument user.documents}}
+            <div class="table-wrapper w-70">
+                <table class="table table-bordered">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Documento</th>
+                            <th scope="col">Nombre del Documento</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each user.documents}}
+                            {{#eq this.title 'document'}}
+                                <tr>
+                                    <td><img src="uploads/documents/{{this.filename}}" alt="{{this.name}}" style="max-width: 100px; border-radius:20px"/></td>
+                                    {{#ifContains this.name "identificacion"}}
+                                        <td>Documento de Identidad</td>
+                                    {{/ifContains}}
+                                    {{#ifContains this.name "comprobante_de_domicilio"}}
+                                        <td>Comprobante de domicilio</td>
+                                    {{/ifContains}}
+                                    {{#ifContains this.name "comprobante_estado_cuenta"}}
+                                        <td>Comprobante de estado de cuenta</td>
+                                    {{/ifContains}}
+                                </tr>
+                            {{/eq}}
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        {{else}}
+                <div class="container text-center">
+                <p class="text-background" style="font-size:1rem; margin-bottom:20px;">No ha subido ningún documento</p>
+                </div>
+        {{/hasDocument}}
+    </div>
+    <div class="container d-flex justify-content-center">
+        <div class="text-center">
+            <div class="d-flex justify-content-center w-100">
+            <button id="cargar_documento">Cargar Documento</button>
+            <form id="FormDocument" style="display: none;" enctype="multipart/form-data">
+                <input type="file" name="documents" accept="image/*,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" required class="form-control mb-3"/>
+                <button type="submit" class="btn btn-primary">Subir Documento</button>
+            </form>
+            </div>
+        </div>
+    </div>
+    <hr class="my-4">
+    <div class="container text-center">
+        <h2 class="text-background" style="font-size:1.8rem;">Productos</h2>
+    </div>
+    <div class="d-flex justify-content-center w-100">
+        {{#hasProduct user.documents}}
+            <div class="table-wrapper w-70">
+                <table class="table table-bordered">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Producto</th>
+                            <th scope="col">Nombre del Producto</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each user.documents}}
+                            {{#eq this.title 'products'}}
+                                <tr>
+                                    <td><img src="uploads/products/{{this.filename}}" alt="{{this.name}}" style="max-width: 100px; border-radius:20px"/></td>
+                                    <td>{{this.name}}</td>
+                                </tr>
+                            {{/eq}}
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        {{else}}
+                <div class="container text-center">
+                <p class="text-background" style="font-size:1rem; margin-bottom:20px;">No ha subido ningún producto</p>
+                </div>
+        {{/hasProduct}}
+    </div>
+    <div class="container d-flex justify-content-center mb-10">
+        <div class="text-center">
+            <h2 class="text-background" style="font-size:1rem;">Subir un nueva imagen de producto</h2>
+            <div class="d-flex justify-content-center w-100">
+            <form id="FormProduct" enctype="multipart/form-data">
+                <input type="file" name="product" accept="image/*,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" required class="form-control mb-3"/>
+                <button type="submit" class="btn btn-primary">Subir Producto</button>
+            </form> 
+            </div>
+        </div>
+    </div>
+    <hr class="my-4">
+    <div class="container text-center mt-5">
+        <a class="text-background btn btn-danger btn-lg mb-5" href="/products" role="button">Volver</a>
+    </div>
+</div>
+<script>
+    function showEditForm() {
+        Swal.fire({
+            title: 'Editar Imagen de Perfil',
+            html: `
+                <div class="container d-flex justify-content-center">
+                    <form id="editProfileForm" enctype="multipart/form-data" class="text-center">
+                        <input type="file" name="profile" accept="image/*" required class="form-control mb-3"/>
+                        <button type="submit" class="btn btn-primary">Subir Imagen</button>
+                    </form>
+                </div>
+            `,
+            showCloseButton: true,
+            showCancelButton: false,
+            showConfirmButton: false
+        });
+
+        document.getElementById('editProfileForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const userId = document.getElementById('userProfile').getAttribute('data-user-id');
+
+            try {
+                const response = await fetch(`/api/users/${userId}/documents`, {
+                    method: 'POST',
+                    body: formData,
+                });
+
+                if (response.ok) {
+                    window.location.href = '/perfilUsuario';
+                } else {
+                    Swal.fire('Error', 'Error al subir la imagen.', 'error');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                Swal.fire('Error', 'Error al subir la imagen.', 'error');
+            }
+        });
+    }
+
+document.getElementById('FormProduct').addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const formData = new FormData(event.target);
+        const userId = "{{user.id}}";
+        try {
+            const response = await fetch(`/api/users/${userId}/documents`, {
+                method: 'POST',
+                body: formData,
+            });
+
+            if (response.ok) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Documento subido correctamente',
+                    showConfirmButton: true
+                }).then(() => {
+                    window.location.href = '/perfilUsuario';
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error al subir el documento',
+                    text: 'Hubo un problema al subir el documento. Por favor, inténtalo de nuevo.'
+                });
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Error al subir el documento',
+                text: 'Hubo un problema al subir el documento. Por favor, inténtalo de nuevo.'
+            });
+        }
+    });
+
+
+document.getElementById('cargar_documento').addEventListener('click', () => {
+    Swal.fire({
+        title: 'Subir Documento',
+        html: `
+            <div class="container d-flex justify-content-center">
+                <form id="FormDocument" enctype="multipart/form-data" class="text-center">
+                    <input type="file" id="documentInput" name="documents" accept="image/*,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" required class="form-control mb-3"/>
+                <div class="container">
+                    <div class="form-check text-left">
+                        <input class="form-check-input" type="radio" name="documentType" id="identificacion" value="identificacion" required>
+                        <label class="form-check-label" for="identificacion">Identificación</label>
+                    </div>
+                    <div class="form-check text-left">
+                        <input class="form-check-input" type="radio" name="documentType" id="comprobante_domicilio" value="comprobante_de_domicilio" required>
+                        <label class="form-check-label" for="comprobante_domicilio">Domicilio</label>
+                    </div>
+                    <div class="form-check text-left">
+                        <input class="form-check-input" type="radio" name="documentType" id="comprobante_cuenta" value="comprobante_estado_cuenta" required>
+                        <label class="form-check-label" for="comprobante_cuenta">Estado de cuenta</label>
+                    </div>
+                </div>
+
+                    <button id="button_document" type="button" class="btn btn-primary mt-3">Subir Documento</button>
+                </form>
+            </div>
+        `,
+        showCloseButton: true,
+        showConfirmButton: false,
+        allowOutsideClick: false
+    });
+
+    document.getElementById('button_document').addEventListener('click', async (event) => {
+        event.preventDefault();
+        
+        // Obtener el formulario y crear el FormData
+        const form = document.getElementById('FormDocument');
+        const formData = new FormData(form);
+        const userId = "{{user.id}}";
+        console.log('USER ID:', userId);
+
+        // Obtener el tipo de documento seleccionado
+        const documentType = document.querySelector('input[name="documentType"]:checked').value;
+        const fileInput = document.getElementById('documentInput');
+        const file = fileInput.files[0];
+
+        // Crear un nuevo nombre de archivo basado en el tipo de documento
+        const newFilename = `${userId}-${Date.now()}-${documentType}-${file.name}`;
+        console.log('NOMBRE NEW:', newFilename);
+
+        // Eliminar el archivo actual y agregar uno nuevo con el nuevo nombre
+        formData.delete('documents');
+        formData.append('documents', file, newFilename);
+
+        try {
+            const response = await fetch(`/api/users/${userId}/documents`, {
+                method: 'POST',
+                body: formData,
+            });
+
+            if (response.ok) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Documento subido correctamente',
+                    showConfirmButton: true
+                }).then(() => {
+                    window.location.href = '/perfilUsuario';
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error al subir el documento',
+                    text: 'Hubo un problema al subir el documento. Por favor, inténtalo de nuevo.'
+                });
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Error al subir el documento',
+                text: 'Hubo un problema al subir el documento. Por favor, inténtalo de nuevo.'
+            });
+        }
+    });
+});
+
+</script>

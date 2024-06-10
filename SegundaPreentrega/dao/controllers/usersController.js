@@ -25,6 +25,116 @@ exports.verifyLogin = async (username, password) => {
     }
 };
 
+// Logout de usuarios
+exports.logout = async (req, res) => {
+    if (!req.session.user._id) {
+        return res.status(400).json({ status: 'error', message: 'No user session found' });
+    }
+
+    try {
+        const user = await User.findById(req.session.user._id);
+        if (user) {
+            user.last_connection = new Date();
+            await user.save();
+        }
+
+        req.session.destroy(err => {
+            if (err) {
+                console.error('Error destroying session:', err);
+                return res.status(500).json({ status: 'error', message: 'Internal server error' });
+            }
+            res.redirect('/');
+        });
+    } catch (error) {
+        console.error('Error during logout:', error);
+        res.status(500).json({ status: 'error', message: 'Internal server error' });
+    }
+};
+
+//Manejar Documentos 
+exports.uploadDocuments = async (req, res) => {
+    const userId = req.params.uid;
+    const files = req.files;
+
+    if (!files || Object.keys(files).length === 0) {
+        return res.status(400).json({ status: 'error', message: 'No se han subido archivos' });
+    }
+
+    try {
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ status: 'error', message: 'Usuario no encontrado' });
+        }
+        if (!user.documents) {
+            user.documents = [];
+        }
+
+        // Reemplazar la imagen de perfil si existe
+        if (files.profile) {
+            const profilePhoto = files.profile[0];
+            user.documents = user.documents.filter(doc => doc.title !== 'profilephoto');
+            user.documents.push({
+                title: 'profilephoto',
+                name: profilePhoto.originalname,
+                reference: profilePhoto.path,
+                mimetype: profilePhoto.mimetype,
+                filename: profilePhoto.filename
+            });
+        }
+
+        // Reemplazar productos
+        if (files.product) {
+            files.product.forEach(file => {
+                user.documents.push({
+                    title: 'products',
+                    name: file.originalname,
+                    reference: file.path,
+                    mimetype: file.mimetype,
+                    filename: file.filename
+                });
+            });
+        }
+
+        // Reemplazar documentos específicos
+        if (files.documents) {
+            files.documents.forEach(file => {
+                let title = 'document';
+                if (file.filename.includes('identificacion')) {
+                    title = 'document';
+                    user.documents = user.documents.filter(doc => !doc.filename.includes('identificacion'));
+                } else if (file.filename.includes('comprobante_de_domicilio')) {
+                    title = 'document';
+                    user.documents = user.documents.filter(doc => !doc.filename.includes('comprobante_de_domicilio'));
+                } else if (file.filename.includes('comprobante__estado_cuenta')) {
+                    title = 'document';
+                    user.documents = user.documents.filter(doc => !doc.filename.includes('comprobante__estado_cuenta'));
+                }
+
+                user.documents.push({
+                    title: title,
+                    name: file.originalname,
+                    reference: file.path,
+                    mimetype: file.mimetype,
+                    filename: file.filename
+                });
+            });
+        }
+
+        await user.save();
+        // Actualiza la sesión del usuario
+        req.session.user = user;
+
+        res.status(200).json({ status: 'success', message: 'Documentos subidos correctamente', documents: user.documents });
+    } catch (error) {
+        console.error('Error al subir documentos:', error);
+        res.status(500).json({ status: 'error', message: 'Error interno del servidor' });
+    }
+};
+
+
+
+
+
 
 // Obtener todos los usuarios
 exports.getAllUsers = async (req, res, next) => {
@@ -123,6 +233,20 @@ exports.changeUserRole = async (req, res) => {
             return res.status(404).json({ status: 'error', message: 'Usuario no encontrado' });
         }
 
+        // Validar que el usuario ha subido los tres documentos requeridos
+        const requiredDocuments = ['identificacion', 'comprobante_estado_cuenta', 'comprobante_de_domicilio'];
+        const userDocuments = user.documents.map(doc => doc.name);
+        console.log('Documentos del usuario:', userDocuments); // Añade esta línea para depuración
+        const missingDocuments = requiredDocuments.filter(doc => !userDocuments.some(name => name.includes(doc)));
+        console.log('Documentos faltantes:', missingDocuments); // Añade esta línea para depuración
+
+        if (newRole === 'premium' && missingDocuments.length > 0) {
+            return res.status(400).json({
+                status: 'error',
+                message: `Faltan los siguientes documentos para cambiar el rol a premium: ${missingDocuments.join(', ')}`
+            });
+        }
+
         // Actualizar el rol del usuario
         user.role = newRole;
 
@@ -135,3 +259,4 @@ exports.changeUserRole = async (req, res) => {
         res.status(500).json({ status: 'error', message: 'Error interno del servidor' });
     }
 };
+

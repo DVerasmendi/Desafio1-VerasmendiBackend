@@ -2,6 +2,8 @@ const Cart = require('../db/models/Cart');
 const Product = require('../db/models/Product');
 const ticketController = require('./ticketController');
 const logger = require('../../configuration/winston-config');
+const mongoose = require('mongoose');
+
 
 // Controlador para gestionar operaciones en el carrito
 const cartsController = {
@@ -32,37 +34,15 @@ try {
 // Obtener un carrito por ID y popular los detalles de los productos
 getCartById: async (req, res) => {
     const { cartId } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(cartId)) {
+        return res.status(400).json({ status: 'error', message: 'ID de carrito no válido' });
+    }
     try {
         const cart = await Cart.findById(cartId).populate('items.productId');
-        if (req.isApiRequest) {
-            console.log('ES API')
-            if (!cart) {
-                return res.status(404).json({ error: 'Carrito no encontrado' });
-            }
-
-            // Formatear la respuesta para la API
-            const formattedResponse = {
-                _id: cart._id,
-                userId: cart.userId,
-                status: cart.status,
-                items: cart.items.map(item => ({
-                    quantity: item.quantity,
-                    productId: item.productId._id,
-                    name: item.productId.name,
-                    price: item.productId.price,
-                })),
-                createdAt: cart.createdAt,
-                updatedAt: cart.updatedAt,
-                __v: cart.__v,
-            };
-
-            return res.status(200).json(formattedResponse);
-        }else{
         if (!cart) {
-            if (req.isApiRequest) {
-                return res.status(404).json({ error: 'Carrito no encontrado' });
-            } 
+            return res.status(404).json({ error: 'Carrito no encontrado' });
         }
+
         // Obtener solo los datos necesarios para la vista
         const items = cart.items.map(item => ({
             quantity: item.quantity,
@@ -78,7 +58,6 @@ getCartById: async (req, res) => {
             items,
             totalPrice,
         };
-    }
         
     } catch (error) {
         console.error('Error al obtener el carrito:', error);

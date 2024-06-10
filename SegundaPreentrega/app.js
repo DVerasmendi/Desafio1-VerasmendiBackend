@@ -7,8 +7,8 @@ const mongoose = require('mongoose');
 const path = require('path');
 const logger = require('./configuration/winston-config');
 const loggerTestRouter = require('./routes/loggerTest');
-const multer = require('multer');
-const upload = multer();
+const favicon = require('serve-favicon');
+
 require('dotenv').config();
 
 const app = express();
@@ -20,17 +20,18 @@ const useDB = process.env.USE_DB === 'true';
 
 //logger.debug(`App environment: ${env}`);
 
-app.use(upload.none());
+
 // Configuración de express-session
 app.use(session({
     secret: 'tu_secreto_aqui',
     resave: false,
     saveUninitialized: false
 }));
+//
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Middleware para analizar el cuerpo de la solicitud
 app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
 
 // Middleware para simular la sesión del usuario
 app.use((req, res, next) => {
@@ -106,6 +107,50 @@ const hbs = exphbs.create({
         multiply: function (a, b) {
             return a * b;
         },
+        ifCond: function (v1, operator, v2, options) {
+            switch (operator) {
+                case '==':
+                    return (v1 == v2) ? options.fn(this) : options.inverse(this);
+                case '===':
+                    return (v1 === v2) ? options.fn(this) : options.inverse(this);
+                case '!=':
+                    return (v1 != v2) ? options.fn(this) : options.inverse(this);
+                case '!==':
+                    return (v1 !== v2) ? options.fn(this) : options.inverse(this);
+                case '<':
+                    return (v1 < v2) ? options.fn(this) : options.inverse(this);
+                case '<=':
+                    return (v1 <= v2) ? options.fn(this) : options.inverse(this);
+                case '>':
+                    return (v1 > v2) ? options.fn(this) : options.inverse(this);
+                case '>=':
+                    return (v1 >= v2) ? options.fn(this) : options.inverse(this);
+                case '&&':
+                    return (v1 && v2) ? options.fn(this) : options.inverse(this);
+                case '||':
+                    return (v1 || v2) ? options.fn(this) : options.inverse(this);
+                default:
+                    return options.inverse(this);
+            }
+        },
+        hasProfilePhoto: function(documents, options) {
+            const hasProfile = documents.some(doc => doc.title === 'profilephoto');
+            return hasProfile ? options.fn(this) : options.inverse(this);
+        },
+        hasDocument: function(documents, options) {
+            const hasProfile = documents.some(doc => doc.title === 'document');
+            return hasProfile ? options.fn(this) : options.inverse(this);
+        },
+        hasProduct: function(documents, options) {
+            const hasProfile = documents.some(doc => doc.title === 'products');
+            return hasProfile ? options.fn(this) : options.inverse(this);
+        },
+        ifContains: function (str, substring, options) {
+            if (str.includes(substring)) {
+                return options.fn(this);
+            }
+            return options.inverse(this);
+        }
     },
 });
 
@@ -114,6 +159,7 @@ app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname, 'views'));
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(favicon(path.join(__dirname, 'public', 'flaticon.ico')));
 app.use(express.json());
 
 app.use((req, res, next) => {
@@ -162,15 +208,6 @@ if (useDB) {
         }
     });
 
-    app.get('/logout', (req, res) => {
-        req.session.destroy(err => {
-            if (err) {
-                console.error(err);
-            }
-            res.redirect('/');
-        });
-    });
-
     const renderController = require('./dao/controllers/renderController');
     app.use('/', renderController);
     app.use('/products', renderController);
@@ -181,6 +218,7 @@ if (useDB) {
     app.post('/login', renderController); 
     app.get('/chat', renderController); 
     app.get('/orders', renderController); 
+    app.get('/perfilUsuario', renderController); 
     app.get('/users/:uid', renderController);
     app.use(loggerTestRouter);
 

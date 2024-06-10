@@ -9,6 +9,10 @@ const ticketController = require('./ticketController');
 const { ErrorType } = require('./usersController');
 const logger = require('../../configuration/winston-config');
 
+const multer = require('multer');
+const upload = multer();
+//app.use(upload.none());
+
 const User = require('../db/models/User');
 require('dotenv').config();
 
@@ -257,9 +261,9 @@ router.get('/carts/:cartId', async (req, res, next) => {
         const cartData = await cartsController.getCartById(req, res); // Llama al controlador de carritos
 
         if (!cartData) {
-            return; // Ya está manejado en el controlador, no hace falta hacer nada aquí
+            return;
         }
-
+        //console.log('RENDER:',cartData)
         // Renderizar la vista de detalles del carrito
         res.render('carts/cartDetails', { items: cartData.items, totalPrice: cartData.totalPrice, cartId:cartId,logged: req.session.logged || false });
     } catch (error) {
@@ -341,7 +345,7 @@ router.get('/registerForm', (req, res) => {
 
 
 // Ruta para cargar la vista de registro y procesar el registro de usuarios
-router.post('/registerUpload', usersController.getAllUsers, async (req, res) => {
+router.post('/registerUpload', upload.none(), usersController.getAllUsers, async (req, res) => {
     try {
         const usersData = res.locals.usersData;
         if (usersData && usersData.users) {
@@ -450,5 +454,43 @@ router.get('/users/:uid', async (req, res, next) => {
     }
 });
 
+
+
+// PERFIL USER 
+router.get('/perfilUsuario', async (req, res, next) => {
+    const logged = req.session.logged || false;
+    const user = req.session.user;
+    if (user) {
+        let cartId;
+        const cart = await cartsController.getCartByUserId(req, res);
+        cartId = cart ? cart._id : null;
+        const userData = {
+            id: user._id,
+            username: user.username,
+            email: user.email,
+            age: user.age,
+            role: user.role,
+            documents: user.documents.map(doc => ({
+                id: doc._id,
+                name: doc.name,
+                reference: doc.reference,
+                mimetype: doc.mimetype,
+                filename: doc.filename,
+                title: doc.title
+            }))
+        };
+
+        res.render('users/userProfile', {
+            pageTitle: 'Perfil del Usuario',
+            user: userData,
+            logged: req.session.logged || false,
+            user_role: user.role,
+            welcomeMessage: `Bienvenido: ${user.username} | ROL: ${user.role}`,
+            cartId:cartId
+        });
+    } else {
+        res.redirect('/login'); // Redirigir al login si no hay usuario en sesión
+    }
+});
 
 module.exports = router;

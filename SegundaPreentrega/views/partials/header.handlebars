@@ -25,6 +25,11 @@
                 {{#if logged}}
                     <!-- Botones para usuarios autenticados -->
                             <li class="nav-item">
+                            <a class="nav-link" href="/perfilUsuario" style="font-size: 1.2rem; display: flex; align-items: center;">
+                                <img src="/public/images/usuario.png" alt="Mi Perfil" style="margin-right: 25px; height: 35px; width: 35px;">
+                            </a>
+                            </li>
+                            <li class="nav-item">
                             <a class="nav-link" href="/orders" style="font-size: 1.2rem; display: flex; align-items: center;">
                                 <img src="/public/images/pedidos.png" alt="Mis pedidos" style="margin-right: 25px; height: 35px; width: 35px;">
                             </a>
@@ -36,7 +41,7 @@
                             </li>
                         {{#eq user_role "user"}}
                         <li class="nav-item">
-                            <a class="nav-link" href="/carts/{{cartId}}" style="font-size: 1.2rem; display: flex; align-items: center;">
+                            <a class="nav-link" href="carts/{{cartId}}" style="font-size: 1.2rem; display: flex; align-items: center;">
                                 <img src="/public/images/cart.png" alt="Carrito" style="margin-right: 25px; height: 35px; width: 35px;">
                             </a>
                         </li>
@@ -49,7 +54,7 @@
                         </li>
                         {{/eq}}
                             <li class="nav-item">
-                                <a class="nav-link" href="/logout" style="font-size: 1.2rem;">Cerrar Sesión</a>
+                                <a class="nav-link" href="/api/users/logout" style="font-size: 1.2rem;">Cerrar Sesión</a>
                             </li> 
                 {{else}}
                     <!-- Botones para usuarios no autenticados -->
