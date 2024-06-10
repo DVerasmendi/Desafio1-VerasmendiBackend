@@ -162,7 +162,15 @@
             event.preventDefault();
             const formData = new FormData(event.target);
             const userId = document.getElementById('userProfile').getAttribute('data-user-id');
-
+            Swal.fire({
+            title: 'Procesando datos',
+            html: 'Por favor espera unos momentos mientras procesamos el documento',
+            allowOutsideClick: false,
+            timerProgressBar: true,
+            didOpen: () => {
+                Swal.showLoading()
+            }
+            });
             try {
                 const response = await fetch(`/api/users/${userId}/documents`, {
                     method: 'POST',
@@ -185,6 +193,15 @@ document.getElementById('FormProduct').addEventListener('submit', async (event) 
         event.preventDefault();
         const formData = new FormData(event.target);
         const userId = "{{user.id}}";
+        Swal.fire({
+            title: 'Procesando datos',
+            html: 'Por favor espera unos momentos mientras procesamos el documento',
+            allowOutsideClick: false,
+            timerProgressBar: true,
+            didOpen: () => {
+                Swal.showLoading()
+            }
+        });
         try {
             const response = await fetch(`/api/users/${userId}/documents`, {
                 method: 'POST',
@@ -269,6 +286,15 @@ document.getElementById('cargar_documento').addEventListener('click', () => {
         // Eliminar el archivo actual y agregar uno nuevo con el nuevo nombre
         formData.delete('documents');
         formData.append('documents', file, newFilename);
+        Swal.fire({
+            title: 'Procesando datos',
+            html: 'Por favor espera unos momentos mientras procesamos el documento',
+            allowOutsideClick: false,
+            timerProgressBar: true,
+            didOpen: () => {
+                Swal.showLoading()
+            }
+        });
 
         try {
             const response = await fetch(`/api/users/${userId}/documents`, {

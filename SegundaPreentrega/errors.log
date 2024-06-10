@@ -2173,3 +2173,6 @@
 2024-06-10 11:25:03 [HTTP]: Solicitud HTTP
 2024-06-10 11:25:09 [INFO]: Es un premium!
 2024-06-10 11:27:11 [HTTP]: Solicitud HTTP
+2024-06-10 11:43:26 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-10 11:43:53 [HTTP]: Solicitud HTTP
+2024-06-10 11:44:02 [INFO]: Es un premium!
