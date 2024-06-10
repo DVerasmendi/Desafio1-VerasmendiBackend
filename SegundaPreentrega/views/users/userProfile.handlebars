@@ -85,10 +85,10 @@
     <div class="container d-flex justify-content-center">
         <div class="text-center">
             <div class="d-flex justify-content-center w-100">
-            <button id="cargar_documento">Cargar Documento</button>
+            <button id="cargar_documento" class="btn btn-primary">Cargar Documento</button>
             <form id="FormDocument" style="display: none;" enctype="multipart/form-data">
                 <input type="file" name="documents" accept="image/*,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" required class="form-control mb-3"/>
-                <button type="submit" class="btn btn-primary">Subir Documento</button>
+                <button type="submit" class="btn btn-primary">Cargar Documento</button>
             </form>
             </div>
         </div>
@@ -131,7 +131,7 @@
             <div class="d-flex justify-content-center w-100">
             <form id="FormProduct" enctype="multipart/form-data">
                 <input type="file" name="product" accept="image/*,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" required class="form-control mb-3"/>
-                <button type="submit" class="btn btn-primary">Subir Producto</button>
+                <button type="submit" class="btn btn-primary">Cargar Producto</button>
             </form> 
             </div>
         </div>
@@ -194,7 +194,7 @@ document.getElementById('FormProduct').addEventListener('submit', async (event) 
             if (response.ok) {
                 Swal.fire({
                     icon: 'success',
-                    title: 'Documento subido correctamente',
+                    title: 'Documento cargado correctamente',
                     showConfirmButton: true
                 }).then(() => {
                     window.location.href = '/perfilUsuario';
@@ -219,7 +219,7 @@ document.getElementById('FormProduct').addEventListener('submit', async (event) 
 
 document.getElementById('cargar_documento').addEventListener('click', () => {
     Swal.fire({
-        title: 'Subir Documento',
+        title: 'Cargar Documento',
         html: `
             <div class="container d-flex justify-content-center">
                 <form id="FormDocument" enctype="multipart/form-data" class="text-center">
@@ -239,7 +239,7 @@ document.getElementById('cargar_documento').addEventListener('click', () => {
                     </div>
                 </div>
 
-                    <button id="button_document" type="button" class="btn btn-primary mt-3">Subir Documento</button>
+                    <button id="button_document" type="button" class="btn btn-primary mt-3">Cargar Documento</button>
                 </form>
             </div>
         `,

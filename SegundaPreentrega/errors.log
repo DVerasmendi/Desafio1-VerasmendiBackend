@@ -2151,3 +2151,25 @@
 2024-06-10 11:06:15 [HTTP]: Solicitud HTTP
 2024-06-10 11:06:21 [INFO]: Es un user comun Role
 2024-06-10 11:07:12 [HTTP]: Solicitud HTTP
+2024-06-10 11:11:05 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-10 11:11:19 [HTTP]: Solicitud HTTP
+2024-06-10 11:11:29 [INFO]: Es un user comun Role
+2024-06-10 11:19:47 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-10 11:19:47 [HTTP]: Solicitud HTTP
+2024-06-10 11:19:50 [INFO]: Es un user comun Role
+2024-06-10 11:20:27 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-10 11:20:28 [HTTP]: Solicitud HTTP
+2024-06-10 11:20:30 [INFO]: Es un user comun Role
+2024-06-10 11:21:42 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-10 11:21:45 [HTTP]: Solicitud HTTP
+2024-06-10 11:21:47 [INFO]: Es un user comun Role
+2024-06-10 11:22:07 [HTTP]: Solicitud HTTP
+2024-06-10 11:22:12 [INFO]: Es un admin!
+2024-06-10 11:24:15 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-10 11:24:15 [HTTP]: Solicitud HTTP
+2024-06-10 11:24:17 [INFO]: Es un user comun Role
+2024-06-10 11:24:32 [HTTP]: Solicitud HTTP
+2024-06-10 11:24:35 [INFO]: Es un admin!
+2024-06-10 11:25:03 [HTTP]: Solicitud HTTP
+2024-06-10 11:25:09 [INFO]: Es un premium!
+2024-06-10 11:27:11 [HTTP]: Solicitud HTTP

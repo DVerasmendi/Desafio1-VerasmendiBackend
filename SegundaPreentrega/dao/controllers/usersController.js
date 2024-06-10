@@ -236,9 +236,9 @@ exports.changeUserRole = async (req, res) => {
         // Validar que el usuario ha subido los tres documentos requeridos
         const requiredDocuments = ['identificacion', 'comprobante_estado_cuenta', 'comprobante_de_domicilio'];
         const userDocuments = user.documents.map(doc => doc.name);
-        console.log('Documentos del usuario:', userDocuments); // Añade esta línea para depuración
+        //console.log('Documentos del usuario:', userDocuments); // Añade esta línea para depuración
         const missingDocuments = requiredDocuments.filter(doc => !userDocuments.some(name => name.includes(doc)));
-        console.log('Documentos faltantes:', missingDocuments); // Añade esta línea para depuración
+        //console.log('Documentos faltantes:', missingDocuments); // Añade esta línea para depuración
 
         if (newRole === 'premium' && missingDocuments.length > 0) {
             return res.status(400).json({
