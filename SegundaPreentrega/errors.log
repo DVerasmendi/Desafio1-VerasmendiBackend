@@ -2186,3 +2186,14 @@
 2024-06-11 10:55:12 [HTTP]: Solicitud HTTP
 2024-06-11 10:55:15 [INFO]: Es un premium!
 2024-06-11 10:56:26 [HTTP]: Solicitud HTTP
+2024-06-11 10:58:02 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-11 10:58:03 [HTTP]: Solicitud HTTP
+2024-06-11 10:58:05 [INFO]: Es un premium!
+2024-06-11 10:58:08 [HTTP]: Solicitud HTTP
+2024-06-11 10:58:10 [HTTP]: Solicitud HTTP
+2024-06-11 10:58:14 [INFO]: Es un admin!
+2024-06-11 11:00:04 [HTTP]: Solicitud HTTP
+2024-06-11 11:13:06 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-11 11:13:10 [HTTP]: Solicitud HTTP
+2024-06-11 11:13:14 [HTTP]: Solicitud HTTP
+2024-06-11 11:13:34 [HTTP]: Solicitud HTTP

@@ -259,6 +259,23 @@ Módulos de testing para proyecto final: Martes 04/06/2023
 - Se aprueban todos los test.
 - Ejecutar modulo de test : npm test
 
+*************************************************************************************************************/
+Cuarta práctica Integradora: Jueves 13/06/2023
+- Se instalo el modulo de multer.
+- Se creo archivo de configuracion de multer.
+- Se creo la ruta api/users/:uid/documents  para subir documentos.
+- Se configura multer para procesar 3 tipos de imagenes: profile, documents y products.
+- Se crea el funcionamiento que permite subir 1 imagen de profile, los 3 documentos necesarios para ser usuario premium y un max de 10 productos.
+- El admin unicamente podra pasar de user común a user premium cuando el user tenga en su perfil los 3 archivos necesarios para esto: 
+    - Identificación.
+    - Comprobante de domicilio.
+    - Comprobante de estado de cuenta.
+- Se muestra mensaje de espera para indicarle al usuario que se esta cargando la imagen en la app.
+- Se crea la vista Profile para cualquier usuario: admin, premium, común.
+- Se ajustan ciertas rutas de user.
+
+
+
 
 
 NOTAS IMPORTANTES:

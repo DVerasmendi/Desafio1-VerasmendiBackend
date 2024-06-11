@@ -226,6 +226,11 @@ if (useDB) {
         console.error(err.stack);
         res.status(500).json({ status: 'error', error: 'Error interno del servidor' });
     });
+
+    // Middleware para redirigir todas las rutas no definidas a la ruta principal
+    app.use((req, res, next) => {
+        res.redirect('/');
+    });
 }
 
 const PORT = process.env.NODE_ENV === 'test' ? (process.env.TEST_PORT || 8081) : (process.env.PORT || 8080);
