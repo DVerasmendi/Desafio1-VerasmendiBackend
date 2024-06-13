@@ -198,7 +198,7 @@ Mejorando la arquitectura del servidor  23/04/2024
     - Se crea la vista de chats para users y enviar mensajes a la tienda.
 
 /*************************************************************************************************************/
-Optimización: Jueves 02-05-2023
+Optimización: Jueves 02-05-2024
 Ruta para /users/:uid: Se implementa ruta para validar user segun uid válido o inválido.
 Se utiliza la expresión if (uid.length !== 24 || !/^[0-9a-fA-F]+$/.test(uid)) para validar formato del uid enviado por GET ya que los IDs generados por MongoDB son del tipo ObjectId, y estos tienen una estructura específica, por tanto se valida si el UID tiene la longitud correcta y si es una cadena hexadecimal.
 
@@ -223,7 +223,7 @@ Se implementa la administración de UsersErrors, ProductsErrors y CartError con 
 
 
 /*************************************************************************************************************/
-Implementación de logger: Jueves 09/05-2023
+Implementación de logger: Jueves 09/05-2024
 - Se instala winston.
 - Se crean los archivos de configuración y administración de logger.
 - Se sustituyen diferentes console.log que mostraban el estatus de corrida de la app por logger, se comprueba funcionamiento.
@@ -253,14 +253,14 @@ Documentar API: Martes 28/05/2023
 
 
 *************************************************************************************************************/
-Módulos de testing para proyecto final: Martes 04/06/2023
+Módulos de testing para proyecto final: Martes 04/06/2024
 - Se instalo el modulo de mocha, pero no logre implementarlo, cambie por supertest y jest.
 - Se creo la carpeta test con la carpeta controllers en los cuales estan los diferentes archivos y pruebas para las rutas.
 - Se aprueban todos los test.
 - Ejecutar modulo de test : npm test
 
 *************************************************************************************************************/
-Cuarta práctica Integradora: Jueves 13/06/2023
+Cuarta práctica Integradora: Jueves 13/06/2024
 - Se instalo el modulo de multer.
 - Se creo archivo de configuracion de multer.
 - Se creo la ruta api/users/:uid/documents  para subir documentos.
