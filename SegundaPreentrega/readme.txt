@@ -274,7 +274,20 @@ Cuarta práctica Integradora: Jueves 13/06/2024
 - Se crea la vista Profile para cualquier usuario: admin, premium, común.
 - Se ajustan ciertas rutas de user.
 
+*************************************************************************************************************/
+Entrega Final: Miércoles 03/07/2024
+- Se instalo stripe.
+- Se realiza la configuración necesaria para implementar Stripe.
+- Se agrega el uso de Stripe al flujo original de la app para simular pago con tarjetas.
+Tarjetas de prueba:
+Pago aprobado: 
+4242424242424242 11/25 123
 
+Pago rechazado: 
+4000000000000002
+Sin fondos: 4000000000009995
+Tarjeta perdida: 4000000000009987
+Tarjeta robada: 4000000000009979
 
 
 

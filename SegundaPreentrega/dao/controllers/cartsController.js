@@ -3,7 +3,7 @@ const Product = require('../db/models/Product');
 const ticketController = require('./ticketController');
 const logger = require('../../configuration/winston-config');
 const mongoose = require('mongoose');
-
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 // Controlador para gestionar operaciones en el carrito
 const cartsController = {
@@ -276,7 +276,7 @@ getCartByUserId: async (req, res) => {
         }
 
         // Si no hay carritos activos, crear uno nuevo
-        console.log('No se encontraron carritos activos. Creando uno nuevo...');
+        logger.info(`No se encontraron carritos activos. Creando uno nuevo...`);
         const newCart = await Cart.create({ userId, userEmail });
         return newCart._id
     } catch (error) {
@@ -285,8 +285,12 @@ getCartByUserId: async (req, res) => {
     }
 },
 
+
 purchaseCart: async (req, res) => {
     const { cartId } = req.params;
+    const { paymentMethodId } = req.body;
+    logger.info(`CART ID: ${cartId}`);
+    logger.info(`PAYMENT METHOD ID: ${paymentMethodId}`);
     try {
         const cart = await Cart.findById(cartId).populate('items.productId');
         if (!cart || cart.status !== 'active') {
@@ -295,13 +299,11 @@ purchaseCart: async (req, res) => {
 
         const purchasedProducts = [];
         const notPurchasedProducts = [];
-
         let totalPurchasedAmount = 0;
         let totalNotPurchasedAmount = 0;
 
         for (const item of cart.items) {
             const product = item.productId;
-
             if (!product || product.stock < item.quantity) {
                 notPurchasedProducts.push({
                     name: product.name,
@@ -318,12 +320,12 @@ purchaseCart: async (req, res) => {
                     totalAmount: item.quantity * item.price
                 });
                 totalPurchasedAmount += item.quantity * item.price;
-                product.stock -= item.quantity;
+				product.stock -= item.quantity;
                 await product.save();
                 await cartsController.removeProductFromCart({ params: { cartId: cartId, productId: product._id } });
             }
         }
-        // Solo se generara el ticket si existen elementos comprados y procesados, si todos los elementos no tienen stock, no se procesa ticket de compra.
+
         if (purchasedProducts.length !== 0) {
             await ticketController.createTicket(cart, purchasedProducts, totalPurchasedAmount);
         } 
@@ -332,19 +334,30 @@ purchaseCart: async (req, res) => {
             cart.status = 'completed';
         }
         await cart.save();
+        logger.info(`Total Pagado: ${totalPurchasedAmount}`);
+        // Crear el intent de pago con Stripe
+        const paymentIntent = await stripe.paymentIntents.create({
+            amount: totalPurchasedAmount * 100, // Stripe acepta el monto en centavos
+            currency: 'usd',
+            payment_method: paymentMethodId,
+            payment_method_types: ['card'],
+        });
+            
         return res.status(200).json({
+            clientSecret: paymentIntent.client_secret,
             message: 'Compra realizada con éxito',
             userEmail: cart.userEmail,
             purchasedProducts: purchasedProducts,
             notPurchasedProducts: notPurchasedProducts,
             totalPurchasedAmount: totalPurchasedAmount,
-            totalNotPurchasedAmount: totalNotPurchasedAmount, 
-            cartId: cartId
+            totalNotPurchasedAmount: totalNotPurchasedAmount,
+            cartId: cartId,
+            paymentStatus: true
         });
 
     } catch (error) {
         console.error('Error al procesar la compra:', error);
-        return res.status(500).json({ error: 'Error interno del servidor' });
+        return res.status(500).json({ error: 'Error interno del servidor', paymentStatus: false });
     }
 },
 }

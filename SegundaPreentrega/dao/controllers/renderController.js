@@ -190,8 +190,7 @@ router.get('/', usersController.getAllUsers, productsController.getAllProducts, 
             res.status(500).json({ status: 'error', error: 'Error interno del servidor' });
         }
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ status: 'error', error: 'Error al renderizar la vista' });
+        res.redirect('/');
     }
 });
 
@@ -272,13 +271,15 @@ router.get('/carts/:cartId', async (req, res, next) => {
 });
 
 // Ruta para finalizar el proceso de compra de un carrito
-router.get('/carts/:cartId/purchase', async (req, res, next) => {
+router.post('/carts/:cartId/purchase', async (req, res, next) => {
     try {
         await cartsController.purchaseCart(req, res);
     } catch (error) {
         next(error);
     }
 });
+
+
 
 
 

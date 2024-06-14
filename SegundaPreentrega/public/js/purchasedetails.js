@@ -1,22 +1,144 @@
+// public/js/purchasedetailsStripe.js
 document.addEventListener("DOMContentLoaded", function() {
-// FINALIZAR COMPRA //
-function purchaseCart(cartId) {
-    fetch(`/carts/${cartId}/purchase`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-    .then(response => response.json())
-    .then(data => {
-        showPurchaseDetails(data);
-    })
-    .catch(error => {
-        console.error('Error al realizar la compra:', error);
-    });
-}
+    const form_ = document.getElementById('card-element');
+    if (form_) {
+        const stripe = Stripe('pk_test_51PRMNIEDjy4qZIbftbly3GJ46DIwA7EU9jrCPfGgAtdYRN7C6k0KyIRJtN7AvPy3Vf7HXDYw1CC8Rc6FlILTVtWQ00eGx1j8H4');
+        const elements = stripe.elements();
+        const cardElement = elements.create('card', { hidePostalCode: true });
+        cardElement.mount('#card-element');
 
-function showPurchaseDetails(data) {
+        async function handleStripePayment(cartId) {
+            try {
+                const { paymentMethod, error } = await stripe.createPaymentMethod({
+                    type: 'card',
+                    card: cardElement,
+                });
+
+                if (error) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error al crear el método de pago',
+                        text: error.message,
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'OK'
+                    });
+                    return;
+                }
+                const response = await fetch(`/carts/${cartId}/purchase`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ paymentMethodId: paymentMethod.id })
+                });
+                const data = await response.json();
+
+                if (data.error) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Pago Rechazado',
+                        text: data.error,
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'OK'
+                    });
+                } else {
+                    const { clientSecret } = data;
+                    const result = await stripe.confirmCardPayment(clientSecret);
+                    if (result.error) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Pago Rechazado',
+                            text: result.error.message,
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'OK'
+                        });
+                    } else if (result.paymentIntent.status === 'succeeded') {
+                        showPurchaseDetails(data, result.paymentIntent.id);
+                    }
+                }
+            } catch (error) {
+                console.error('Error al procesar el pago con Stripe:', error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error al procesar el pago',
+                    text: 'Por favor, intenta nuevamente más tarde',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK'
+                });
+            }
+        }
+
+        const pagarStripeButton = document.getElementById('boton_pagar_stripe');
+        if (pagarStripeButton) {
+            const cartId = pagarStripeButton.dataset.cartid;
+            pagarStripeButton.addEventListener('click', function(event) {
+                Swal.fire({
+                    title: 'Procesando pago',
+                    html: 'Por favor espera unos momentos mientras procesamos el pago',
+                    allowOutsideClick: false,
+                    timerProgressBar: true,
+                    didOpen: () => {
+                        Swal.showLoading()
+                    }
+                });
+
+                event.preventDefault();
+                handleStripePayment(cartId);
+            });
+        }
+    }
+
+    // VACIAR CARRITO //
+    const vaciarCarritoBtn = document.getElementById('vaciarCarrito');
+    if (vaciarCarritoBtn) {
+        vaciarCarritoBtn.addEventListener('click', function(event) {
+            event.preventDefault();
+            const cartId = vaciarCarritoBtn.getAttribute('data-cartid');
+            fetch(`/api/carts/${cartId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Carrito vaciado con éxito',
+                        showConfirmButton: true,
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'OK'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            location.reload();
+                        }
+                    });
+                } else {
+                    console.error('Error al vaciar el carrito:', response.statusText);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error al vaciar el carrito',
+                        text: 'Por favor, intenta nuevamente más tarde',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'OK'
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Error al vaciar el carrito:', error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error al vaciar el carrito',
+                    text: 'Por favor, intenta nuevamente más tarde',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK'
+                });
+            });
+        });
+    }
+});
+
+function showPurchaseDetails(data, paymentIntentId) {
     const content = document.createElement('div');
     const userSubtitle = document.createElement('h4');
     userSubtitle.textContent = `Email: ${data.userEmail}`;
@@ -46,14 +168,21 @@ function showPurchaseDetails(data) {
     });
     content.appendChild(confirmButton);
 
+    const paymentStatus = document.createElement('h1');
+    paymentStatus.textContent = 'Pago Exitoso';
+    content.appendChild(paymentStatus);
+
+    const paymentIntentIdElement = document.createElement('p');
+    paymentIntentIdElement.textContent = `ID de Transacción: ${paymentIntentId}`;
+    content.appendChild(paymentIntentIdElement);
+
     Swal.fire({
         title: 'Detalles de la Compra',
         html: content,
-        width: '800px', 
+        width: '800px',
         showConfirmButton: false
     });
 }
-
 
 function createTableWithTotalAmount(products, title) {
     const table = document.createElement('table');
@@ -88,61 +217,3 @@ function createTableWithTotalAmount(products, title) {
 
     return table;
 }
-
-const pagarButton = document.getElementById('boton_pagar');
-if (pagarButton){
-const cartId = pagarButton.dataset.cartid;
-pagarButton.addEventListener('click', function() {
-    purchaseCart(cartId); 
-});
-}
-//
-// VACIAR CARRITO //
-const vaciarCarritoBtn = document.getElementById('vaciarCarrito');
-if (vaciarCarritoBtn) {
-    vaciarCarritoBtn.addEventListener('click', function(event) {
-        event.preventDefault();
-        const cartId = vaciarCarritoBtn.getAttribute('data-cartid');
-        fetch(`/api/carts/${cartId}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        .then(response => {
-            if (response.ok) {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Carrito vaciado con éxito',
-                    showConfirmButton: true,
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'OK'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        location.reload();
-                    }
-                });
-            } else {
-                console.error('Error al vaciar el carrito:', response.statusText);
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error al vaciar el carrito',
-                    text: 'Por favor, intenta nuevamente más tarde',
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'OK'
-                });
-            }
-        })
-        .catch(error => {
-            console.error('Error al vaciar el carrito:', error);
-            Swal.fire({
-                icon: 'error',
-                title: 'Error al vaciar el carrito',
-                text: 'Por favor, intenta nuevamente más tarde',
-                confirmButtonColor: '#3085d6',
-                confirmButtonText: 'OK'
-            });
-        });
-    });
-}
-});
