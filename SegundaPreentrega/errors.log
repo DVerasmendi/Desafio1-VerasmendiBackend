@@ -2352,3 +2352,9 @@
 2024-06-14 12:18:54 [INFO]: CART ID: 666c5ddebd6e17c1b92127e7
 2024-06-14 12:18:54 [INFO]: PAYMENT METHOD ID: pm_1PRcq0EDjy4qZIbfRo0yU0Ys
 2024-06-14 12:18:54 [INFO]: Total Pagado: 0
+2024-06-19 09:48:03 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-19 09:48:14 [HTTP]: Solicitud HTTP
+2024-06-19 09:48:23 [INFO]: Es un user comun Role
+2024-06-19 09:53:42 [HTTP]: Solicitud HTTP
+2024-06-19 09:53:47 [INFO]: Es un user comun Role
+2024-06-19 09:55:10 [HTTP]: Solicitud HTTP
