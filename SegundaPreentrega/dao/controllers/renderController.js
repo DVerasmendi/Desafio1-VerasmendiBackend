@@ -273,12 +273,30 @@ router.get('/carts/:cartId', async (req, res, next) => {
 // Ruta para finalizar el proceso de compra de un carrito
 router.post('/carts/:cartId/purchase', async (req, res, next) => {
     try {
-        await cartsController.purchaseCart(req, res);
+        await cartsController.validateCart(req, res);
     } catch (error) {
         next(error);
     }
 });
 
+// Ruta para crear el intento de pago y confirmar la compra
+router.post('/carts/:cartId/purchaseConfirm', async (req, res, next) => {
+    try {
+        await cartsController.purchaseCartConfirm(req, res);
+    } catch (error) {
+        next(error);
+    }
+});
+
+
+// Ruta para completar la compra después de confirmar el pago
+router.post('/carts/:cartId/completePurchase', async (req, res, next) => {
+    try {
+        await cartsController.completePurchase(req, res);
+    } catch (error) {
+        next(error);
+    }
+});
 
 
 

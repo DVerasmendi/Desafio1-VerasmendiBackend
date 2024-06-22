@@ -2358,3 +2358,101 @@
 2024-06-19 09:53:42 [HTTP]: Solicitud HTTP
 2024-06-19 09:53:47 [INFO]: Es un user comun Role
 2024-06-19 09:55:10 [HTTP]: Solicitud HTTP
+2024-06-22 11:12:32 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-22 11:12:52 [HTTP]: Solicitud HTTP
+2024-06-22 11:13:02 [INFO]: Es un user comun Role
+2024-06-22 11:14:42 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-22 11:14:46 [HTTP]: Solicitud HTTP
+2024-06-22 11:14:48 [INFO]: Es un user comun Role
+2024-06-22 11:17:15 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-22 11:17:15 [HTTP]: Solicitud HTTP
+2024-06-22 11:17:17 [INFO]: Es un user comun Role
+2024-06-22 11:19:03 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-22 11:19:03 [HTTP]: Solicitud HTTP
+2024-06-22 11:19:06 [INFO]: Es un user comun Role
+2024-06-22 11:21:06 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-22 11:21:08 [HTTP]: Solicitud HTTP
+2024-06-22 11:21:11 [INFO]: Es un user comun Role
+2024-06-22 11:24:58 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-22 11:25:01 [HTTP]: Solicitud HTTP
+2024-06-22 11:25:03 [INFO]: Es un user comun Role
+2024-06-22 11:25:30 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-22 11:25:32 [HTTP]: Solicitud HTTP
+2024-06-22 11:25:34 [INFO]: Es un user comun Role
+2024-06-22 11:28:59 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-22 11:29:01 [HTTP]: Solicitud HTTP
+2024-06-22 11:29:04 [INFO]: Es un user comun Role
+2024-06-22 11:29:43 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-22 11:29:43 [HTTP]: Solicitud HTTP
+2024-06-22 11:29:45 [INFO]: Es un user comun Role
+2024-06-22 11:30:10 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-22 11:30:11 [HTTP]: Solicitud HTTP
+2024-06-22 11:30:13 [INFO]: Es un user comun Role
+2024-06-22 11:33:42 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-22 11:33:43 [HTTP]: Solicitud HTTP
+2024-06-22 11:33:46 [INFO]: Es un user comun Role
+2024-06-22 11:43:00 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-22 11:43:05 [HTTP]: Solicitud HTTP
+2024-06-22 11:43:08 [INFO]: Es un user comun Role
+2024-06-22 11:47:13 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-22 11:47:28 [HTTP]: Solicitud HTTP
+2024-06-22 11:47:30 [INFO]: Es un user comun Role
+2024-06-22 11:47:55 [INFO]: Total a pagar: 250
+2024-06-22 11:51:05 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-22 11:51:06 [HTTP]: Solicitud HTTP
+2024-06-22 11:51:08 [INFO]: Es un user comun Role
+2024-06-22 11:51:57 [INFO]: Total a pagar: 250
+2024-06-22 11:53:32 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-22 11:53:36 [HTTP]: Solicitud HTTP
+2024-06-22 11:53:38 [INFO]: Es un user comun Role
+2024-06-22 11:56:30 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-22 11:56:30 [HTTP]: Solicitud HTTP
+2024-06-22 11:56:32 [INFO]: Es un user comun Role
+2024-06-22 11:56:48 [INFO]: Total a pagar: 250
+2024-06-22 11:56:50 [INFO]: Payment Intent ID: pi_3PUWJ2EDjy4qZIbf1B9jsRng
+2024-06-22 11:56:50 [INFO]: CART ID: 66758f48d24ac0e9c93c0e76
+2024-06-22 11:57:09 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-22 12:00:48 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-22 12:00:51 [HTTP]: Solicitud HTTP
+2024-06-22 12:00:54 [INFO]: Es un user comun Role
+2024-06-22 12:01:18 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-22 12:01:21 [HTTP]: Solicitud HTTP
+2024-06-22 12:01:31 [HTTP]: Solicitud HTTP
+2024-06-22 12:01:36 [INFO]: Es un user comun Role
+2024-06-22 12:02:16 [INFO]: Total a pagar: 250
+2024-06-22 12:02:17 [INFO]: CART ID: 66758f48d24ac0e9c93c0e76
+2024-06-22 12:02:17 [INFO]: PAYMENT METHOD ID: undefined
+2024-06-22 12:02:50 [HTTP]: Solicitud HTTP
+2024-06-22 12:03:41 [INFO]: Total a pagar: 250
+2024-06-22 12:03:42 [INFO]: CART ID: 66758f48d24ac0e9c93c0e76
+2024-06-22 12:03:42 [INFO]: PAYMENT METHOD ID: undefined
+2024-06-22 12:03:53 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-22 12:03:53 [HTTP]: Solicitud HTTP
+2024-06-22 12:06:25 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-22 12:06:25 [HTTP]: Solicitud HTTP
+2024-06-22 12:06:28 [INFO]: Es un user comun Role
+2024-06-22 12:07:42 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-22 12:07:45 [HTTP]: Solicitud HTTP
+2024-06-22 12:07:48 [INFO]: Es un user comun Role
+2024-06-22 12:08:03 [INFO]: Total a pagar: 250
+2024-06-22 12:08:05 [INFO]: CART ID: 66758f48d24ac0e9c93c0e76
+2024-06-22 12:08:05 [INFO]: PAYMENT METHOD ID: pi_3PUWTvEDjy4qZIbf0nZdSqvJ
+2024-06-22 12:08:09 [HTTP]: Solicitud HTTP
+2024-06-22 12:08:29 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-22 12:08:29 [HTTP]: Solicitud HTTP
+2024-06-22 12:08:32 [INFO]: Es un user comun Role
+2024-06-22 12:18:24 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-22 12:18:25 [HTTP]: Solicitud HTTP
+2024-06-22 12:18:28 [INFO]: Es un user comun Role
+2024-06-22 12:18:59 [INFO]: Total a pagar: 500
+2024-06-22 12:19:00 [INFO]: CART ID: 66758f48d24ac0e9c93c0e76
+2024-06-22 12:19:00 [INFO]: PAYMENT METHOD ID: pi_3PUWeVEDjy4qZIbf1c0WNVz3
+2024-06-22 12:19:05 [HTTP]: Solicitud HTTP
+2024-06-22 12:20:22 [INFO]: Total a pagar: 250
+2024-06-22 12:21:05 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-22 12:21:05 [HTTP]: Solicitud HTTP
+2024-06-22 12:21:08 [INFO]: Es un user comun Role
+2024-06-22 12:21:29 [INFO]: Total a pagar: 250
+2024-06-22 12:22:15 [INFO]: Total a pagar: 250
+2024-06-22 12:22:35 [INFO]: Total a pagar: 250
+2024-06-22 12:22:53 [INFO]: Total a pagar: 250

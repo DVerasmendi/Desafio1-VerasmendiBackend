@@ -285,12 +285,89 @@ getCartByUserId: async (req, res) => {
     }
 },
 
-
-purchaseCart: async (req, res) => {
+// Controlador para validar los productos en el carrito
+validateCart: async (req, res) => {
     const { cartId } = req.params;
-    const { paymentMethodId } = req.body;
+    try {
+        const cart = await Cart.findById(cartId).populate('items.productId');
+        if (!cart || cart.status !== 'active') {
+            return res.status(404).json({ error: 'Carrito no encontrado o no está activo' });
+        }
+
+        const purchasedProducts = [];
+        const notPurchasedProducts = [];
+        let totalPurchasedAmount = 0;
+        let totalNotPurchasedAmount = 0;
+
+        for (const item of cart.items) {
+            const product = item.productId;
+            if (!product || product.stock < item.quantity) {
+                notPurchasedProducts.push({
+                    name: product.name,
+                    quantity: item.quantity,
+                    price: item.price,
+                    totalAmount: item.quantity * item.price
+                });
+                totalNotPurchasedAmount += item.quantity * item.price;
+            } else {
+                purchasedProducts.push({
+                    name: product.name,
+                    quantity: item.quantity,
+                    price: item.price,
+                    totalAmount: item.quantity * item.price
+                });
+                totalPurchasedAmount += item.quantity * item.price;
+            }
+        }
+
+        return res.status(200).json({
+            userEmail: cart.userEmail,
+            message: 'Validación realizada con éxito',
+            purchasedProducts: purchasedProducts,
+            notPurchasedProducts: notPurchasedProducts,
+            totalPurchasedAmount: totalPurchasedAmount,
+            totalNotPurchasedAmount: totalNotPurchasedAmount,
+            cartId: cartId
+        });
+
+    } catch (error) {
+        console.error('Error al validar el carrito:', error);
+        return res.status(500).json({ error: 'Error interno del servidor' });
+    }
+},
+
+
+// Controlador para crear el intento de pago y confirmar la compra
+purchaseCartConfirm: async (req, res) => {
+    const { cartId } = req.params;
+    const { paymentMethodId, totalPurchasedAmount } = req.body;
+    try {
+        logger.info(`Total a pagar: ${totalPurchasedAmount}`);
+        // Crear el intento de pago con Stripe
+        const paymentIntent = await stripe.paymentIntents.create({
+            amount: totalPurchasedAmount * 100, // Stripe acepta el monto en centavos
+            currency: 'usd',
+            payment_method: paymentMethodId,
+            payment_method_types: ['card'],
+        });
+
+        return res.status(200).json({
+            clientSecret: paymentIntent.client_secret,
+            message: 'Intento de pago creado con éxito'
+        });
+
+    } catch (error) {
+        console.error('Error al crear el intento de pago:', error);
+        return res.status(500).json({ error: 'Error interno del servidor' });
+    }
+},
+
+// Controlador para completar la compra
+completePurchase: async (req, res) => {
+    const { cartId } = req.params;
+    const { paymentIntentId } = req.body;
     logger.info(`CART ID: ${cartId}`);
-    logger.info(`PAYMENT METHOD ID: ${paymentMethodId}`);
+    logger.info(`PAYMENT METHOD ID: ${paymentIntentId}`);
     try {
         const cart = await Cart.findById(cartId).populate('items.productId');
         if (!cart || cart.status !== 'active') {
@@ -333,33 +410,16 @@ purchaseCart: async (req, res) => {
         if (notPurchasedProducts.length === 0) {
             cart.status = 'completed';
         }
-        await cart.save();
-        logger.info(`Total Pagado: ${totalPurchasedAmount}`);
-        // Crear el intent de pago con Stripe
-        const paymentIntent = await stripe.paymentIntents.create({
-            amount: totalPurchasedAmount * 100, // Stripe acepta el monto en centavos
-            currency: 'usd',
-            payment_method: paymentMethodId,
-            payment_method_types: ['card'],
-        });
-            
-        return res.status(200).json({
-            clientSecret: paymentIntent.client_secret,
-            message: 'Compra realizada con éxito',
-            userEmail: cart.userEmail,
-            purchasedProducts: purchasedProducts,
-            notPurchasedProducts: notPurchasedProducts,
-            totalPurchasedAmount: totalPurchasedAmount,
-            totalNotPurchasedAmount: totalNotPurchasedAmount,
-            cartId: cartId,
-            paymentStatus: true
-        });
+        await cart.save();  
+        return res.status(200).json({ message: 'Compra completada con éxito' });
+
 
     } catch (error) {
-        console.error('Error al procesar la compra:', error);
-        return res.status(500).json({ error: 'Error interno del servidor', paymentStatus: false });
+        console.error('Error al completar la compra:', error);
+        return res.status(500).json({ error: 'Error interno del servidor' });
     }
 },
+
 }
 
 
