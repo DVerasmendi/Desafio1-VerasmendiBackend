@@ -2466,3 +2466,14 @@
 2024-06-22 12:26:05 [INFO]: Es un user comun Role
 2024-06-22 12:26:29 [HTTP]: Solicitud HTTP
 2024-06-22 12:26:32 [HTTP]: Solicitud HTTP
+2024-06-24 09:34:16 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-24 09:34:20 [HTTP]: Solicitud HTTP
+2024-06-24 09:34:31 [INFO]: Es un user comun Role
+2024-06-24 09:35:30 [HTTP]: Solicitud HTTP
+2024-06-24 09:35:34 [HTTP]: Solicitud HTTP
+2024-06-24 09:35:38 [INFO]: Es un admin!
+2024-06-24 09:37:36 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-24 09:38:12 [HTTP]: Solicitud HTTP
+2024-06-24 09:38:22 [INFO]: Es un user comun Role
+2024-06-24 09:38:28 [HTTP]: Solicitud HTTP
+2024-06-24 09:38:31 [INFO]: Es un user comun Role

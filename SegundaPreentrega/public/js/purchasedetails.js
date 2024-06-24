@@ -73,17 +73,17 @@ function showPurchaseDetails(data, cartId) {
 
     const stripeLabel1 = document.createElement('p');
     stripeLabel1.innerHTML = `<strong>Total a pagar: $${totalPurchasedAmount.toFixed(2)}</strong>`;
-    stripeLabel1.classList.add('mt-5', 'mb-1'); // Agregar clases para margen superior e inferior
+    stripeLabel1.classList.add('mt-5', 'mb-1');
     content.appendChild(stripeLabel1);
 
     const stripeLabel2 = document.createElement('p');
     stripeLabel2.innerHTML  = '<strong>Ingrese su tarjeta</strong>';
-    stripeLabel2.classList.add('mt-2', 'mb-3'); // Agregar clases para margen superior e inferior
+    stripeLabel2.classList.add('mt-2', 'mb-3'); 
     content.appendChild(stripeLabel2);
 
     const stripeForm = document.createElement('div');
     stripeForm.id = 'card-element';
-    stripeForm.classList.add('mb-3', 'mt-1'); // Agregar clases para margen superior e inferior
+    stripeForm.classList.add('mb-3', 'mt-1'); 
     content.appendChild(stripeForm);
 
     const payButton = document.createElement('button');
@@ -263,60 +263,6 @@ function createTableWithTotalAmount(products, title) {
 
 });
 
-
-
-
-
-
-
-
-
-
-// function showPurchaseDetails(data, paymentIntentId) {
-//     const content = document.createElement('div');
-//     const userSubtitle = document.createElement('h4');
-//     userSubtitle.textContent = `Email: ${data.userEmail}`;
-//     content.appendChild(userSubtitle);
-
-//     const purchasedTable = createTableWithTotalAmount(data.purchasedProducts, 'Elementos Comprados');
-//     content.appendChild(purchasedTable);
-
-//     const totalPurchasedAmount = data.purchasedProducts.reduce((total, product) => total + product.totalAmount, 0);
-//     const totalPurchasedElement = document.createElement('div');
-//     totalPurchasedElement.textContent = `Total de elementos comprados: $${totalPurchasedAmount.toFixed(2)}`;
-//     content.appendChild(totalPurchasedElement);
-
-//     const notPurchasedTable = createTableWithTotalAmount(data.notPurchasedProducts, 'Elementos No Comprados');
-//     content.appendChild(notPurchasedTable);
-
-//     const totalNotPurchasedAmount = data.notPurchasedProducts.reduce((total, product) => total + product.totalAmount, 0);
-//     const totalNotPurchasedElement = document.createElement('div');
-//     totalNotPurchasedElement.textContent = `Total de elementos no comprados: $${totalNotPurchasedAmount.toFixed(2)}`;
-//     content.appendChild(totalNotPurchasedElement);
-
-//     const confirmButton = document.createElement('button');
-//     confirmButton.textContent = 'Confirmar';
-//     confirmButton.classList.add('btn', 'btn-primary', 'mt-3');
-//     confirmButton.addEventListener('click', () => {
-//         window.location.href = '/';
-//     });
-//     content.appendChild(confirmButton);
-
-//     const paymentStatus = document.createElement('h1');
-//     paymentStatus.textContent = 'Pago Exitoso';
-//     content.appendChild(paymentStatus);
-
-//     const paymentIntentIdElement = document.createElement('p');
-//     paymentIntentIdElement.textContent = `ID de Transacción: ${paymentIntentId}`;
-//     content.appendChild(paymentIntentIdElement);
-
-//     Swal.fire({
-//         title: 'Detalles de la Compra',
-//         html: content,
-//         width: '800px',
-//         showConfirmButton: false
-//     });
-// }
 
 
 // VACIAR CARRITO //

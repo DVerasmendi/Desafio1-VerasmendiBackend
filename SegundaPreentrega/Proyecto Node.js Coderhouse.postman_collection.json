@@ -1,0 +1,712 @@
+{
+	"info": {
+		"_postman_id": "97b0760f-fc65-4b3e-b2bd-332d2eb383f8",
+		"name": "Proyecto Node.js Coderhouse",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11570479"
+	},
+	"item": [
+		{
+			"name": "Productos",
+			"item": [
+				{
+					"name": "Obtener Productos",
+					"item": [
+						{
+							"name": "Obtener todos los productos",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/products",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"products"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Obtener Productos con parametros de paginacion",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/products?limit=10&page=1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"products"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "10"
+										},
+										{
+											"key": "page",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Obtener Productos en orden ascendente por PRECIO",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/products?sort=asc",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"products"
+									],
+									"query": [
+										{
+											"key": "sort",
+											"value": "asc"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Obtener productos que contengan una cadena específica en su NOMBRE",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/products?query=3",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"products"
+									],
+									"query": [
+										{
+											"key": "query",
+											"value": "3"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Envio de documentos",
+					"item": [
+						{
+							"name": "Envio de documentos",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "profile",
+											"type": "file",
+											"src": "/C:/Users/deike/Downloads/profile.jpg"
+										},
+										{
+											"key": "product",
+											"type": "file",
+											"src": "/C:/Users/deike/Downloads/arrozconpollo.jpg",
+											"disabled": true
+										},
+										{
+											"key": "documents",
+											"type": "file",
+											"src": "/C:/Users/deike/Downloads/documento.jpg",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/users/666384b1ea249d0de5d8c164/documents",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"users",
+										"666384b1ea249d0de5d8c164",
+										"documents"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Agregar Producto",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "session={\"user\":{\"role\":\"admin\"}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Producto Test 200\",\r\n  \"description\": \"Descripción del producto\",\r\n  \"price\": 100,\r\n  \"stock\": 50,\r\n  \"imageUrl\": \"http://example.com/image.jpg\",\r\n  \"category\":\"vapor\",\r\n  \"owner\":\"admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar producto",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "session={\"user\":{\"role\":\"admin\"}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Producto Test 200 Editado\",\r\n  \"description\": \"Descripción del producto actualizada\",\r\n  \"price\": 150,\r\n  \"stock\": 45,\r\n  \"imageUrl\": \"http://example.com/image-updated.jpg\",\r\n  \"category\":\"vapor\",\r\n  \"owner\":\"admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/products/665a98d02bab3c65adecf46e",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"products",
+								"665a98d02bab3c65adecf46e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Borrar Producto",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "session={\"user\":{\"role\":\"admin\"}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Producto Test 1 Editado\",\r\n  \"description\": \"Descripción del producto actualizada\",\r\n  \"price\": 150,\r\n  \"stock\": 45,\r\n  \"imageUrl\": \"http://example.com/image-updated.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/products/665a93c9f5dd9b5b5c7765b8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"products",
+								"665a93c9f5dd9b5b5c7765b8"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cart",
+			"item": [
+				{
+					"name": "Nuevas Rutas 2da Preentrega",
+					"item": [
+						{
+							"name": "Eliminar un producto específico del carrito",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/carts/65da13bed2f6fb5c0396d1a5/products/65c931e8ffef98faa42dee01",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"carts",
+										"65da13bed2f6fb5c0396d1a5",
+										"products",
+										"65c931e8ffef98faa42dee01"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Actualizar el carrito con un arreglo de productos",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"items\": [\r\n    {\r\n      \"productId\": \"65c92a9194ea9d3f9493c6f7\",\r\n      \"quantity\": 3\r\n    },\r\n    {\r\n      \"productId\": \"65c931e4ffef98faa42dedff\",\r\n      \"quantity\": 2\r\n    }\r\n  ]\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/carts/65da13bed2f6fb5c0396d1a5",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"carts",
+										"65da13bed2f6fb5c0396d1a5"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Actualizar solo la cantidad de un producto específico",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"quantity\": 5\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/carts/65da13bed2f6fb5c0396d1a5/products/65c92a9494ea9d3f9493c6f9",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"carts",
+										"65da13bed2f6fb5c0396d1a5",
+										"products",
+										"65c92a9494ea9d3f9493c6f9"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Eliminar todos los productos del carrito",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/carts/65da13bed2f6fb5c0396d1a5",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"carts",
+										"65da13bed2f6fb5c0396d1a5"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Obtener un carrito por ID con productos poblados",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/carts/65c93269ffef98faa42dee06",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"carts",
+										"65c93269ffef98faa42dee06"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Crear carrito",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userId\": \"usuariotest23\",  // Ajusta el ID de usuario según tus necesidades\r\n  \"userEmail\":\"test@gmail.com\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/carts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"carts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener todos los carritos",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "session={\"user\":{\"role\":\"admin\"}}"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/carts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"carts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener un carrito por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/carts/662542591c516de91812627c",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"carts",
+								"662542591c516de91812627c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Agregar un producto al carrito",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"productId\": \"65c92a9194ea9d3f9493c6f7\",  // Ajusta el ID del producto según tus necesidades\r\n  \"quantity\": 5,\r\n  \"price\":250\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/carts/662542591c516de91812627c/items",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"carts",
+								"662542591c516de91812627c",
+								"items"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar la cantidad de un producto en el carrito",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"quantity\": 25\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/carts/662542591c516de91812627c/items/65c92a9194ea9d3f9493c6f7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"carts",
+								"662542591c516de91812627c",
+								"items",
+								"65c92a9194ea9d3f9493c6f7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar un producto del carrito",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/carts/662542591c516de91812627c/items/65c92a9194ea9d3f9493c6f7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"carts",
+								"662542591c516de91812627c",
+								"items",
+								"65c92a9194ea9d3f9493c6f7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cambiar el estado del carrito",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"status\": \"completed\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/carts/662542591c516de91812627c/status",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"carts",
+								"662542591c516de91812627c",
+								"status"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Mensajes",
+			"item": [
+				{
+					"name": "Obtener todos los mensajes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/messages",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"messages"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Agregar un nuevo mensaje",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"user\": \"usuario4\",\r\n  \"message\": \"Hola, este es un nuevo mensaje 44\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/messages",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"messages"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar un mensaje por ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/messages/665b1d4e85e80f8c0b174a6f",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"messages",
+								"665b1d4e85e80f8c0b174a6f"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Session",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"test\",\r\n  \"password\": \"test\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
