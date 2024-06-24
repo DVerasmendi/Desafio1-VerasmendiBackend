@@ -2456,3 +2456,13 @@
 2024-06-22 12:22:15 [INFO]: Total a pagar: 250
 2024-06-22 12:22:35 [INFO]: Total a pagar: 250
 2024-06-22 12:22:53 [INFO]: Total a pagar: 250
+2024-06-22 12:24:29 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-22 12:24:30 [HTTP]: Solicitud HTTP
+2024-06-22 12:24:34 [INFO]: Es un user comun Role
+2024-06-22 12:24:46 [HTTP]: Solicitud HTTP
+2024-06-22 12:25:51 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-22 12:25:51 [HTTP]: Solicitud HTTP
+2024-06-22 12:26:01 [HTTP]: Solicitud HTTP
+2024-06-22 12:26:05 [INFO]: Es un user comun Role
+2024-06-22 12:26:29 [HTTP]: Solicitud HTTP
+2024-06-22 12:26:32 [HTTP]: Solicitud HTTP
