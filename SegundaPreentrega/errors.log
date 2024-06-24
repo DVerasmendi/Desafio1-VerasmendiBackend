@@ -2486,3 +2486,7 @@
 2024-06-24 10:32:20 [INFO]: Servidor Express escuchando en el puerto 8080
 2024-06-24 10:32:24 [HTTP]: Solicitud HTTP
 2024-06-24 10:32:28 [INFO]: Es un admin!
+2024-06-24 10:35:47 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-24 10:35:59 [HTTP]: Solicitud HTTP
+2024-06-24 10:36:19 [INFO]: Es un admin!
+2024-06-24 10:39:02 [HTTP]: Solicitud HTTP

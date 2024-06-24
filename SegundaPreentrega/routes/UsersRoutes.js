@@ -18,7 +18,6 @@ router.get('/', UsersController.getAllUsers);
 router.delete('/:uid', UsersController.deleteUserById);
 router.delete('/', UsersController.deleteInactiveUsers);
 
-// Ruta para subir documentos
 router.post('/:uid/documents', uploadFileMulter, UsersController.uploadDocuments);
 
 module.exports = router;
