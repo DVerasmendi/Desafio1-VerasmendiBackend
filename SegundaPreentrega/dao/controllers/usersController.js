@@ -260,3 +260,55 @@ exports.changeUserRole = async (req, res) => {
     }
 };
 
+// Eliminar un usuario por ID
+exports.deleteUserById = async (req, res) => {
+    const { userId } = req.body;
+    if (!userId) {
+        return res.status(400).json({ status: 'error', message: 'Falta el ID del usuario' });
+    }
+    try {
+        // Buscar el usuario en la base de datos por su ID
+        const user = await User.findById(userId);
+
+        if (!user) {
+            return res.status(404).json({ status: 'error', message: 'Usuario no encontrado' });
+        }
+
+        // Verificar si la última conexión fue hace más de 2 días
+        const twoDaysAgo = new Date(Date.now() - 2 * 24 * 60 * 60 * 1000);
+        if (user.last_connection > twoDaysAgo) {
+            return res.status(400).json({
+                status: 'error',
+                message: 'No se puede eliminar el usuario porque su última conexión fue hace menos de 2 días'
+            });
+        }
+
+        // Eliminar el usuario
+        await User.findByIdAndDelete(userId);
+
+        res.status(200).json({ status: 'success', message: 'Usuario eliminado correctamente' });
+    } catch (error) {
+        console.error('Error al eliminar el usuario:', error);
+        res.status(500).json({ status: 'error', message: 'Error interno del servidor' });
+    }
+};
+
+
+// Eliminar usuarios con última conexión hace más de 2 días
+exports.deleteInactiveUsers = async (req, res) => {
+    try {
+        // Obtener la fecha de hace 2 días
+        const twoDaysAgo = new Date(Date.now() - 2 * 24 * 60 * 60 * 1000);
+
+        // Encontrar y eliminar usuarios cuya última conexión fue hace más de 2 días
+        const result = await User.deleteMany({ last_connection: { $lt: twoDaysAgo } });
+
+        res.status(200).json({
+            status: 'success',
+            message: `Se han eliminado ${result.deletedCount} usuarios inactivos`
+        });
+    } catch (error) {
+        console.error('Error al eliminar usuarios inactivos:', error);
+        res.status(500).json({ status: 'error', message: 'Error interno del servidor' });
+    }
+};

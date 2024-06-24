@@ -2477,3 +2477,12 @@
 2024-06-24 09:38:22 [INFO]: Es un user comun Role
 2024-06-24 09:38:28 [HTTP]: Solicitud HTTP
 2024-06-24 09:38:31 [INFO]: Es un user comun Role
+2024-06-24 09:55:08 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-24 10:29:16 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-24 10:30:42 [HTTP]: Solicitud HTTP
+2024-06-24 10:30:45 [INFO]: Es un user comun Role
+2024-06-24 10:30:48 [HTTP]: Solicitud HTTP
+2024-06-24 10:30:52 [INFO]: Es un admin!
+2024-06-24 10:32:20 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-24 10:32:24 [HTTP]: Solicitud HTTP
+2024-06-24 10:32:28 [INFO]: Es un admin!

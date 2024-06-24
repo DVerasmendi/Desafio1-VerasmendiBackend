@@ -13,6 +13,10 @@ const router = express.Router();
 
 router.post('/premium/:uid', UsersController.changeUserRole);
 router.get('/logout', UsersController.logout);
+router.get('/', UsersController.getAllUsers);
+
+router.delete('/:uid', UsersController.deleteUserById);
+router.delete('/', UsersController.deleteInactiveUsers);
 
 // Ruta para subir documentos
 router.post('/:uid/documents', uploadFileMulter, UsersController.uploadDocuments);

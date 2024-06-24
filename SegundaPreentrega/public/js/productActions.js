@@ -184,6 +184,7 @@ function updateRoles() {
     const userSelect = document.getElementById('user_select');
     const roleSelect = document.getElementById('role_select');
     const editRoleButton = document.getElementById('boton_editarRole');
+    const DeleteUserButton = document.getElementById('boton_EliminarUser');
 
     const selectedUser = userSelect.options[userSelect.selectedIndex];
     const userRole = selectedUser.getAttribute('data-role');
@@ -192,6 +193,7 @@ function updateRoles() {
         // Muestra el segundo select y el botón si se selecciona un usuario
         roleSelect.style.display = 'block';
         editRoleButton.style.display = 'block';
+        DeleteUserButton.style.display = 'block';
 
         // Actualiza el segundo select según el role del usuario seleccionado
         for (let option of roleSelect.options) {
@@ -275,3 +277,67 @@ if (boton_editarRole) {
     });
 }
 
+const boton_EliminarUser = document.getElementById('boton_EliminarUser');
+if (boton_EliminarUser) {
+    document.getElementById('boton_EliminarUser').addEventListener('click', async function() {
+        const userSelect = document.getElementById('user_select');
+        const selectedUser = userSelect.options[userSelect.selectedIndex];
+        const userId = selectedUser.getAttribute('data-id');
+
+        if (!userId) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Debes seleccionar un usuario.'
+            });
+            return;
+        }
+
+        Swal.fire({
+            title: 'Procesando datos',
+            html: 'Por favor espera unos momentos mientras eliminamos el usuario.',
+            allowOutsideClick: false,
+            timerProgressBar: true,
+            didOpen: () => {
+                Swal.showLoading()
+            }
+        });
+
+        try {
+            const response = await fetch(`/api/users/${userId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({userId: userId })
+            });
+
+            const data = await response.json();
+            Swal.close();
+
+            if (response.ok) {
+                Swal.fire({
+                    icon: 'success',
+                    title: '¡Éxito!',
+                    text: 'El usuario ha sido eliminado correctamente.'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.reload();
+                    }
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: data.message || 'No se pudo eliminar el usuario. Por favor, intenta de nuevo.',
+                });
+            }
+        } catch (error) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: error.message || 'No se pudo eliminar el usuario. Por favor, intenta de nuevo.',
+            });
+        }
+    });
+}
