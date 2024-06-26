@@ -79,7 +79,7 @@ Este proyecto requiere Node.js y las siguientes dependencias:
 
 ## Uso
 ### Como cliente
-1. Regístrate en: [http://localhost:8080/registerForm](http://localhost:8080/registerForm) 
+1. Regístrate en: [https://chickenwithrice.cloudaustro.com/registerForm](https://chickenwithrice.cloudaustro.com/registerForm) o ambiente local: [http://localhost:8080/registerForm](http://localhost:8080/registerForm) 
 
 2. O usa un usuario ya creado:
     - **Usuario**: peluchin
@@ -99,6 +99,10 @@ Este proyecto requiere Node.js y las siguientes dependencias:
 ### Como admin
 1. Accede con el admin ya creado:
     - **Usuario**: admin
+    - **Contraseña**: admin
+
+    - **Usuario**: admin2
+    - **Contraseña**: admin2
 
 ### Tarjetas de prueba
 - **Pago aprobado**: 4242424242424242 11/25 123
@@ -108,7 +112,7 @@ Este proyecto requiere Node.js y las siguientes dependencias:
 - **Tarjeta robada**: 4000000000009979
 
 ## Documentación
-- Documentación de rutas de API: [http://localhost:8080/api-docs/](http://localhost:8080/api-docs/)
+- Documentación de rutas de API: [https://chickenwithrice.cloudaustro.com/api-docs/](https://chickenwithrice.cloudaustro.com/api-docs/) o ambiente local: [http://localhost:8080/api-docs/](http://localhost:8080/api-docs/)
 
 ## Contribuidores
 - **Deiker Verasmendi** - Desarrollador principal
