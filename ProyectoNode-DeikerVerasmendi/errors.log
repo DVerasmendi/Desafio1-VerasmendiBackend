@@ -2491,3 +2491,7 @@
 2024-06-24 10:36:19 [INFO]: Es un admin!
 2024-06-24 10:39:02 [HTTP]: Solicitud HTTP
 2024-06-26 18:12:38 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-26 18:53:09 [INFO]: Servidor Express escuchando en el puerto 8080
+2024-06-26 19:12:37 [INFO]: No se encontraron carritos activos. Creando uno nuevo...
+2024-06-26 19:12:43 [HTTP]: Solicitud HTTP
+2024-06-26 19:12:50 [INFO]: Es un admin!
