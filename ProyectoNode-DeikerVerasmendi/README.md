@@ -1,7 +1,7 @@
 
 # Ecommerce: Chicken with rice
 
-![Ecommerce Banner](https://via.placeholder.com/800x300.png?text=Ecommerce:+Chicken+with+rice)
+![Ecommerce Banner](http://160.20.190.228/chickenwithrice.png)
 
 ## Descripción General
 **Ecommerce: Chicken with rice** es una tienda en línea especializada en la venta de arroz con pollo, ofreciendo diferentes presentaciones y opciones de cuentas para usuarios y usuarios premium. Los usuarios pueden administrar varias opciones en la página. Este proyecto se presenta como requisito para aprobar el curso de Node.js de Coderhouse.
